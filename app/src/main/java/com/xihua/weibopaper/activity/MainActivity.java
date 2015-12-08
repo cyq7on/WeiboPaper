@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.xihua.weibopaper.R;
 import com.xihua.weibopaper.fragment.ContentFragment;
 
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private List<Fragment> fragmentList;
+    private List<String> gruopList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,24 +55,24 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        List<String> list = new ArrayList<>();
-        list.add("好友");
-        list.add("IT");
-        list.add("娱乐");
-        list.add("学习");
-        list.add("好友");
-        list.add("IT");
-        list.add("娱乐");
-        list.add("学习");
-        initTabLayout(list);
+        gruopList = new ArrayList<>();
+        gruopList.add("好友");
+        gruopList.add("IT");
+        gruopList.add("娱乐");
+        gruopList.add("学习");
+        gruopList.add("好友");
+        gruopList.add("IT");
+        gruopList.add("娱乐");
+        gruopList.add("学习");
+        initTabLayout();
 
     }
 
-    private void initTabLayout(List<String> data) {
+    private void initTabLayout() {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         fragmentList = new ArrayList<>();
-        for (int i = 0;i < data.size();i ++) {
-            tabLayout.addTab(tabLayout.newTab().setText(data.get(i)));
+        for (int i = 0;i < gruopList.size();i ++) {
+            tabLayout.addTab(tabLayout.newTab().setText(gruopList.get(i)));
             fragmentList.add(new ContentFragment());
         }
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp);
@@ -86,6 +86,13 @@ public class MainActivity extends AppCompatActivity
             public int getCount() {
                 return fragmentList.size();
             }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+
+                return gruopList.get(position);
+            }
+
         });
         tabLayout.setupWithViewPager(viewPager);
 
