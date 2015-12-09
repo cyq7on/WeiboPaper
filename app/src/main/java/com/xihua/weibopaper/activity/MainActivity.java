@@ -1,5 +1,6 @@
 package com.xihua.weibopaper.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -11,7 +12,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,8 +21,16 @@ import com.xihua.weibopaper.fragment.ContentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * @Package com.xihua.weibopaper.activity
+ * @ClassName: MainActivity
+ * @Description:主页面
+ * @author cyq7on
+ * @date 2015/12/9 15:47
+ * @version V1.0
+ */
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private List<Fragment> fragmentList;
     private List<String> gruopList;
@@ -35,7 +43,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("首页");
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.mipmap.ic_overflow);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -72,7 +83,7 @@ public class MainActivity extends AppCompatActivity
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         fragmentList = new ArrayList<>();
         for (int i = 0;i < gruopList.size();i ++) {
-            tabLayout.addTab(tabLayout.newTab().setText(gruopList.get(i)));
+            tabLayout.addTab(tabLayout.newTab());
             fragmentList.add(new ContentFragment());
         }
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp);
@@ -123,7 +134,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
             return true;
         }
 
