@@ -16,11 +16,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.xihua.weibopaper.common.GsonRequest;
 import com.xihua.weibopaper.fragment.ContentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 /**
  * @Package com.xihua.weibopaper.activity
  * @ClassName: MainActivity
@@ -77,7 +86,85 @@ public class MainActivity extends BaseActivity
         gruopList.add("学习");
         initTabLayout();
 
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        GsonRequest<Weather> request = new GsonRequest<Weather>("http://www.weather." +
+                "com.cn/data/sk/101010100.html",
+                Weather.class, new Response.Listener<Weather>() {
+            @Override
+            public void onResponse(Weather response) {
+                Toast.makeText(MainActivity.this,response.getWeatherinfo().getCity(),Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this,error+"",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+//        StringRequest request = new StringRequest("https://www.baidu.com",
+//                new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Toast.makeText(MainActivity.this,response,Toast.LENGTH_SHORT).show();
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(MainActivity.this,error+"",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        requestQueue.add(request);
     }
+
+    class Weather {
+
+        private WeatherInfo weatherinfo;
+
+        public WeatherInfo getWeatherinfo() {
+            return weatherinfo;
+        }
+
+        public void setWeatherinfo(WeatherInfo weatherinfo) {
+            this.weatherinfo = weatherinfo;
+        }
+
+        class WeatherInfo {
+
+            private String city;
+
+            private String temp;
+
+            private String time;
+
+            public String getCity() {
+                return city;
+            }
+
+            public void setCity(String city) {
+                this.city = city;
+            }
+
+            public String getTemp() {
+                return temp;
+            }
+
+            public void setTemp(String temp) {
+                this.temp = temp;
+            }
+
+            public String getTime() {
+                return time;
+            }
+
+            public void setTime(String time) {
+                this.time = time;
+            }
+
+        }
+    }
+
 
     private void initTabLayout() {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
