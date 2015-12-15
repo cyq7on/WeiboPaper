@@ -1,6 +1,5 @@
 package com.xihua.weibopaper.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,14 +20,12 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.xihua.weibopaper.common.GsonRequest;
 import com.xihua.weibopaper.fragment.ContentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Package com.xihua.weibopaper.activity
