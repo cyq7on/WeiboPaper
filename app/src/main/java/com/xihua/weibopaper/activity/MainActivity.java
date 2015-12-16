@@ -15,12 +15,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.sina.weibo.sdk.openapi.legacy.GroupAPI;
 import com.xihua.weibopaper.common.GsonRequest;
 import com.xihua.weibopaper.fragment.ContentFragment;
 
@@ -40,6 +42,7 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private List<Fragment> fragmentList;
     private List<String> gruopList;
+    GroupAPI g;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
