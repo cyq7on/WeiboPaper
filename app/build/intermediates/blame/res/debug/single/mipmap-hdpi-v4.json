@@ -16,8 +16,16 @@
         "source": "C:\\project\\androidStudio\\Weibo\\app\\src\\main\\res\\mipmap-hdpi\\ic_reply.png"
     },
     {
+        "merged": "C:\\project\\androidStudio\\Weibo\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\bg_cust_title.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\app\\src\\main\\res\\mipmap-hdpi\\bg_cust_title.png"
+    },
+    {
         "merged": "C:\\project\\androidStudio\\Weibo\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\list_male.png",
         "source": "C:\\project\\androidStudio\\Weibo\\app\\src\\main\\res\\mipmap-hdpi\\list_male.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\back_white.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\app\\src\\main\\res\\mipmap-hdpi\\back_white.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi-v4\\ic_launcher.png",

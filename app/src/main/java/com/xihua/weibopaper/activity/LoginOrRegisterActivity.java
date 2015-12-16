@@ -1,5 +1,6 @@
 package com.xihua.weibopaper.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -29,11 +30,19 @@ public class LoginOrRegisterActivity extends BaseActivity {
         setContentView(R.layout.activity_loginorregister);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("微博");
+        toolbar.setNavigationIcon(R.mipmap.back_white);
         setSupportActionBar(toolbar);
+        //在上一句之前设置无效
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         AuthInfo mAuthInfo = new AuthInfo(LoginOrRegisterActivity.this,
                 Constants.APP_KEY, Constants.REDIRECT_URL, Constants.SCOPE);
         mSsoHandler = new SsoHandler(LoginOrRegisterActivity.this, mAuthInfo);
-
+        mAccessToken = AccessTokenKeeper.readAccessToken(LoginOrRegisterActivity.this);
 
     }
 
@@ -41,7 +50,6 @@ public class LoginOrRegisterActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_login:
                 mSsoHandler.authorize(new AuthListener());
-                mAccessToken = AccessTokenKeeper.readAccessToken(LoginOrRegisterActivity.this);
                 break;
             case R.id.btn_register:
                 mSsoHandler.registerOrLoginByMobile("手机注册",new AuthListener());
@@ -58,7 +66,7 @@ public class LoginOrRegisterActivity extends BaseActivity {
                 // 不为空
                 // 保存 Token 到SharePreferences
                 AccessTokenKeeper.writeAccessToken(LoginOrRegisterActivity.this, mAccessToken);
-                ToastUtil.showShort(LoginOrRegisterActivity.this, "授权成功");
+                startActivity(new Intent(LoginOrRegisterActivity.this,MainActivity.class));
             } else {
                 // 以下几种情况，您会收到 Code：
                 // 1. 当您未在平台上注册的应用程序的包名与签名时；

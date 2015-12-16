@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,9 +23,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.net.RequestListener;
 import com.sina.weibo.sdk.openapi.legacy.GroupAPI;
+import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.common.GsonRequest;
 import com.xihua.weibopaper.fragment.ContentFragment;
+import com.xihua.weibopaper.utils.AccessTokenKeeper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +48,27 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private List<Fragment> fragmentList;
     private List<String> gruopList;
-    GroupAPI g;
+    private GroupAPI groupAPI;
+    private Oauth2AccessToken accessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        accessToken = AccessTokenKeeper.readAccessToken(this);
+        groupAPI = new GroupAPI(this, Constants.APP_KEY,accessToken);
+        groupAPI.groups(new RequestListener() {
+            @Override
+            public void onComplete(String s) {
+                Log.i("info",s);
+            }
+
+            @Override
+            public void onWeiboException(WeiboException e) {
+                Log.e("e",e.getMessage());
+            }
+        });
     }
 
     private void initView() {
