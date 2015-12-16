@@ -16,7 +16,7 @@ import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
 import com.xihua.weibopaper.utils.ToastUtil;
 
-public class LoginOrRegisterActivity extends AppCompatActivity {
+public class LoginOrRegisterActivity extends BaseActivity {
     /** 封装了 "access_token"，"expires_in"，"refresh_token"，并提供了他们的管理功能  */
     private Oauth2AccessToken mAccessToken;
 
@@ -27,7 +27,7 @@ public class LoginOrRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginorregister);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("微博");
         setSupportActionBar(toolbar);
         AuthInfo mAuthInfo = new AuthInfo(LoginOrRegisterActivity.this,
