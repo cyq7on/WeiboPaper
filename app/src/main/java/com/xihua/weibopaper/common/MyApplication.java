@@ -17,26 +17,17 @@ import java.util.List;
 
 public class MyApplication extends Application {
     //运用list来保存们每一个activity是关键
-    private List<Activity> mList = new LinkedList<Activity>();
-    //为了实现每次使用该类时不创建新的对象而创建的静态对象
-    private static MyApplication instance;
-    //实例化一次
-    public synchronized static MyApplication getInstance(){
-        if (null == instance) {
-            instance = new MyApplication();
-        }
-        return instance;
-    }
+    private static List<Activity> mList = new LinkedList<Activity>();
     // add Activity
-    public void addActivity(Activity activity) {
+    public static void addActivity(Activity activity) {
         mList.add(activity);
     }
     //remove activity
-    public void removeActivity(Activity activity) {
+    public static void removeActivity(Activity activity) {
         mList.remove(activity);
     }
     //关闭每一个list内的activity
-    public void finishAll() {
+    public static void finishAll() {
         for (Activity activity:mList) {
             if (!activity.isFinishing()) {
                 activity.finish();

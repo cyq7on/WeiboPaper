@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,16 +25,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.sina.weibo.sdk.exception.WeiboException;
-import com.sina.weibo.sdk.net.RequestListener;
-import com.sina.weibo.sdk.openapi.legacy.GroupAPI;
+import com.xihua.weibopaper.bean.WeiBoUser;
 import com.xihua.weibopaper.common.Constants;
-import com.xihua.weibopaper.common.GsonRequest;
+import com.xihua.weibopaper.utils.GsonRequest;
 import com.xihua.weibopaper.fragment.ContentFragment;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
+import com.xihua.weibopaper.utils.ImageUtils;
+import com.xihua.weibopaper.view.CircleImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Package com.xihua.weibopaper.activity
@@ -48,8 +51,9 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private List<Fragment> fragmentList;
     private List<String> gruopList;
-    private GroupAPI groupAPI;
     private Oauth2AccessToken accessToken;
+    private CircleImageView ivUser;
+    private TextView tvName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +61,33 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         initView();
         accessToken = AccessTokenKeeper.readAccessToken(this);
-        groupAPI = new GroupAPI(this, Constants.APP_KEY,accessToken);
-        groupAPI.groups(new RequestListener() {
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
+        Map<String, String> params = new HashMap<>();
+        params.put("source",Constants.APP_KEY);
+        params.put("access_token", accessToken.getToken());
+        params.put("uid", accessToken.getUid());
+        String url = GsonRequest.getUrl(Constants.USER_SHOW,params);
+        GsonRequest<WeiBoUser> request = new GsonRequest<>(url,
+                WeiBoUser.class, new Response.Listener<WeiBoUser>() {
             @Override
-            public void onComplete(String s) {
-                Log.i("info",s);
+            public void onResponse(WeiBoUser response) {
+                if (response.getAvatar_large() != null) {
+                    ImageUtils imageUtils = new ImageUtils(requestQueue,
+                            response.getAvatar_large());
+                    imageUtils.displayImage(ivUser);
+                }
+                if (response.getScreen_name() != null) {
+                    tvName.setText(response.getScreen_name());
+                }
             }
-
+        }, new Response.ErrorListener() {
             @Override
-            public void onWeiboException(WeiboException e) {
-                Log.e("e",e.getMessage());
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+        requestQueue.add(request);
+
     }
 
     private void initView() {
@@ -93,94 +112,18 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View view = navigationView.getHeaderView(0);
+        ivUser = (CircleImageView) view.findViewById(R.id.iv_user);
+        tvName = (TextView) view.findViewById(R.id.tv_name);
+
         gruopList = new ArrayList<>();
-        gruopList.add("好友");
-        gruopList.add("IT");
-        gruopList.add("娱乐");
-        gruopList.add("学习");
-        gruopList.add("好友");
-        gruopList.add("IT");
-        gruopList.add("娱乐");
-        gruopList.add("学习");
+        gruopList.add("全部微博");
+        gruopList.add("互相关注");
+        gruopList.add("朋友圈");
+
         initTabLayout();
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        GsonRequest<Weather> request = new GsonRequest<Weather>("http://www.weather." +
-                "com.cn/data/sk/101010100.html",
-                Weather.class, new Response.Listener<Weather>() {
-            @Override
-            public void onResponse(Weather response) {
-                Toast.makeText(MainActivity.this,response.getWeatherinfo().getCity(),Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this,error+"",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-//        StringRequest request = new StringRequest("https://www.baidu.com",
-//                new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Toast.makeText(MainActivity.this,response,Toast.LENGTH_SHORT).show();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(MainActivity.this,error+"",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-        requestQueue.add(request);
-    }
-
-    class Weather {
-
-        private WeatherInfo weatherinfo;
-
-        public WeatherInfo getWeatherinfo() {
-            return weatherinfo;
-        }
-
-        public void setWeatherinfo(WeatherInfo weatherinfo) {
-            this.weatherinfo = weatherinfo;
-        }
-
-        class WeatherInfo {
-
-            private String city;
-
-            private String temp;
-
-            private String time;
-
-            public String getCity() {
-                return city;
-            }
-
-            public void setCity(String city) {
-                this.city = city;
-            }
-
-            public String getTemp() {
-                return temp;
-            }
-
-            public void setTemp(String temp) {
-                this.temp = temp;
-            }
-
-            public String getTime() {
-                return time;
-            }
-
-            public void setTime(String time) {
-                this.time = time;
-            }
-
-        }
     }
 
 

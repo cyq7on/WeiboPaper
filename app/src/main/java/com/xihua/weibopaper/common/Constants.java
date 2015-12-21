@@ -22,7 +22,7 @@ package com.xihua.weibopaper.common;
  * @author SINA
  * @since 2013-09-29
  */
-public interface Constants {
+public class Constants {
 
     /** 当前 DEMO 应用的 APP_KEY，第三方应用应该使用自己的 APP_KEY 替换该 APP_KEY */
     public static final String APP_KEY = "796805297";
@@ -51,8 +51,13 @@ public interface Constants {
      * 有关哪些 OpenAPI 需要权限申请，请查看：http://open.weibo.com/wiki/%E5%BE%AE%E5%8D%9AAPI
      * 关于 Scope 概念及注意事项，请查看：http://open.weibo.com/wiki/Scope
      */
-    public static final String SCOPE = 
-            "email,direct_messages_read,direct_messages_write,"
-            + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
-            + "follow_app_official_microblog," + "invitation_write";
+    public static final  String SCOPE = "all";
+
+//    public static final String SCOPE =
+//            "email,direct_messages_read,direct_messages_write,"
+//            + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
+//            + "follow_app_official_microblog," + "invitation_write";
+
+    //根据用户ID获取用户信息
+    public static final String USER_SHOW = "https://api.weibo.com/2/users/show.json";
 }

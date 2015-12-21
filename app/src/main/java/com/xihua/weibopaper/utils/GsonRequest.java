@@ -1,4 +1,6 @@
-package com.xihua.weibopaper.common;
+package com.xihua.weibopaper.utils;
+
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -12,6 +14,7 @@ import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @Package com.xihua.weibopaper.common
@@ -31,6 +34,15 @@ public class GsonRequest<T> extends Request<T> {
     private Class<T> mClass;
 
     private Map<String, String> params;
+
+    //get请求拼接参数
+    public static String getUrl(String url,Map<String, String> params) {
+        String str = "";
+        for (String key : params.keySet()) {
+            str += "&" + key + "=" +params.get(key);
+        }
+        return url + "?" + str.substring(1);
+    }
 
     public GsonRequest(Map<String, String> params, String url, Class<T> clazz, Listener<T> listener,
                        ErrorListener errorListener) {
