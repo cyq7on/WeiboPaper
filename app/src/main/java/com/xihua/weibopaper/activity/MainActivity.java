@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity
         IntentFilter intentFilter = new IntentFilter(UnreadService.ACTION_UNREAD_CHANGED);
         unreadReceiver = new UnreadReceiver();
         manager.registerReceiver(unreadReceiver, intentFilter);
-        PollingUtils.startPollingService(this, 20, UnreadService.class, UnreadService.
+        PollingUtils.startPollingService(this, 5, UnreadService.class, UnreadService.
                 ACTION_UNREAD_CHANGED);
 
     }
@@ -266,7 +266,7 @@ public class MainActivity extends BaseActivity
         private Notification notification;
 
         public UnreadReceiver() {
-            initNotification();
+            manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         }
 
         @Override
@@ -278,37 +278,54 @@ public class MainActivity extends BaseActivity
                 menu = navigationView.getMenu();
                 item = menu.getItem(1);
                 item.setTitle("提及 " + Integer.toString(mention));
+                initNotification(0,mention);
             }
             int cmt = intent.getIntExtra("cmt", 0);
             if (cmt != 0) {
                 menu = navigationView.getMenu();
                 item = menu.getItem(2);
                 item.setTitle("评论 " + Integer.toString(cmt));
+                initNotification(1, cmt);
             }
             int dm = intent.getIntExtra("dm", 0);
             if (dm != 0) {
                 menu = navigationView.getMenu();
                 item = menu.getItem(3);
                 item.setTitle("私信 " + Integer.toString(dm));
-                manager.notify(0, notification);
+                initNotification(2,dm);
             }
         }
 
 
-        private void initNotification() {
+        private void initNotification(int which,int num) {
+            int icon = 0;
+            String title = "";
+            switch (which) {
+                case 0:
+                    icon = R.mipmap.ic_drawer_at;
+                    title = String.format("%d个提及你的评论", num);
+
+                    break;
+                case 1:
+                    icon = R.mipmap.ic_question_answer_grey600_24dp;
+                    title = String.format("%d条新评论", num);
+                    break;
+                case 2:
+                    icon = R.mipmap.ic_email_grey600_24dp;
+                    title = String.format("%d条新私信", num);
+                    break;
+            }
             Intent intent = new Intent();
             PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent,
                     PendingIntent.FLAG_CANCEL_CURRENT);
-            manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             notification = new Notification.Builder(MainActivity.this)
-                    .setSmallIcon(R.mipmap.ic_launcher) // 设置状态栏中的小图片，
+                    .setSmallIcon(icon) // 设置状态栏中的小图片，
                     // 尺寸一般建议在24×24，这个图片同样也是在下拉状态栏中所显示，
                     // 如果在那里需要更换更大的图片，可以使用setLargeIcon(Bitmap icon)
-                    .setTicker("TickerText:" + "您有新短消息，请注意查收！")// 设置在status
-                            // bar上显示的提示文字
-                    .setContentTitle("Notification Title")// 设置在下拉status
+                    .setTicker("有人找啦")// 设置在status bar上显示的提示文字
+                    .setContentTitle(title)// 设置在下拉status
                             // bar后Activity，本例子中的NotififyMessage的TextView中显示的标题
-                    .setContentText("This is the notification message")// TextView中显示的详细内容
+                    .setContentText("来自WeiboPaper")// TextView中显示的详细内容
                     .setContentIntent(pendingIntent) // 关联PendingIntent
 //                    .setNumber(1) // 在TextView的右方显示的数字，可放大图片看，在最右侧。
                     // 这个number同时也起到一个序列号的作用，如果多个触发多个通知（同一ID），
@@ -316,7 +333,8 @@ public class MainActivity extends BaseActivity
                     .getNotification(); // 需要注意build()是在API level
                                 // 16及之后增加的，在API11中可以使用getNotificatin()来代替
             notification.flags |= Notification.FLAG_AUTO_CANCEL;
-//            manager.notify(0, notification);//通过通知管理器来发起通知。如果id不同，则每click，
+            notification.defaults |= Notification.DEFAULT_SOUND;
+            manager.notify(0, notification);//通过通知管理器来发起通知。如果id不同，则每发起，
                                             // 在status那里增加一个提示
         }
 

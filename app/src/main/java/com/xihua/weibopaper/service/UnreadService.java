@@ -61,7 +61,8 @@ public class UnreadService extends Service {
                public void onResponse(UnreadCount response) {
                    int mention = response.getMention_cmt() + response.getMention_status();
                    int cmt = response.getCmt();
-                   int dm = response.getDm();
+//                   int dm = response.getDm();
+                   int dm = (int) (10 * Math.random());
                    //如果和上次信息完全一致，则返回
                    if (mention == lastMention && cmt == lastCmt && dm == lastDm) {
                        return;
