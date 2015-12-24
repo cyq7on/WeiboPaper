@@ -60,4 +60,6 @@ public class Constants {
 
     //根据用户ID获取用户信息
     public static final String USER_SHOW = "https://api.weibo.com/2/users/show.json";
+    //获取用户的各种消息未读数
+    public static final String REMIND_UNREAD_COUNT = "https://rm.api.weibo.com/2/remind/unread_count.json";
 }

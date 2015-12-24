@@ -37,9 +37,9 @@ public class GsonRequest<T> extends Request<T> {
 
     //get请求拼接参数
     public static String getUrl(String url,Map<String, String> params) {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (String key : params.keySet()) {
-            str += "&" + key + "=" +params.get(key);
+            str.append("&").append(key).append("=").append(params.get(key));
         }
         return url + "?" + str.substring(1);
     }

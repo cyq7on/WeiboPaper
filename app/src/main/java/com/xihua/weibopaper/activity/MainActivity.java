@@ -1,5 +1,13 @@
 package com.xihua.weibopaper.activity;
 
+import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -7,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -25,12 +34,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.xihua.weibopaper.bean.UnreadCount;
 import com.xihua.weibopaper.bean.WeiBoUser;
 import com.xihua.weibopaper.common.Constants;
+import com.xihua.weibopaper.common.MyApplication;
+import com.xihua.weibopaper.service.UnreadService;
 import com.xihua.weibopaper.utils.GsonRequest;
 import com.xihua.weibopaper.fragment.ContentFragment;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
 import com.xihua.weibopaper.utils.ImageUtils;
+import com.xihua.weibopaper.utils.PollingUtils;
+import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
 
 import java.util.ArrayList;
@@ -54,12 +68,27 @@ public class MainActivity extends BaseActivity
     private Oauth2AccessToken accessToken;
     private CircleImageView ivUser;
     private TextView tvName;
+    private NavigationView navigationView;
+    private UnreadReceiver unreadReceiver;
+    private LocalBroadcastManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        initData();
+        manager = LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter = new IntentFilter(UnreadService.ACTION_UNREAD_CHANGED);
+        unreadReceiver = new UnreadReceiver();
+        manager.registerReceiver(unreadReceiver, intentFilter);
+        PollingUtils.startPollingService(this, 20, UnreadService.class, UnreadService.
+                ACTION_UNREAD_CHANGED);
+
+    }
+
+    @Override
+    public void initData() {
         accessToken = AccessTokenKeeper.readAccessToken(this);
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
         Map<String, String> params = new HashMap<>();
@@ -67,14 +96,13 @@ public class MainActivity extends BaseActivity
         params.put("access_token", accessToken.getToken());
         params.put("uid", accessToken.getUid());
         String url = GsonRequest.getUrl(Constants.USER_SHOW,params);
-        GsonRequest<WeiBoUser> request = new GsonRequest<>(url,
+        GsonRequest<WeiBoUser> requestImage = new GsonRequest<>(url,
                 WeiBoUser.class, new Response.Listener<WeiBoUser>() {
             @Override
             public void onResponse(WeiBoUser response) {
                 if (response.getAvatar_large() != null) {
-                    ImageUtils imageUtils = new ImageUtils(requestQueue,
-                            response.getAvatar_large());
-                    imageUtils.displayImage(ivUser);
+                    ImageUtils.getInstance().displayImage(requestQueue, response.getAvatar_large(),
+                            ivUser);
                 }
                 if (response.getScreen_name() != null) {
                     tvName.setText(response.getScreen_name());
@@ -83,19 +111,19 @@ public class MainActivity extends BaseActivity
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                ToastUtil.showShort(MainActivity.this, error.getMessage());
             }
         });
-        requestQueue.add(request);
-
+        requestQueue.add(requestImage);
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("首页");
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,7 +138,7 @@ public class MainActivity extends BaseActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View view = navigationView.getHeaderView(0);
@@ -179,14 +207,23 @@ public class MainActivity extends BaseActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                break;
+            case R.id.action_write:
+                break;
+            case R.id.action_group:
+                break;
+            case R.id.action_offline:
+                break;
+            case R.id.action_exit:
+                MyApplication.finishAll();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+        return true;
 
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -214,5 +251,74 @@ public class MainActivity extends BaseActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PollingUtils.stopPollingService(this, UnreadService.class, UnreadService.
+                ACTION_UNREAD_CHANGED);
+        manager.unregisterReceiver(unreadReceiver);
+    }
+
+    private class UnreadReceiver extends BroadcastReceiver {
+        private NotificationManager manager;
+        private Notification notification;
+
+        public UnreadReceiver() {
+            initNotification();
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Menu menu;
+            MenuItem item;
+            int mention = intent.getIntExtra("mention",0);
+            if (mention != 0) {
+                menu = navigationView.getMenu();
+                item = menu.getItem(1);
+                item.setTitle("提及 " + Integer.toString(mention));
+            }
+            int cmt = intent.getIntExtra("cmt", 0);
+            if (cmt != 0) {
+                menu = navigationView.getMenu();
+                item = menu.getItem(2);
+                item.setTitle("评论 " + Integer.toString(cmt));
+            }
+            int dm = intent.getIntExtra("dm", 0);
+            if (dm != 0) {
+                menu = navigationView.getMenu();
+                item = menu.getItem(3);
+                item.setTitle("私信 " + Integer.toString(dm));
+                manager.notify(0, notification);
+            }
+        }
+
+
+        private void initNotification() {
+            Intent intent = new Intent();
+            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent,
+                    PendingIntent.FLAG_CANCEL_CURRENT);
+            manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notification = new Notification.Builder(MainActivity.this)
+                    .setSmallIcon(R.mipmap.ic_launcher) // 设置状态栏中的小图片，
+                    // 尺寸一般建议在24×24，这个图片同样也是在下拉状态栏中所显示，
+                    // 如果在那里需要更换更大的图片，可以使用setLargeIcon(Bitmap icon)
+                    .setTicker("TickerText:" + "您有新短消息，请注意查收！")// 设置在status
+                            // bar上显示的提示文字
+                    .setContentTitle("Notification Title")// 设置在下拉status
+                            // bar后Activity，本例子中的NotififyMessage的TextView中显示的标题
+                    .setContentText("This is the notification message")// TextView中显示的详细内容
+                    .setContentIntent(pendingIntent) // 关联PendingIntent
+//                    .setNumber(1) // 在TextView的右方显示的数字，可放大图片看，在最右侧。
+                    // 这个number同时也起到一个序列号的作用，如果多个触发多个通知（同一ID），
+                    // 可以指定显示哪一个。
+                    .getNotification(); // 需要注意build()是在API level
+                                // 16及之后增加的，在API11中可以使用getNotificatin()来代替
+            notification.flags |= Notification.FLAG_AUTO_CANCEL;
+//            manager.notify(0, notification);//通过通知管理器来发起通知。如果id不同，则每click，
+                                            // 在status那里增加一个提示
+        }
+
     }
 }

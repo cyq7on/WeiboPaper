@@ -16,33 +16,41 @@ import com.xihua.weibopaper.activity.R;
  * @date 2015/12/2116:59
  */
 public class ImageUtils {
-    private RequestQueue requestQueue;
-    private String url;
     private ImageLoader imageLoader;
     private ImageLoader.ImageListener imageListener;
-    public ImageUtils(RequestQueue requestQueue,String url) {
-        this.requestQueue = requestQueue;
-        this.url = url;
-        imageLoader = new ImageLoader(requestQueue, new BitmapCache());
+    private static ImageUtils instance;
+
+    private ImageUtils() {
+
+    }
+
+    public static ImageUtils getInstance() {
+        if (instance == null) {
+            instance = new ImageUtils();
+        }
+        return instance;
     }
 
     public void setImageListener(ImageLoader.ImageListener imageListener) {
         this.imageListener = imageListener;
     }
 
-    public void displayImage(ImageView imageView) {
+    public void displayImage(RequestQueue requestQueue,String url,ImageView imageView) {
         if (imageListener == null) {
             imageListener = ImageLoader.getImageListener(imageView,
                     R.mipmap.ic_launcher, R.mipmap.ic_launcher);
         }
+        imageLoader = new ImageLoader(requestQueue, new BitmapCache());
         imageLoader.get(url,imageListener);
     }
 
-    public void displayImage(ImageView imageView,int maxWith,int maxHight) {
+    public void displayImage(RequestQueue requestQueue,String url,
+                             ImageView imageView,int maxWith,int maxHight) {
         if (imageListener == null) {
             imageListener = ImageLoader.getImageListener(imageView,
                     R.mipmap.ic_launcher, R.mipmap.ic_launcher);
         }
+        imageLoader = new ImageLoader(requestQueue, new BitmapCache());
         imageLoader.get(url,imageListener,maxWith,maxHight);
     }
 
