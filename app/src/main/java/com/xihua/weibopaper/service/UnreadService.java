@@ -61,23 +61,18 @@ public class UnreadService extends Service {
                public void onResponse(UnreadCount response) {
                    int mention = response.getMention_cmt() + response.getMention_status();
                    int cmt = response.getCmt();
-//                   int dm = response.getDm();
-                   int dm = (int) (10 * Math.random());
-                   //如果和上次信息完全一致，则返回
-                   if (mention == lastMention && cmt == lastCmt && dm == lastDm) {
-                       return;
-                   }
+                   int dm = response.getDm();
 //                   ToastUtil.showShort(getApplicationContext(), response.toString());
                    Intent intent = new Intent(ACTION_UNREAD_CHANGED);
-                   if (mention != 0) {
+                   if (mention != 0 && mention != lastMention) {
                        intent.putExtra("mention",mention);
                        manager.sendBroadcast(intent);
                    }
-                   if (cmt != 0) {
+                   if (cmt != 0 && cmt != lastCmt) {
                        intent.putExtra("cmt",cmt);
                        manager.sendBroadcast(intent);
                    }
-                   if (dm != 0) {
+                   if (dm != 0 && dm != lastDm) {
                        intent.putExtra("dm",dm);
                        manager.sendBroadcast(intent);
                    }

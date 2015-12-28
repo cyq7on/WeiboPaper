@@ -1,6 +1,5 @@
 package com.xihua.weibopaper.activity;
 
-import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,27 +20,27 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.xihua.weibopaper.bean.UnreadCount;
-import com.xihua.weibopaper.bean.WeiBoUser;
+import com.sina.weibo.sdk.openapi.models.User;
+import com.xihua.weibopaper.adapter.WeiboAdapter;
+import com.xihua.weibopaper.bean.WeiboContent;
 import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.common.MyApplication;
+import com.xihua.weibopaper.fragment.HomeFragment;
 import com.xihua.weibopaper.service.UnreadService;
-import com.xihua.weibopaper.utils.GsonRequest;
-import com.xihua.weibopaper.fragment.ContentFragment;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
+import com.xihua.weibopaper.utils.GsonRequest;
 import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.PollingUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
@@ -71,11 +70,14 @@ public class MainActivity extends BaseActivity
     private NavigationView navigationView;
     private UnreadReceiver unreadReceiver;
     private LocalBroadcastManager manager;
+    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        accessToken = AccessTokenKeeper.readAccessToken(this);
+        requestQueue = Volley.newRequestQueue(this);
         initView();
         initData();
         manager = LocalBroadcastManager.getInstance(this);
@@ -89,23 +91,21 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void initData() {
-        accessToken = AccessTokenKeeper.readAccessToken(this);
-        final RequestQueue requestQueue = Volley.newRequestQueue(this);
         Map<String, String> params = new HashMap<>();
         params.put("source",Constants.APP_KEY);
         params.put("access_token", accessToken.getToken());
         params.put("uid", accessToken.getUid());
         String url = GsonRequest.getUrl(Constants.USER_SHOW,params);
-        GsonRequest<WeiBoUser> requestImage = new GsonRequest<>(url,
-                WeiBoUser.class, new Response.Listener<WeiBoUser>() {
+        GsonRequest<User> requestImage = new GsonRequest<>(url,
+                User.class, new Response.Listener<User>() {
             @Override
-            public void onResponse(WeiBoUser response) {
-                if (response.getAvatar_large() != null) {
-                    ImageUtils.getInstance().displayImage(requestQueue, response.getAvatar_large(),
-                            ivUser);
+            public void onResponse(User response) {
+                if (response.avatar_large != null) {
+//                    ImageUtils.getInstance().displayImage(requestQueue, response.avatar_large,
+//                            ivUser);
                 }
-                if (response.getScreen_name() != null) {
-                    tvName.setText(response.getScreen_name());
+                if (response.screen_name != null) {
+                    tvName.setText(response.screen_name);
                 }
             }
         }, new Response.ErrorListener() {
@@ -147,8 +147,8 @@ public class MainActivity extends BaseActivity
 
         gruopList = new ArrayList<>();
         gruopList.add("全部微博");
-        gruopList.add("互相关注");
-        gruopList.add("朋友圈");
+        gruopList.add("我的关注");
+        gruopList.add("我的微博");
 
         initTabLayout();
 
@@ -158,12 +158,20 @@ public class MainActivity extends BaseActivity
     private void initTabLayout() {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         fragmentList = new ArrayList<>();
-        for (int i = 0;i < gruopList.size();i ++) {
-            tabLayout.addTab(tabLayout.newTab());
-            fragmentList.add(new ContentFragment());
-        }
+        Map<String, String> params = new HashMap<>();
+        params.put("source",Constants.APP_KEY);
+        params.put("access_token", accessToken.getToken());
+        String url = GsonRequest.getUrl(Constants.STATUSES_PUBLIC_TIMELINE,params);
+        fragmentList.add(HomeFragment.newInstance(url));
+        url = GsonRequest.getUrl(Constants.STATUSES_FRIENDS_TIMELINE,params);
+        fragmentList.add(HomeFragment.newInstance(url));
+        params.put("uid", accessToken.getUid());
+        url = GsonRequest.getUrl(Constants.STATUSES_USER_TIMELINE,params);
+        fragmentList.add(HomeFragment.newInstance(url));
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp);
+        viewPager.setOffscreenPageLimit(1);
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+
             @Override
             public Fragment getItem(int position) {
                 return  fragmentList.get(position);
@@ -226,7 +234,6 @@ public class MainActivity extends BaseActivity
 
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -277,22 +284,25 @@ public class MainActivity extends BaseActivity
             if (mention != 0) {
                 menu = navigationView.getMenu();
                 item = menu.getItem(1);
-                item.setTitle("提及 " + Integer.toString(mention));
+//                item.setTitle("提及 " + Integer.toString(mention));
+                item.setTitle(String.format("提及 %c",mention));
                 initNotification(0,mention);
             }
             int cmt = intent.getIntExtra("cmt", 0);
             if (cmt != 0) {
                 menu = navigationView.getMenu();
                 item = menu.getItem(2);
-                item.setTitle("评论 " + Integer.toString(cmt));
+//                item.setTitle("评论 " + Integer.toString(cmt));
+                item.setTitle(String.format("评论 %c",cmt));
                 initNotification(1, cmt);
             }
             int dm = intent.getIntExtra("dm", 0);
             if (dm != 0) {
                 menu = navigationView.getMenu();
                 item = menu.getItem(3);
-                item.setTitle("私信 " + Integer.toString(dm));
-                initNotification(2,dm);
+//                item.setTitle("私信 " + Integer.toString(dm));
+                item.setTitle(String.format("私信 %c",dm));
+                initNotification(2, dm);
             }
         }
 
@@ -302,16 +312,15 @@ public class MainActivity extends BaseActivity
             String title = "";
             switch (which) {
                 case 0:
-                    icon = R.mipmap.ic_drawer_at;
+                    icon = R.mipmap.statusbar_ic_mention_small;
                     title = String.format("%d个提及你的评论", num);
-
                     break;
                 case 1:
-                    icon = R.mipmap.ic_question_answer_grey600_24dp;
+                    icon = R.mipmap.statusbar_ic_comment_small;
                     title = String.format("%d条新评论", num);
                     break;
                 case 2:
-                    icon = R.mipmap.ic_email_grey600_24dp;
+                    icon = R.mipmap.statusbar_ic_dm_small;
                     title = String.format("%d条新私信", num);
                     break;
             }
@@ -334,7 +343,7 @@ public class MainActivity extends BaseActivity
                                 // 16及之后增加的，在API11中可以使用getNotificatin()来代替
             notification.flags |= Notification.FLAG_AUTO_CANCEL;
             notification.defaults |= Notification.DEFAULT_SOUND;
-            manager.notify(0, notification);//通过通知管理器来发起通知。如果id不同，则每发起，
+            manager.notify(which, notification);//通过通知管理器来发起通知。如果id不同，则每发起，
                                             // 在status那里增加一个提示
         }
 

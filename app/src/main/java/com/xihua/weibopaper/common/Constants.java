@@ -62,4 +62,10 @@ public class Constants {
     public static final String USER_SHOW = "https://api.weibo.com/2/users/show.json";
     //获取用户的各种消息未读数
     public static final String REMIND_UNREAD_COUNT = "https://rm.api.weibo.com/2/remind/unread_count.json";
+    //返回最新的公共微博
+    public static final String STATUSES_PUBLIC_TIMELINE = "https://api.weibo.com/2/statuses/public_timeline.json";
+    //获取当前登录用户及其所关注（授权）用户的最新微博
+    public static final String STATUSES_FRIENDS_TIMELINE = "https://api.weibo.com/2/statuses/friends_timeline.json";
+    //获取某个用户最新发表的微博列表
+    public static final String STATUSES_USER_TIMELINE = "https://api.weibo.com/2/statuses/user_timeline.json";
 }

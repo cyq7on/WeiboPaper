@@ -1,241 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/item_padding"
-        android:paddingRight="@dimen/item_padding"
-        android:paddingTop="@dimen/item_padding">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/txtName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="名字" />
-
-            <ImageView
-                android:id="@+id/imgVerified"
-                android:layout_width="18dip"
-                android:layout_height="18dip"
-                android:layout_marginLeft="4dip"
-                android:layout_toRightOf="@id/txtName"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/txtDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtName"
-                android:layout_marginTop="2dip"
-                android:text="来自Aisen 2015-01-26" />
-
-            <!--org.aisen.weibo.sina.ui.widget.AisenTextView-->
-            <TextView
-                android:id="@+id/txtContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtDesc"
-                android:layout_marginBottom="4dip"
-                android:layout_marginTop="10dip"
-                android:lineSpacingExtra="2dip"
-                android:text="哈哈，我今天发了条微博" />
-
-            <!--android:background="@drawable/timeline_profile_question_single_normal"-->
-            <RelativeLayout
-                android:id="@+id/layRe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtContent"
-                android:layout_marginLeft="-10dip"
-                android:layout_marginRight="-10dip"
-                android:orientation="vertical"
-                android:paddingBottom="4dip"
-                android:paddingLeft="10dip"
-                android:paddingRight="10dip">
-
-                <View
-                    android:id="@+id/layReDivider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1.5dip"
-                    android:layout_marginBottom="8dip"
-                     />
-
-                <TextView
-                    android:id="@+id/txtReContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/layReDivider"
-                    android:lineSpacingExtra="2dip"
-                    android:text="哈哈，我发了条微博被baby转发了，教主吃屎！" />
-
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <!--org.aisen.weibo.sina.ui.widget.TimelinePicsView-->
-        <View
-            android:id="@+id/layPicturs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--org.aisen.weibo.sina.ui.widget.GifHintImageView-->
-            <ImageView
-                android:id="@+id/img01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/img02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/img03"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/img04"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/img05"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/img06"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/img07"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/img08"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/img09"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </View>
-
-        <TextView
-            android:id="@+id/txtPics"
+        <com.xihua.weibopaper.view.CircleImageView
+            android:id="@+id/iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp" />
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/txtVisiable"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:layout_toRightOf="@id/iv"
+            android:layout_marginLeft="3dp"
+            android:textColor="#000"
+            android:textSize="@dimen/com_sina_weibo_sdk_loginview_text_size"
+            tool:text="中国之声" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="35dip"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+        <com.xihua.weibopaper.view.CircleImageView
+            android:id="@+id/iv_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@id/tv_name"
+            android:src="@mipmap/avatar_enterprise_vip" />
 
-            <LinearLayout
-                android:id="@+id/btnLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dip"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingBottom="2dip">
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_menu_moreoverflow_card_dark_normal" />
 
-                <ImageView
-                    android:id="@+id/imgLike"
-                    android:layout_width="24dip"
-                    android:layout_height="20dip"
-                     />
+        <TextView
+            android:id="@+id/tv_create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_toRightOf="@id/iv"
+            android:layout_marginLeft="3dp"
+            tool:text="1分钟前" />
 
-                <TextView
-                    android:id="@+id/txtLike"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="4dip"
-                    android:text="1人赞了"
-                    android:textSize="12sp" />
-            </LinearLayout>
+        <TextView
+            android:id="@+id/tv_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_toRightOf="@id/tv_create_time"
+            android:layout_marginLeft="3dp"
+            tool:text="来自微博" />
 
-            <LinearLayout
-                android:id="@+id/btnCmt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:orientation="horizontal">
+    </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="24dip"
-                    android:layout_height="20dip"
-                    />
-
-                <TextView
-                    android:id="@+id/txtComment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btnRepost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dip"
-                android:layout_toLeftOf="@id/btnCmt"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="24dip"
-                    android:layout_height="20dip"
-                    />
-
-                <TextView
-                    android:id="@+id/txtRepost"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-        </RelativeLayout>
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/btnMenus"
-        android:layout_width="40dip"
-        android:layout_height="40dip"
-        android:layout_alignParentRight="true"
-        android:paddingBottom="8dip"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tool:text="hahahahahahahha"
+        android:id="@+id/tv_user_do"
+        android:textSize="15sp"
+        android:textColor="#000"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         />
+    <View
+        android:id="@+id/view"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#ABABAB"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:visibility="gone"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hahahahahahahha"
+        android:id="@+id/tv_content"
+        android:textSize="15sp"
+        android:textColor="#000"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        />
+    <LinearLayout
+        android:id="@+id/image_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"/>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp">
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/timeline_icon_unlike"
+            android:id="@+id/iv_like"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7"
+            android:textSize="16sp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/tv_like_num"
+            android:layout_toRightOf="@id/iv_like"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_comment"
+            android:src="@mipmap/statusbar_ic_comment_small"
+            android:layout_alignParentRight="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="77"
+            android:textSize="16sp"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="10dp"
+            android:id="@+id/tv_send_num"
+            android:layout_toLeftOf="@id/iv_comment"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_send"
+            android:src="@mipmap/statusbar_ic_sending"
+            android:layout_toLeftOf="@id/tv_send_num"
+            android:layout_marginRight="5dp"/>
+
+    </RelativeLayout>
+</LinearLayout>

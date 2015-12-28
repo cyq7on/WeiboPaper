@@ -38,7 +38,7 @@ public class ImageUtils {
     public void displayImage(RequestQueue requestQueue,String url,ImageView imageView) {
         if (imageListener == null) {
             imageListener = ImageLoader.getImageListener(imageView,
-                    R.mipmap.ic_launcher, R.mipmap.ic_launcher);
+                    R.mipmap.ic_launcher, R.mipmap.im_default_user_portrait);
         }
         imageLoader = new ImageLoader(requestQueue, new BitmapCache());
         imageLoader.get(url,imageListener);
@@ -48,7 +48,7 @@ public class ImageUtils {
                              ImageView imageView,int maxWith,int maxHight) {
         if (imageListener == null) {
             imageListener = ImageLoader.getImageListener(imageView,
-                    R.mipmap.ic_launcher, R.mipmap.ic_launcher);
+                    R.mipmap.ic_launcher, R.mipmap.im_default_user_portrait);
         }
         imageLoader = new ImageLoader(requestQueue, new BitmapCache());
         imageLoader.get(url,imageListener,maxWith,maxHight);
