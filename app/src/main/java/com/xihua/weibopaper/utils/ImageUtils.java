@@ -16,7 +16,7 @@ import com.xihua.weibopaper.activity.R;
  * @date 2015/12/2116:59
  */
 public class ImageUtils {
-    private ImageLoader imageLoader;
+    private static ImageLoader imageLoader;
     private ImageLoader.ImageListener imageListener;
     private static ImageUtils instance;
 
@@ -31,26 +31,27 @@ public class ImageUtils {
         return instance;
     }
 
-    public void setImageListener(ImageLoader.ImageListener imageListener) {
-        this.imageListener = imageListener;
-    }
-
-    public void displayImage(RequestQueue requestQueue,String url,ImageView imageView) {
+    public void displayImage(RequestQueue requestQueue,String url,
+                             ImageLoader.ImageListener imageListener,ImageView imageView) {
         if (imageListener == null) {
             imageListener = ImageLoader.getImageListener(imageView,
                     R.mipmap.ic_launcher, R.mipmap.im_default_user_portrait);
         }
-        imageLoader = new ImageLoader(requestQueue, new BitmapCache());
+        if(imageLoader == null) {
+            imageLoader = new ImageLoader(requestQueue, new BitmapCache());
+        }
         imageLoader.get(url,imageListener);
     }
 
-    public void displayImage(RequestQueue requestQueue,String url,
-                             ImageView imageView,int maxWith,int maxHight) {
+    public void displayImage(RequestQueue requestQueue,String url,ImageLoader.ImageListener
+            imageListener, ImageView imageView,int maxWith,int maxHight) {
         if (imageListener == null) {
             imageListener = ImageLoader.getImageListener(imageView,
                     R.mipmap.ic_launcher, R.mipmap.im_default_user_portrait);
         }
-        imageLoader = new ImageLoader(requestQueue, new BitmapCache());
+        if(imageLoader == null) {
+            imageLoader = new ImageLoader(requestQueue, new BitmapCache());
+        }
         imageLoader.get(url,imageListener,maxWith,maxHight);
     }
 
@@ -79,4 +80,5 @@ public class ImageUtils {
         }
 
     }
+
 }

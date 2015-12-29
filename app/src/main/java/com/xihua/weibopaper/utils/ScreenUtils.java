@@ -123,4 +123,11 @@ public class ScreenUtils
 
 	}
 
+	public static float getDensity(Context context)
+	{
+		DisplayMetrics dm = new DisplayMetrics();
+		dm = context.getApplicationContext().getResources().getDisplayMetrics();
+		return dm.density;
+	}
+
 }

@@ -124,7 +124,6 @@
             android:layout_height="wrap_content"
             android:text="7"
             android:textSize="16sp"
-            android:layout_centerInParent="true"
             android:layout_marginLeft="5dp"
             android:id="@+id/tv_like_num"
             android:layout_toRightOf="@id/iv_like"/>
@@ -139,7 +138,6 @@
             android:layout_height="wrap_content"
             android:text="77"
             android:textSize="16sp"
-            android:layout_centerInParent="true"
             android:layout_marginRight="10dp"
             android:id="@+id/tv_send_num"
             android:layout_toLeftOf="@id/iv_comment"

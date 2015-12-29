@@ -1,6 +1,7 @@
 package com.xihua.weibopaper.adapter;
 
 import android.content.Context;
+import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +9,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.sina.weibo.sdk.openapi.models.Status;
 import com.sina.weibo.sdk.openapi.models.User;
 import com.xihua.weibopaper.activity.R;
+import com.xihua.weibopaper.bean.PicUrls;
 import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiboContent;
 import com.xihua.weibopaper.utils.ImageUtils;
+import com.xihua.weibopaper.utils.ScreenUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
 
@@ -53,6 +59,24 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
         if (content.getStatuses().size() == 0) {
             return;
         }
+        if (onItemClickListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    onItemClickListener.onItemClick(holder.itemView, pos);
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    onItemClickListener.onItemLongClick(holder.itemView,pos);
+                    return true;
+                }
+            });
+        }
         StatusContent sc = content.getStatuses().get(position);
         User user = sc.getUser();
 //        if (onClickListener == null) {
@@ -64,8 +88,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
             };
             holder.ivMore.setOnClickListener(onClickListener);
 //        }
-        ImageUtils.getInstance().displayImage(requestQueue, user.avatar_large,
+        ImageUtils.getInstance().displayImage(requestQueue, user.avatar_large,null,
                 holder.iv);
+//        holder.setIsRecyclable(false);
         // 黄V
         if (user.verified_type == 0) {
             holder.ivVerify.setImageResource(R.mipmap.avatar_vip);
@@ -98,31 +123,122 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
 
         }
 
-        if (sc.getRetweeted_status() != null) {
+        PicUrls[] picUrls;
+        StatusContent reStatus = sc.getRetweeted_status();
+        if (reStatus != null) {
             holder.line.setVisibility(View.VISIBLE);
             holder.tvUserDo.setText(sc.getText());
-        }else {
+            holder.tvContent.setText(reStatus.getText());
+            picUrls = reStatus.getPic_urls();
+        } else {
             holder.tvUserDo.setVisibility(View.GONE);
             holder.tvContent.setText(sc.getText());
+            picUrls = sc.getPic_urls();
         }
-        if (onItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    onItemClickListener.onItemClick(holder.itemView, pos);
-                }
-            });
+        //微博配图
+        int size = picUrls.length;
+        if (size == 0) {
+            return;
+        }
+        int width = (int) ScreenUtils.getScreenWidth(context);// 屏幕宽度
+        ImageView image;
+        if (size == 1) {
+            holder.container.removeAllViews();
+            image = new ImageView(context);
+            image.setOnClickListener(new ImageOnClickListener(0));
+            image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            holder.container.addView(image, params);
+            ImageUtils.getInstance().displayImage(requestQueue,picUrls[0].
+                            getThumbnail_pic().replace("thumbnail", "large"), null,image);
+        } else if (size == 2) {
+            holder.container.removeAllViews();
+            LinearLayout horizonLayout = new LinearLayout(context);
+            LinearLayout.LayoutParams params;
+            float density = ScreenUtils.getDensity(context);
+            float imageLayWidth = width - (10 + 10) * density;
+            for (int i = 0; i < size; i++) {
+                params = new LinearLayout.LayoutParams(
+                        (int) (imageLayWidth / 2), (int) (imageLayWidth / 2));
+                image = new ImageView(context);
+                image.setOnClickListener(new ImageOnClickListener(i));
+                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                image.setPadding(0, (int) (4 * density), (int) (4 * density),
+                        (int) (4 * density));
+                horizonLayout.addView(image, params);
+                ImageUtils.getInstance().displayImage(requestQueue,picUrls[i].getThumbnail_pic().replace("thumbnail", "bmiddle"),
+                        null,image);
+            }
+            holder.container.addView(horizonLayout);
+        } else if (size > 2 && size <= 9) {
+            holder.container.removeAllViews();
 
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    onItemClickListener.onItemLongClick(holder.itemView,pos);
-                    return true;
+            LinearLayout.LayoutParams params;
+            float density = ScreenUtils.getDensity(context);
+            float imageLayWidth = width - (10 + 10) * density;
+
+            int count = size;
+            int yuShu = count % 3;
+            if (yuShu == 0) {
+                int hangNum = (int) (size / 3);
+                for (int i = 0; i < hangNum; i++) {
+                    LinearLayout horizonLayout = new LinearLayout(context);
+                    for (int j = 0; j < 3; j++) {
+                        params = new LinearLayout.LayoutParams(
+                                (int) (imageLayWidth / 3),
+                                (int) (imageLayWidth / 3));
+                        image = new ImageView(context);
+                        image.setOnClickListener(new ImageOnClickListener(i * 3
+                                + j));
+                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                        image.setPadding(0, (int) (2 * density),
+                                (int) (2 * density), (int) (2 * density));
+                        horizonLayout.addView(image, params);
+                        ImageUtils.getInstance().displayImage(requestQueue,
+                                picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle"), null,image);
+                    }
+                    holder.container.addView(horizonLayout);
                 }
-            });
+            } else {
+                int hangNum = (int) (size / 3) + 1;
+                for (int i = 0; i <= hangNum - 1; i++) {
+                    LinearLayout horizonLayout = new LinearLayout(context);
+                    if (i < hangNum - 1) {
+                        for (int j = 0; j < 3; j++) {
+                            params = new LinearLayout.LayoutParams(
+                                    (int) (imageLayWidth / 3),
+                                    (int) (imageLayWidth / 3));
+                            image = new ImageView(context);
+                            image.setOnClickListener(new ImageOnClickListener(i * 3
+                                    + j));
+                            image.setPadding(0, (int) (2 * density),
+                                    (int) (2 * density), (int) (2 * density));
+                            image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            horizonLayout.addView(image, params);
+                            ImageUtils.getInstance().displayImage(requestQueue,
+                                    picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle"), null,image);
+                        }
+                        holder.container.addView(horizonLayout);
+                    } else if (i == hangNum - 1) {
+                        for (int j = 0; j < yuShu; j++) {
+                            params = new LinearLayout.LayoutParams(
+                                    (int) (imageLayWidth / 3),
+                                    (int) (imageLayWidth / 3));
+                            image = new ImageView(context);
+                            image.setOnClickListener(new ImageOnClickListener(i * 3
+                                    + j));
+                            image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            horizonLayout.addView(image, params);
+                            ImageUtils.getInstance().displayImage(requestQueue,
+                                    picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle"), null,image);
+                        }
+                        holder.container.addView(horizonLayout);
+                    }
+                }
+            }
         }
+        
     }
 
     @Override
@@ -160,5 +276,21 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
             ivSend = (ImageView) itemView.findViewById(R.id.iv_send);
             ivComment = (ImageView) itemView.findViewById(R.id.iv_comment);
         }
+    }
+
+    private class ImageOnClickListener implements View.OnClickListener {
+
+        private int index;
+
+        public ImageOnClickListener(int index) {
+            this.index = index;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(context, "第" + index + "张", Toast.LENGTH_LONG)
+                    .show();
+        }
+
     }
 }

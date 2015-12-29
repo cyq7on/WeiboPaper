@@ -101,8 +101,8 @@ public class MainActivity extends BaseActivity
             @Override
             public void onResponse(User response) {
                 if (response.avatar_large != null) {
-//                    ImageUtils.getInstance().displayImage(requestQueue, response.avatar_large,
-//                            ivUser);
+                    ImageUtils.getInstance().displayImage(requestQueue, response.avatar_large,
+                            null,ivUser);
                 }
                 if (response.screen_name != null) {
                     tvName.setText(response.screen_name);
