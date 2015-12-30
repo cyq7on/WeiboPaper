@@ -127,12 +127,20 @@
             android:layout_marginLeft="5dp"
             android:id="@+id/tv_like_num"
             android:layout_toRightOf="@id/iv_like"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7"
+            android:textSize="16sp"
+            android:id="@+id/tv_comment_num"
+            android:layout_alignParentRight="true"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/iv_comment"
             android:src="@mipmap/statusbar_ic_comment_small"
-            android:layout_alignParentRight="true"/>
+            android:layout_toLeftOf="@id/tv_comment_num"
+            android:layout_marginRight="5dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

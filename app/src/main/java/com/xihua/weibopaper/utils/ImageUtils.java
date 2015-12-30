@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.xihua.weibopaper.activity.R;
 
 /**
@@ -19,6 +20,7 @@ public class ImageUtils {
     private static ImageLoader imageLoader;
     private ImageLoader.ImageListener imageListener;
     private static ImageUtils instance;
+    private String url;
 
     private ImageUtils() {
 
@@ -31,11 +33,15 @@ public class ImageUtils {
         return instance;
     }
 
+    public ImageLoader getImageLoader() {
+        return imageLoader;
+    }
+
     public void displayImage(RequestQueue requestQueue,String url,
                              ImageLoader.ImageListener imageListener,ImageView imageView) {
         if (imageListener == null) {
             imageListener = ImageLoader.getImageListener(imageView,
-                    R.mipmap.ic_launcher, R.mipmap.im_default_user_portrait);
+                    R.mipmap.im_default_user_portrait, R.mipmap.im_default_user_portrait);
         }
         if(imageLoader == null) {
             imageLoader = new ImageLoader(requestQueue, new BitmapCache());
@@ -47,12 +53,21 @@ public class ImageUtils {
             imageListener, ImageView imageView,int maxWith,int maxHight) {
         if (imageListener == null) {
             imageListener = ImageLoader.getImageListener(imageView,
-                    R.mipmap.ic_launcher, R.mipmap.im_default_user_portrait);
+                    R.mipmap.im_default_user_portrait, R.mipmap.im_default_user_portrait);
         }
         if(imageLoader == null) {
             imageLoader = new ImageLoader(requestQueue, new BitmapCache());
         }
         imageLoader.get(url,imageListener,maxWith,maxHight);
+    }
+
+    public void displayImage(RequestQueue requestQueue,String url, NetworkImageView imageView) {
+        if(imageLoader == null) {
+            imageLoader = new ImageLoader(requestQueue, new BitmapCache());
+        }
+        imageView.setDefaultImageResId(R.mipmap.im_default_user_portrait);
+        imageView.setErrorImageResId(R.mipmap.im_default_user_portrait);
+        imageView.setImageUrl(url,imageLoader);
     }
 
     class BitmapCache implements ImageLoader.ImageCache {

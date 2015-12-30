@@ -49,6 +49,32 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            //只有当该Fragment被用户可见的时候,才加载网络数据
+            requestContent = new GsonRequest<>(url,
+                    WeiboContent.class, new Response.Listener<WeiboContent>() {
+                @Override
+                public void onResponse(WeiboContent response) {
+                    adapter = new WeiboAdapter(context,response,requestQueue);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.addItemDecoration(new DividerItemDecoration(context,
+                            DividerItemDecoration.VERTICAL_LIST));
+                    Log.i("content", response.toString());
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    ToastUtil.showShort(context, error.getMessage());
+                }
+            });
+            requestQueue.add(requestContent);
+        }
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getActivity();
@@ -61,24 +87,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
-        requestContent = new GsonRequest<>(url,
-                WeiboContent.class, new Response.Listener<WeiboContent>() {
-            @Override
-            public void onResponse(WeiboContent response) {
-                adapter = new WeiboAdapter(context,response,requestQueue);
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                recyclerView.setAdapter(adapter);
-                recyclerView.addItemDecoration(new DividerItemDecoration(context,
-                        DividerItemDecoration.VERTICAL_LIST));
-                Log.i("content", response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                ToastUtil.showShort(context, error.getMessage());
-            }
-        });
-        requestQueue.add(requestContent);
         return view;
     }
 }

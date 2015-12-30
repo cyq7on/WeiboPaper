@@ -1,8 +1,14 @@
 package com.xihua.weibopaper.adapter;
 
 import android.content.Context;
-import android.support.v4.view.animation.FastOutLinearInInterpolator;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
-import com.sina.weibo.sdk.openapi.models.Status;
 import com.sina.weibo.sdk.openapi.models.User;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.bean.PicUrls;
@@ -31,22 +35,25 @@ import com.xihua.weibopaper.view.CircleImageView;
  * @Description:微博内容的适配器
  * @date 2015/12/2517:12
  */
-public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
+public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> {
     private Context context;
     private WeiboContent content;
     private OnItemClickListener onItemClickListener;
     private View.OnClickListener onClickListener;
     private RequestQueue requestQueue;
-    public WeiboAdapter(Context context,WeiboContent content,RequestQueue requestQueue) {
+
+    public WeiboAdapter(Context context, WeiboContent content, RequestQueue requestQueue) {
         this.context = context;
         this.content = content;
         this.requestQueue = requestQueue;
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View view,int position);
-        void onItemLongClick(View view,int position);
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_weibo_content, null);
@@ -72,7 +79,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
                 @Override
                 public boolean onLongClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    onItemClickListener.onItemLongClick(holder.itemView,pos);
+                    onItemClickListener.onItemLongClick(holder.itemView, pos);
                     return true;
                 }
             });
@@ -80,17 +87,16 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
         StatusContent sc = content.getStatuses().get(position);
         User user = sc.getUser();
 //        if (onClickListener == null) {
-            onClickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ToastUtil.showShort(context,Integer.toString(position));
-                }
-            };
-            holder.ivMore.setOnClickListener(onClickListener);
+        onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showShort(context, Integer.toString(position));
+            }
+        };
+        holder.ivMore.setOnClickListener(onClickListener);
 //        }
-        ImageUtils.getInstance().displayImage(requestQueue, user.avatar_large,null,
+        ImageUtils.getInstance().displayImage(requestQueue, user.avatar_large, null,
                 holder.iv);
-//        holder.setIsRecyclable(false);
         // 黄V
         if (user.verified_type == 0) {
             holder.ivVerify.setImageResource(R.mipmap.avatar_vip);
@@ -105,53 +111,82 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
         }
         if (user.verified_type >= 0) {
             holder.ivVerify.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             holder.ivVerify.setVisibility(View.GONE);
         }
-        String name = user.name;
-//        if (name.equals("")) {
-//            name = user.screen_name;
-//        }
+        String name = user.remark;
+        if (name.equals("")) {
+            name = user.screen_name;
+        }
         holder.tvName.setText(name);
         holder.tvCreateTime.setText(user.created_at);
         String source = sc.getSource();
-        int len = source.length();
-        try {
-            holder.tvSource.setText(source.substring(len - 11,len -5));
-        }catch (Exception e) {
-
-        }
+//        SpannableString msp = new SpannableString(source);
+//        msp.setSpan(new ForegroundColorSpan(Color.BLUE),
+//                0, source.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); //设置前景色
+        CharSequence charSequence = Html.fromHtml(source);
+        holder.tvSource.setText(charSequence);
+//        holder.tvSource.setMovementMethod(LinkMovementMethod.getInstance());//点击的时候产生超链接
 
         PicUrls[] picUrls;
         StatusContent reStatus = sc.getRetweeted_status();
-        if (reStatus != null) {
+        String count1 = "";
+        String count2 = "";
+        String count3 = "";
+        if (reStatus == null) {
+            holder.tvUserDo.setVisibility(View.GONE);
+            holder.tvContent.setText(sc.getText());
+            picUrls = sc.getPic_urls();
+            count1 = sc.getAttitudes_count();
+            count2 = sc.getReposts_count();
+            count3 = sc.getComments_count();
+        } else {
             holder.line.setVisibility(View.VISIBLE);
             holder.tvUserDo.setText(sc.getText());
             holder.tvContent.setText(reStatus.getText());
             picUrls = reStatus.getPic_urls();
-        } else {
-            holder.tvUserDo.setVisibility(View.GONE);
-            holder.tvContent.setText(sc.getText());
-            picUrls = sc.getPic_urls();
+            count1 = reStatus.getAttitudes_count();
+            count2 = reStatus.getReposts_count();
+            count3 = reStatus.getComments_count();
         }
+
+        if (count1.equals("0")) {
+            holder.tvLikeNum.setVisibility(View.INVISIBLE);
+        }else {
+            holder.tvLikeNum.setText(count1);
+        }
+
+        if (count2.equals("0")) {
+            holder.tvSendNum.setVisibility(View.INVISIBLE);
+        }else {
+            holder.tvSendNum.setText(count2);
+        }
+
+        if (count3.equals("0")) {
+            holder.tvCommentNum.setVisibility(View.INVISIBLE);
+        }else {
+            holder.tvCommentNum.setText(count3);
+        }
+
         //微博配图
         int size = picUrls.length;
         if (size == 0) {
             return;
         }
-        int width = (int) ScreenUtils.getScreenWidth(context);// 屏幕宽度
+        int width = ScreenUtils.getScreenWidth(context);// 屏幕宽度
         ImageView image;
         if (size == 1) {
             holder.container.removeAllViews();
             image = new ImageView(context);
+            image.setMaxHeight(1000);
+            image.setMaxWidth(1000);
             image.setOnClickListener(new ImageOnClickListener(0));
             image.setScaleType(ImageView.ScaleType.FIT_CENTER);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
             holder.container.addView(image, params);
-            ImageUtils.getInstance().displayImage(requestQueue,picUrls[0].
-                            getThumbnail_pic().replace("thumbnail", "large"), null,image);
+            ImageUtils.getInstance().displayImage(requestQueue, picUrls[0].
+                    getThumbnail_pic().replace("thumbnail", "bmiddle"), null,image);
         } else if (size == 2) {
             holder.container.removeAllViews();
             LinearLayout horizonLayout = new LinearLayout(context);
@@ -167,8 +202,8 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
                 image.setPadding(0, (int) (4 * density), (int) (4 * density),
                         (int) (4 * density));
                 horizonLayout.addView(image, params);
-                ImageUtils.getInstance().displayImage(requestQueue,picUrls[i].getThumbnail_pic().replace("thumbnail", "bmiddle"),
-                        null,image);
+                ImageUtils.getInstance().displayImage(requestQueue,
+                        picUrls[i].getThumbnail_pic().replace("thumbnail", "bmiddle"), null,image);
             }
             holder.container.addView(horizonLayout);
         } else if (size > 2 && size <= 9) {
@@ -238,7 +273,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
                 }
             }
         }
-        
+
     }
 
     @Override
@@ -260,6 +295,10 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
         ImageView ivLike;
         ImageView ivSend;
         ImageView ivComment;
+        TextView tvLikeNum;
+        TextView tvSendNum;
+        TextView tvCommentNum;
+
         public ViewHolder(View itemView) {
             super(itemView);
             iv = (CircleImageView) itemView.findViewById(R.id.iv);
@@ -275,6 +314,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder>{
             ivLike = (ImageView) itemView.findViewById(R.id.iv_like);
             ivSend = (ImageView) itemView.findViewById(R.id.iv_send);
             ivComment = (ImageView) itemView.findViewById(R.id.iv_comment);
+            tvLikeNum = (TextView) itemView.findViewById(R.id.tv_like_num);
+            tvSendNum = (TextView) itemView.findViewById(R.id.tv_send_num);
+            tvCommentNum = (TextView) itemView.findViewById(R.id.tv_comment_num);
         }
     }
 
