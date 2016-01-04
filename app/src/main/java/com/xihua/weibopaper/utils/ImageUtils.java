@@ -1,6 +1,7 @@
 package com.xihua.weibopaper.utils;
 
 import android.graphics.Bitmap;
+import android.support.v7.widget.RecyclerView;
 import android.util.LruCache;
 import android.widget.ImageView;
 
@@ -19,6 +20,8 @@ import com.xihua.weibopaper.activity.R;
 public class ImageUtils {
     private static ImageLoader imageLoader;
     private ImageLoader.ImageListener imageListener;
+    private com.xihua.weibopaper.utils.ImageLoader myImageLoader;
+    private com.xihua.weibopaper.utils.ImageLoader.ImageListener myImageListener;
     private static ImageUtils instance;
     private String url;
 
@@ -35,6 +38,18 @@ public class ImageUtils {
 
     public ImageLoader getImageLoader() {
         return imageLoader;
+    }
+    public void displayImage(RequestQueue requestQueue,String url,
+                             com.xihua.weibopaper.utils.ImageLoader.ImageListener imageListener,
+                             RecyclerView recyclerView) {
+        if (myImageListener == null) {
+            myImageListener = com.xihua.weibopaper.utils.ImageLoader.getImageListener(recyclerView, url,
+                    R.mipmap.im_default_user_portrait, R.mipmap.im_default_user_portrait);
+        }
+        if(myImageLoader == null) {
+            myImageLoader = new com.xihua.weibopaper.utils.ImageLoader(requestQueue,new MyBitmapCache());
+        }
+        myImageLoader.get(url,myImageListener);
     }
 
     public void displayImage(RequestQueue requestQueue,String url,
@@ -75,6 +90,32 @@ public class ImageUtils {
         private LruCache<String, Bitmap> mCache;
 
         public BitmapCache() {
+            int maxSize = 10 * 1024 * 1024;
+            mCache = new LruCache<String, Bitmap>(maxSize) {
+                @Override
+                protected int sizeOf(String key, Bitmap bitmap) {
+                    return bitmap.getRowBytes() * bitmap.getHeight();
+                }
+            };
+        }
+
+        @Override
+        public Bitmap getBitmap(String url) {
+            return mCache.get(url);
+        }
+
+        @Override
+        public void putBitmap(String url, Bitmap bitmap) {
+            mCache.put(url, bitmap);
+        }
+
+    }
+
+    class MyBitmapCache implements com.xihua.weibopaper.utils.ImageLoader.ImageCache {
+
+        private LruCache<String, Bitmap> mCache;
+
+        public MyBitmapCache() {
             int maxSize = 10 * 1024 * 1024;
             mCache = new LruCache<String, Bitmap>(maxSize) {
                 @Override

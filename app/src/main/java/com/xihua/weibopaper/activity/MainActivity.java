@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -31,9 +30,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.melnykov.fab.FloatingActionButton;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.openapi.models.User;
 import com.xihua.weibopaper.adapter.WeiboAdapter;
+import com.xihua.weibopaper.bean.WeiBoUser;
 import com.xihua.weibopaper.bean.WeiboContent;
 import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.common.MyApplication;
@@ -92,20 +93,20 @@ public class MainActivity extends BaseActivity
     @Override
     public void initData() {
         Map<String, String> params = new HashMap<>();
-        params.put("source",Constants.APP_KEY);
+        params.put("source", Constants.APP_KEY);
         params.put("access_token", accessToken.getToken());
         params.put("uid", accessToken.getUid());
         String url = GsonRequest.getUrl(Constants.USER_SHOW,params);
-        GsonRequest<User> requestImage = new GsonRequest<>(url,
-                User.class, new Response.Listener<User>() {
+        GsonRequest<WeiBoUser> requestImage = new GsonRequest<>(url,
+                WeiBoUser.class, new Response.Listener<WeiBoUser>() {
             @Override
-            public void onResponse(User response) {
-                if (response.avatar_large != null) {
-                    ImageUtils.getInstance().displayImage(requestQueue, response.avatar_large,
+            public void onResponse(WeiBoUser response) {
+                if (response.getAvatar_large() != null) {
+                    ImageUtils.getInstance().displayImage(requestQueue, response.getAvatar_large(),
                             null,ivUser);
                 }
-                if (response.screen_name != null) {
-                    tvName.setText(response.screen_name);
+                if (response.getScreen_name() != null) {
+                    tvName.setText(response.getScreen_name());
                 }
             }
         }, new Response.ErrorListener() {
@@ -131,11 +132,33 @@ public class MainActivity extends BaseActivity
                         .setAction("Action", null).show();
             }
         });
+        fab.show();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
+        drawer.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                fab.hide();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                fab.show();
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -159,10 +182,10 @@ public class MainActivity extends BaseActivity
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         fragmentList = new ArrayList<>();
         Map<String, String> params = new HashMap<>();
-        params.put("source",Constants.APP_KEY);
+        params.put("source", Constants.APP_KEY);
         params.put("access_token", accessToken.getToken());
         params.put("count", "50");
-        String url = GsonRequest.getUrl(Constants.STATUSES_PUBLIC_TIMELINE,params);
+        String url = GsonRequest.getUrl(Constants.STATUSES_PUBLIC_TIMELINE, params);
         fragmentList.add(HomeFragment.newInstance(url));
         url = GsonRequest.getUrl(Constants.STATUSES_FRIENDS_TIMELINE,params);
         fragmentList.add(HomeFragment.newInstance(url));
@@ -174,7 +197,7 @@ public class MainActivity extends BaseActivity
 
             @Override
             public Fragment getItem(int position) {
-                return  fragmentList.get(position);
+                return fragmentList.get(position);
             }
 
             @Override

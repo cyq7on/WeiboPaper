@@ -31,8 +31,8 @@ public class LoginOrRegisterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAccessToken = AccessTokenKeeper.readAccessToken(LoginOrRegisterActivity.this);
-
-        if (!mAccessToken.getToken().equals("")) {
+        boolean b = mAccessToken.getExpiresTime() > System.currentTimeMillis() ? true : false;
+        if (!mAccessToken.getToken().equals("") && b) {
             startActivity(new Intent(LoginOrRegisterActivity.this, MainActivity.class));
             finish();
         }
@@ -52,6 +52,9 @@ public class LoginOrRegisterActivity extends BaseActivity {
                 finish();
             }
         });
+        if (!b) {
+            ToastUtil.showShort(this,"授权已过期，请重新授权登录");
+        }
 
     }
 

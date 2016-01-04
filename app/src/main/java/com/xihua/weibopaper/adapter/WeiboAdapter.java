@@ -1,13 +1,8 @@
 package com.xihua.weibopaper.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +18,16 @@ import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.bean.PicUrls;
 import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiboContent;
+import com.xihua.weibopaper.utils.DateUtils;
 import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.ScreenUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author cyq7on
@@ -41,6 +42,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
     private OnItemClickListener onItemClickListener;
     private View.OnClickListener onClickListener;
     private RequestQueue requestQueue;
+    private RecyclerView recyclerView;
 
     public WeiboAdapter(Context context, WeiboContent content, RequestQueue requestQueue) {
         this.context = context;
@@ -58,6 +60,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_weibo_content, null);
         ViewHolder viewHolder = new ViewHolder(view);
+        if (recyclerView == null) {
+            recyclerView = (RecyclerView) parent;
+        }
         return viewHolder;
     }
 
@@ -97,6 +102,12 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
 //        }
         ImageUtils.getInstance().displayImage(requestQueue, user.avatar_large, null,
                 holder.iv);
+
+        holder.iv.setTag(position);
+        ImageView iv = (ImageView) recyclerView.findViewWithTag(position);
+        Log.i("iviviviv",Boolean.toString(iv == null));
+
+
         // 黄V
         if (user.verified_type == 0) {
             holder.ivVerify.setImageResource(R.mipmap.avatar_vip);
@@ -119,7 +130,8 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             name = user.screen_name;
         }
         holder.tvName.setText(name);
-        holder.tvCreateTime.setText(user.created_at);
+
+        holder.tvCreateTime.setText(DateUtils.formatDate(sc.getCreated_at()));
         String source = sc.getSource();
 //        SpannableString msp = new SpannableString(source);
 //        msp.setSpan(new ForegroundColorSpan(Color.BLUE),
@@ -135,6 +147,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         String count3 = "";
         if (reStatus == null) {
             holder.tvUserDo.setVisibility(View.GONE);
+            holder.line.setVisibility(View.GONE);
             holder.tvContent.setText(sc.getText());
             picUrls = sc.getPic_urls();
             count1 = sc.getAttitudes_count();
@@ -142,6 +155,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             count3 = sc.getComments_count();
         } else {
             holder.line.setVisibility(View.VISIBLE);
+            holder.tvUserDo.setVisibility(View.VISIBLE);
             holder.tvUserDo.setText(sc.getText());
             holder.tvContent.setText(reStatus.getText());
             picUrls = reStatus.getPic_urls();
@@ -153,18 +167,21 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         if (count1.equals("0")) {
             holder.tvLikeNum.setVisibility(View.INVISIBLE);
         }else {
+            holder.tvLikeNum.setVisibility(View.VISIBLE);
             holder.tvLikeNum.setText(count1);
         }
 
         if (count2.equals("0")) {
             holder.tvSendNum.setVisibility(View.INVISIBLE);
         }else {
+            holder.tvLikeNum.setVisibility(View.VISIBLE);
             holder.tvSendNum.setText(count2);
         }
 
         if (count3.equals("0")) {
             holder.tvCommentNum.setVisibility(View.INVISIBLE);
         }else {
+            holder.tvLikeNum.setVisibility(View.VISIBLE);
             holder.tvCommentNum.setText(count3);
         }
 
@@ -175,18 +192,26 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         }
         int width = ScreenUtils.getScreenWidth(context);// 屏幕宽度
         ImageView image;
+        String url;
         if (size == 1) {
             holder.container.removeAllViews();
             image = new ImageView(context);
             image.setMaxHeight(1000);
             image.setMaxWidth(1000);
+            image.setImageResource(R.mipmap.ic_launcher);
+            url = picUrls[0].getThumbnail_pic().replace("thumbnail", "bmiddle");
+            image.setTag(url);
+            ImageView view = (ImageView) recyclerView.findViewWithTag(url);
+            Log.i("vvvvv00000", Boolean.toString(view == null));
             image.setOnClickListener(new ImageOnClickListener(0));
             image.setScaleType(ImageView.ScaleType.FIT_CENTER);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
             holder.container.addView(image, params);
-            ImageUtils.getInstance().displayImage(requestQueue, picUrls[0].
-                    getThumbnail_pic().replace("thumbnail", "bmiddle"), null,image);
+            holder.container.setTag(url);
+            LinearLayout ll = (LinearLayout) recyclerView.findViewWithTag(url);
+            Log.i("vvvvv111", Boolean.toString(ll == null));
+            ImageUtils.getInstance().displayImage(requestQueue,url,null,recyclerView);
         } else if (size == 2) {
             holder.container.removeAllViews();
             LinearLayout horizonLayout = new LinearLayout(context);
@@ -201,9 +226,11 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                 image.setScaleType(ImageView.ScaleType.FIT_XY);
                 image.setPadding(0, (int) (4 * density), (int) (4 * density),
                         (int) (4 * density));
+                image.setImageResource(R.mipmap.ic_launcher);
+                url = picUrls[i].getThumbnail_pic().replace("thumbnail", "bmiddle");
+                image.setTag(url);
                 horizonLayout.addView(image, params);
-                ImageUtils.getInstance().displayImage(requestQueue,
-                        picUrls[i].getThumbnail_pic().replace("thumbnail", "bmiddle"), null,image);
+                ImageUtils.getInstance().displayImage(requestQueue,url, null,recyclerView);
             }
             holder.container.addView(horizonLayout);
         } else if (size > 2 && size <= 9) {
@@ -216,7 +243,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             int count = size;
             int yuShu = count % 3;
             if (yuShu == 0) {
-                int hangNum = (int) (size / 3);
+                int hangNum = size / 3;
                 for (int i = 0; i < hangNum; i++) {
                     LinearLayout horizonLayout = new LinearLayout(context);
                     for (int j = 0; j < 3; j++) {
@@ -229,14 +256,16 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                         image.setScaleType(ImageView.ScaleType.FIT_XY);
                         image.setPadding(0, (int) (2 * density),
                                 (int) (2 * density), (int) (2 * density));
+                        image.setImageResource(R.mipmap.ic_launcher);
+                        url = picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle");
+                        image.setTag(url);
                         horizonLayout.addView(image, params);
-                        ImageUtils.getInstance().displayImage(requestQueue,
-                                picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle"), null,image);
+                        ImageUtils.getInstance().displayImage(requestQueue,url,null,recyclerView);
                     }
                     holder.container.addView(horizonLayout);
                 }
             } else {
-                int hangNum = (int) (size / 3) + 1;
+                int hangNum = size / 3 + 1;
                 for (int i = 0; i <= hangNum - 1; i++) {
                     LinearLayout horizonLayout = new LinearLayout(context);
                     if (i < hangNum - 1) {
@@ -250,9 +279,11 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                             image.setPadding(0, (int) (2 * density),
                                     (int) (2 * density), (int) (2 * density));
                             image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            image.setImageResource(R.mipmap.ic_launcher);
+                            url = picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle");
+                            image.setTag(url);
                             horizonLayout.addView(image, params);
-                            ImageUtils.getInstance().displayImage(requestQueue,
-                                    picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle"), null,image);
+                            ImageUtils.getInstance().displayImage(requestQueue,url,null,recyclerView);
                         }
                         holder.container.addView(horizonLayout);
                     } else if (i == hangNum - 1) {
@@ -264,9 +295,11 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                             image.setOnClickListener(new ImageOnClickListener(i * 3
                                     + j));
                             image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            image.setImageResource(R.mipmap.ic_launcher);
+                            url = picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle");
+                            image.setTag(url);
                             horizonLayout.addView(image, params);
-                            ImageUtils.getInstance().displayImage(requestQueue,
-                                    picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle"), null,image);
+                            ImageUtils.getInstance().displayImage(requestQueue,url, null,recyclerView);
                         }
                         holder.container.addView(horizonLayout);
                     }

@@ -16,6 +16,7 @@ import java.util.List;
  */
 
 public class MyApplication extends Application {
+    private static MyApplication instance;
     //运用list来保存们每一个activity是关键
     private static List<Activity> mList = new LinkedList<Activity>();
     // add Activity
@@ -33,6 +34,16 @@ public class MyApplication extends Application {
                 activity.finish();
             }
         }
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+    }
+
+    public static MyApplication getInstance() {
+        return instance;
     }
     //杀进程
     public void onLowMemory() {
