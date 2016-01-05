@@ -28,6 +28,36 @@ public class StatusContent extends PhotoBean implements Serializable {
      */
     private long id;
 
+    @Override
+    public String toString() {
+        return "StatusContent{" +
+                "created_at='" + created_at + '\'' +
+                ", geo=" + geo +
+                ", id=" + id +
+                ", idstr='" + idstr + '\'' +
+                ", text='" + text + '\'' +
+                ", source='" + source + '\'' +
+                ", favorited=" + favorited +
+                ", truncated=" + truncated +
+                ", in_reply_to_status_id='" + in_reply_to_status_id + '\'' +
+                ", in_reply_to_user_id='" + in_reply_to_user_id + '\'' +
+                ", in_reply_to_screen_name='" + in_reply_to_screen_name + '\'' +
+                ", thumbnail_pic='" + thumbnail_pic + '\'' +
+                ", bmiddle_pic='" + bmiddle_pic + '\'' +
+                ", original_pic='" + original_pic + '\'' +
+                ", pic_urls=" + Arrays.toString(pic_urls) +
+                ", user=" + user +
+                ", retweeted_status=" + retweeted_status +
+                ", reposts_count='" + reposts_count + '\'' +
+                ", comments_count='" + comments_count + '\'' +
+                ", group_get_time=" + group_get_time +
+                ", visible=" + visible +
+                ", attitudes_count='" + attitudes_count + '\'' +
+                '}';
+    }
+
+    private String idstr;
+
     /**
      * 微博信息内容
      */
@@ -287,30 +317,11 @@ public class StatusContent extends PhotoBean implements Serializable {
         this.visible = visible;
     }
 
-    @Override
-    public String toString() {
-        return "StatusContent{" +
-                "created_at='" + created_at + '\'' +
-                ", geo=" + geo +
-                ", id=" + id +
-                ", text='" + text + '\'' +
-                ", source='" + source + '\'' +
-                ", favorited=" + favorited +
-                ", truncated=" + truncated +
-                ", in_reply_to_status_id='" + in_reply_to_status_id + '\'' +
-                ", in_reply_to_user_id='" + in_reply_to_user_id + '\'' +
-                ", in_reply_to_screen_name='" + in_reply_to_screen_name + '\'' +
-                ", thumbnail_pic='" + thumbnail_pic + '\'' +
-                ", bmiddle_pic='" + bmiddle_pic + '\'' +
-                ", original_pic='" + original_pic + '\'' +
-                ", pic_urls=" + Arrays.toString(pic_urls) +
-                ", user=" + user +
-                ", retweeted_status=" + retweeted_status +
-                ", reposts_count='" + reposts_count + '\'' +
-                ", comments_count='" + comments_count + '\'' +
-                ", group_get_time=" + group_get_time +
-                ", visible=" + visible +
-                ", attitudes_count=" + attitudes_count +
-                '}';
+    public String getIdstr() {
+        return idstr;
+    }
+
+    public void setIdstr(String idstr) {
+        this.idstr = idstr;
     }
 }

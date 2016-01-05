@@ -39,18 +39,20 @@ public class ImageUtils {
     public ImageLoader getImageLoader() {
         return imageLoader;
     }
-    public void displayImage(RequestQueue requestQueue,String url,
-                             com.xihua.weibopaper.utils.ImageLoader.ImageListener imageListener,
-                             RecyclerView recyclerView) {
-        if (myImageListener == null) {
-            myImageListener = com.xihua.weibopaper.utils.ImageLoader.getImageListener(recyclerView, url,
-                    R.mipmap.im_default_user_portrait, R.mipmap.im_default_user_portrait);
-        }
-        if(myImageLoader == null) {
-            myImageLoader = new com.xihua.weibopaper.utils.ImageLoader(requestQueue,new MyBitmapCache());
-        }
-        myImageLoader.get(url,myImageListener);
-    }
+
+    //使用重写的ImageLoader
+//    public void displayImage(RequestQueue requestQueue,String url,
+//                             com.xihua.weibopaper.utils.ImageLoader.ImageListener imageListener,
+//                             ImageView imageView) {
+//        if (myImageListener == null) {
+//            myImageListener = com.xihua.weibopaper.utils.ImageLoader.getImageListener(imageView, url,
+//                    R.mipmap.im_default_user_portrait, R.mipmap.im_default_user_portrait);
+//        }
+//        if(myImageLoader == null) {
+//            myImageLoader = new com.xihua.weibopaper.utils.ImageLoader(requestQueue,new MyBitmapCache());
+//        }
+//        myImageLoader.get(url,myImageListener);
+//    }
 
     public void displayImage(RequestQueue requestQueue,String url,
                              ImageLoader.ImageListener imageListener,ImageView imageView) {

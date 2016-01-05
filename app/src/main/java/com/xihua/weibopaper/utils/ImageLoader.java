@@ -74,10 +74,10 @@ public class ImageLoader {
     }
 
 
-    public static ImageListener getImageListener(final RecyclerView recyclerView,final String url,
+    public static ImageListener getImageListener(final ImageView view,final String url,
                                                  final int defaultImageResId, final int errorImageResId) {
         return new ImageListener() {
-            ImageView view = (ImageView) recyclerView.findViewWithTag(url);
+            String imgUrl = (String) view.getTag();
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (errorImageResId != 0) {
@@ -87,10 +87,10 @@ public class ImageLoader {
 
             @Override
             public void onResponse(ImageContainer response, boolean isImmediate) {
-                Log.i("vvvvvvvvvv",Boolean.toString(view == null));
-                if (response.getBitmap() != null && view != null) {
+                Log.i("vvvvvvvv",Boolean.toString(imgUrl == null));
+                if (response.getBitmap() != null && imgUrl != null && imgUrl.equals(url)) {
                     view.setImageBitmap(response.getBitmap());
-                } else if (defaultImageResId != 0 && view != null) {
+                } else if (defaultImageResId != 0) {
                     view.setImageResource(defaultImageResId);
                 }
             }

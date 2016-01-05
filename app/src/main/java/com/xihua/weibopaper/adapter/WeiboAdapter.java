@@ -18,16 +18,12 @@ import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.bean.PicUrls;
 import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiboContent;
+import com.xihua.weibopaper.common.MyApplication;
 import com.xihua.weibopaper.utils.DateUtils;
 import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.ScreenUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * @author cyq7on
@@ -68,9 +64,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        if (content.getStatuses().size() == 0) {
-            return;
-        }
+//        if (content.getStatuses().size() == 0) {
+//            return;
+//        }
         if (onItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -102,11 +98,6 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
 //        }
         ImageUtils.getInstance().displayImage(requestQueue, user.avatar_large, null,
                 holder.iv);
-
-        holder.iv.setTag(position);
-        ImageView iv = (ImageView) recyclerView.findViewWithTag(position);
-        Log.i("iviviviv",Boolean.toString(iv == null));
-
 
         // 黄V
         if (user.verified_type == 0) {
@@ -174,16 +165,20 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         if (count2.equals("0")) {
             holder.tvSendNum.setVisibility(View.INVISIBLE);
         }else {
-            holder.tvLikeNum.setVisibility(View.VISIBLE);
+            holder.tvSendNum.setVisibility(View.VISIBLE);
             holder.tvSendNum.setText(count2);
         }
 
         if (count3.equals("0")) {
             holder.tvCommentNum.setVisibility(View.INVISIBLE);
         }else {
-            holder.tvLikeNum.setVisibility(View.VISIBLE);
+            holder.tvCommentNum.setVisibility(View.VISIBLE);
             holder.tvCommentNum.setText(count3);
         }
+
+        holder.ivLike.setTag(position);
+        holder.ivSend.setTag(sc.getIdstr());
+        holder.ivComment.setTag(sc.getIdstr());
 
         //微博配图
         int size = picUrls.length;
@@ -202,16 +197,17 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             url = picUrls[0].getThumbnail_pic().replace("thumbnail", "bmiddle");
             image.setTag(url);
             ImageView view = (ImageView) recyclerView.findViewWithTag(url);
-            Log.i("vvvvv00000", Boolean.toString(view == null));
+//            Log.i("vvvvv00000", Boolean.toString(view == null));
+//            Log.i("vvvvv11111", (String) image.getTag());
             image.setOnClickListener(new ImageOnClickListener(0));
             image.setScaleType(ImageView.ScaleType.FIT_CENTER);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
             holder.container.addView(image, params);
-            holder.container.setTag(url);
-            LinearLayout ll = (LinearLayout) recyclerView.findViewWithTag(url);
-            Log.i("vvvvv111", Boolean.toString(ll == null));
-            ImageUtils.getInstance().displayImage(requestQueue,url,null,recyclerView);
+//            holder.container.setTag(url);
+//            LinearLayout ll = (LinearLayout) recyclerView.findViewWithTag(url);
+//            Log.i("vvvvv111", Boolean.toString(ll == null));
+            ImageUtils.getInstance().displayImage(requestQueue,url,null,image);
         } else if (size == 2) {
             holder.container.removeAllViews();
             LinearLayout horizonLayout = new LinearLayout(context);
@@ -230,7 +226,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                 url = picUrls[i].getThumbnail_pic().replace("thumbnail", "bmiddle");
                 image.setTag(url);
                 horizonLayout.addView(image, params);
-                ImageUtils.getInstance().displayImage(requestQueue,url, null,recyclerView);
+                ImageUtils.getInstance().displayImage(requestQueue,url, null,image);
             }
             holder.container.addView(horizonLayout);
         } else if (size > 2 && size <= 9) {
@@ -260,7 +256,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                         url = picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle");
                         image.setTag(url);
                         horizonLayout.addView(image, params);
-                        ImageUtils.getInstance().displayImage(requestQueue,url,null,recyclerView);
+                        ImageUtils.getInstance().displayImage(requestQueue,url,null,image);
                     }
                     holder.container.addView(horizonLayout);
                 }
@@ -283,7 +279,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                             url = picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle");
                             image.setTag(url);
                             horizonLayout.addView(image, params);
-                            ImageUtils.getInstance().displayImage(requestQueue,url,null,recyclerView);
+                            ImageUtils.getInstance().displayImage(requestQueue,url,null,image);
                         }
                         holder.container.addView(horizonLayout);
                     } else if (i == hangNum - 1) {
@@ -299,7 +295,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                             url = picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle");
                             image.setTag(url);
                             horizonLayout.addView(image, params);
-                            ImageUtils.getInstance().displayImage(requestQueue,url, null,recyclerView);
+                            ImageUtils.getInstance().displayImage(requestQueue, url, null,image);
                         }
                         holder.container.addView(horizonLayout);
                     }
@@ -331,6 +327,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         TextView tvLikeNum;
         TextView tvSendNum;
         TextView tvCommentNum;
+        private static View.OnClickListener likeListener;
+        private static View.OnClickListener sendListener;
+        private static View.OnClickListener commentListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -350,6 +349,35 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             tvLikeNum = (TextView) itemView.findViewById(R.id.tv_like_num);
             tvSendNum = (TextView) itemView.findViewById(R.id.tv_send_num);
             tvCommentNum = (TextView) itemView.findViewById(R.id.tv_comment_num);
+
+            //添加监听
+            if (likeListener == null) {
+                likeListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.showShort(MyApplication.getInstance(),(int)v.getTag() + "");
+                    }
+                };
+            }
+            if (sendListener == null) {
+                sendListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.showShort(MyApplication.getInstance(),(String)v.getTag());
+                    }
+                };
+            }
+            if (commentListener == null) {
+                commentListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.showShort(MyApplication.getInstance(),(String)v.getTag());
+                    }
+                };
+            }
+            ivLike.setOnClickListener(likeListener);
+            ivSend.setOnClickListener(sendListener);
+            ivComment.setOnClickListener(commentListener);
         }
     }
 
