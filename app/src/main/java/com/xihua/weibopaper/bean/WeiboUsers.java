@@ -1,9 +1,8 @@
 package com.xihua.weibopaper.bean;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class WeiboUsers implements Serializable {
+public class WeiboUsers extends BaseBean {
 
 	private static final long serialVersionUID = 6598510583769514324L;
 	private List<WeiBoUser> users;

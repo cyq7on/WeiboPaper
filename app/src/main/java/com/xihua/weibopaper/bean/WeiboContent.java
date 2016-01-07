@@ -1,5 +1,6 @@
 package com.xihua.weibopaper.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @Description:微博内容实体类
  * @date 2015/12/2511:18
  */
-public class WeiboContent {
+public class WeiboContent implements Serializable{
 
 
     private boolean hasvisible;

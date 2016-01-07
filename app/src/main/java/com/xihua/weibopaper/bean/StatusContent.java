@@ -1,14 +1,10 @@
 package com.xihua.weibopaper.bean;
 
-import com.sina.weibo.sdk.openapi.models.Geo;
-import com.sina.weibo.sdk.openapi.models.User;
-import com.sina.weibo.sdk.openapi.models.Visible;
-
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
-public class StatusContent extends PhotoBean implements Serializable {
+public class StatusContent extends PhotoBean{
 
     private static final long serialVersionUID = 4658890626870999594L;
 
@@ -28,33 +24,33 @@ public class StatusContent extends PhotoBean implements Serializable {
      */
     private long id;
 
-    @Override
-    public String toString() {
-        return "StatusContent{" +
-                "created_at='" + created_at + '\'' +
-                ", geo=" + geo +
-                ", id=" + id +
-                ", idstr='" + idstr + '\'' +
-                ", text='" + text + '\'' +
-                ", source='" + source + '\'' +
-                ", favorited=" + favorited +
-                ", truncated=" + truncated +
-                ", in_reply_to_status_id='" + in_reply_to_status_id + '\'' +
-                ", in_reply_to_user_id='" + in_reply_to_user_id + '\'' +
-                ", in_reply_to_screen_name='" + in_reply_to_screen_name + '\'' +
-                ", thumbnail_pic='" + thumbnail_pic + '\'' +
-                ", bmiddle_pic='" + bmiddle_pic + '\'' +
-                ", original_pic='" + original_pic + '\'' +
-                ", pic_urls=" + Arrays.toString(pic_urls) +
-                ", user=" + user +
-                ", retweeted_status=" + retweeted_status +
-                ", reposts_count='" + reposts_count + '\'' +
-                ", comments_count='" + comments_count + '\'' +
-                ", group_get_time=" + group_get_time +
-                ", visible=" + visible +
-                ", attitudes_count='" + attitudes_count + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "StatusContent{" +
+//                "created_at='" + created_at + '\'' +
+//                ", geo=" + geo +
+//                ", id=" + id +
+//                ", idstr='" + idstr + '\'' +
+//                ", text='" + text + '\'' +
+//                ", source='" + source + '\'' +
+//                ", favorited=" + favorited +
+//                ", truncated=" + truncated +
+//                ", in_reply_to_status_id='" + in_reply_to_status_id + '\'' +
+//                ", in_reply_to_user_id='" + in_reply_to_user_id + '\'' +
+//                ", in_reply_to_screen_name='" + in_reply_to_screen_name + '\'' +
+//                ", thumbnail_pic='" + thumbnail_pic + '\'' +
+//                ", bmiddle_pic='" + bmiddle_pic + '\'' +
+//                ", original_pic='" + original_pic + '\'' +
+//                ", pic_urls=" + pic_urls +
+//                ", user=" + user +
+//                ", retweeted_status=" + retweeted_status +
+//                ", reposts_count='" + reposts_count + '\'' +
+//                ", comments_count='" + comments_count + '\'' +
+//                ", group_get_time=" + group_get_time +
+//                ", visible=" + visible +
+//                ", attitudes_count='" + attitudes_count + '\'' +
+//                '}';
+//    }
 
     private String idstr;
 
@@ -111,12 +107,12 @@ public class StatusContent extends PhotoBean implements Serializable {
     /**
      * 图片配图，多图时，返回多图链接
      */
-    private PicUrls[] pic_urls;
+    private List<PicUrls> pic_urls;
 
     /**
      * 作者信息
      */
-    private User user;
+    private WeiBoUser user;
 
     /**
      * 转发的博文，内容为status，如果不是转发，则没有此字段
@@ -253,19 +249,19 @@ public class StatusContent extends PhotoBean implements Serializable {
         this.original_pic = original_pic;
     }
 
-    public PicUrls[] getPic_urls() {
+    public List<PicUrls> getPic_urls() {
         return pic_urls;
     }
 
-    public void setPic_urls(PicUrls[] pic_urls) {
+    public void setPic_urls(List<PicUrls> pic_urls) {
         this.pic_urls = pic_urls;
     }
 
-    public User getUser() {
+    public WeiBoUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(WeiBoUser user) {
         this.user = user;
     }
 

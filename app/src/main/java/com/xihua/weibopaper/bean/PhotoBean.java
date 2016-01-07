@@ -1,8 +1,6 @@
 package com.xihua.weibopaper.bean;
 
-import java.io.Serializable;
-
-public class PhotoBean implements Serializable{
+public class PhotoBean extends BaseBean{
 
 	private static final long serialVersionUID = -4887284841243544423L;
 

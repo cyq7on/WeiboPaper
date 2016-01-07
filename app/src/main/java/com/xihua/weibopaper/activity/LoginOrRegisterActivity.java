@@ -31,10 +31,12 @@ public class LoginOrRegisterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAccessToken = AccessTokenKeeper.readAccessToken(LoginOrRegisterActivity.this);
-        boolean b = mAccessToken.getExpiresTime() > System.currentTimeMillis() ? true : false;
+        long time = mAccessToken.getExpiresTime();
+        boolean b = time > System.currentTimeMillis() ? true : false;
         if (!mAccessToken.getToken().equals("") && b) {
             startActivity(new Intent(LoginOrRegisterActivity.this, MainActivity.class));
             finish();
+            return;
         }
         setContentView(R.layout.activity_loginorregister);
         mAuthInfo = new AuthInfo(LoginOrRegisterActivity.this,
@@ -52,10 +54,11 @@ public class LoginOrRegisterActivity extends BaseActivity {
                 finish();
             }
         });
-        if (!b) {
-            ToastUtil.showShort(this,"授权已过期，请重新授权登录");
-        }
 
+        if (b || time == 0) {
+            return;
+        }
+        ToastUtil.showShort(this,"授权已过期，请重新授权登录");
     }
 
     @Override

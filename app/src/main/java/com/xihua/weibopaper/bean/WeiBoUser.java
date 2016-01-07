@@ -1,6 +1,5 @@
 package com.xihua.weibopaper.bean;
 
-import java.io.Serializable;
 import java.util.Arrays;
 
 
@@ -10,7 +9,7 @@ import java.util.Arrays;
  * @author wangdan
  * 
  */
-public class WeiBoUser implements Serializable {
+public class WeiBoUser extends BaseBean {
 
 	private static final long serialVersionUID = 7431379231256590182L;
 
@@ -22,7 +21,7 @@ public class WeiBoUser implements Serializable {
 	/**
 	 * 用户UID
 	 */
-	private String id;
+	private long id;
 
 	private String idstr;
 
@@ -192,11 +191,11 @@ public class WeiBoUser implements Serializable {
 		this.photoData = photoData;
 	}
 
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -432,43 +431,43 @@ public class WeiBoUser implements Serializable {
 		this.cover_image_phone = cover_image_phone;
 	}
 
-	@Override
-	public String toString() {
-		return "WeiBoUser{" +
-				"token='" + token + '\'' +
-				", secret='" + secret + '\'' +
-				", recentStatusId='" + recentStatusId + '\'' +
-				", photoData=" + Arrays.toString(photoData) +
-				", id='" + id + '\'' +
-				", idstr='" + idstr + '\'' +
-				", screen_name='" + screen_name + '\'' +
-				", name='" + name + '\'' +
-				", province=" + province +
-				", city=" + city +
-				", location='" + location + '\'' +
-				", description='" + description + '\'' +
-				", url='" + url + '\'' +
-				", profile_image_url='" + profile_image_url + '\'' +
-				", domain='" + domain + '\'' +
-				", gender='" + gender + '\'' +
-				", followers_count=" + followers_count +
-				", friends_count=" + friends_count +
-				", statuses_count=" + statuses_count +
-				", favourites_count=" + favourites_count +
-				", created_at='" + created_at + '\'' +
-				", following=" + following +
-				", verified=" + verified +
-				", avatar_large='" + avatar_large + '\'' +
-				", online_status=" + online_status +
-				", bi_followers_count=" + bi_followers_count +
-				", allow_all_comment=" + allow_all_comment +
-				", geo_enabled=" + geo_enabled +
-				", status=" + status +
-				", remark='" + remark + '\'' +
-				", verified_type=" + verified_type +
-				", verified_reason='" + verified_reason + '\'' +
-				", cover_image='" + cover_image + '\'' +
-				", cover_image_phone='" + cover_image_phone + '\'' +
-				'}';
-	}
+//	@Override
+//	public String toString() {
+//		return "WeiBoUser{" +
+//				"token='" + token + '\'' +
+//				", secret='" + secret + '\'' +
+//				", recentStatusId='" + recentStatusId + '\'' +
+//				", photoData=" + Arrays.toString(photoData) +
+//				", id='" + id + '\'' +
+//				", idstr='" + idstr + '\'' +
+//				", screen_name='" + screen_name + '\'' +
+//				", name='" + name + '\'' +
+//				", province=" + province +
+//				", city=" + city +
+//				", location='" + location + '\'' +
+//				", description='" + description + '\'' +
+//				", url='" + url + '\'' +
+//				", profile_image_url='" + profile_image_url + '\'' +
+//				", domain='" + domain + '\'' +
+//				", gender='" + gender + '\'' +
+//				", followers_count=" + followers_count +
+//				", friends_count=" + friends_count +
+//				", statuses_count=" + statuses_count +
+//				", favourites_count=" + favourites_count +
+//				", created_at='" + created_at + '\'' +
+//				", following=" + following +
+//				", verified=" + verified +
+//				", avatar_large='" + avatar_large + '\'' +
+//				", online_status=" + online_status +
+//				", bi_followers_count=" + bi_followers_count +
+//				", allow_all_comment=" + allow_all_comment +
+//				", geo_enabled=" + geo_enabled +
+//				", status=" + status +
+//				", remark='" + remark + '\'' +
+//				", verified_type=" + verified_type +
+//				", verified_reason='" + verified_reason + '\'' +
+//				", cover_image='" + cover_image + '\'' +
+//				", cover_image_phone='" + cover_image_phone + '\'' +
+//				'}';
+//	}
 }

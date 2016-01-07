@@ -68,4 +68,6 @@ public class Constants {
     public static final String STATUSES_FRIENDS_TIMELINE = "https://api.weibo.com/2/statuses/friends_timeline.json";
     //获取某个用户最新发表的微博列表
     public static final String STATUSES_USER_TIMELINE = "https://api.weibo.com/2/statuses/user_timeline.json";
+    //转发一条微博
+    public static final String STATUSES_REPOST = "https://api.weibo.com/2/statuses/repost.json";
 }

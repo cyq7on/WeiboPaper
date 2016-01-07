@@ -25,7 +25,7 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
-        android:name="com.xihua.weibopaper.common.MyApplication"
+        android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

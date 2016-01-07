@@ -184,7 +184,7 @@ public class MainActivity extends BaseActivity
         Map<String, String> params = new HashMap<>();
         params.put("source", Constants.APP_KEY);
         params.put("access_token", accessToken.getToken());
-        params.put("count", "50");
+//        params.put("count", "30");
         String url = GsonRequest.getUrl(Constants.STATUSES_PUBLIC_TIMELINE, params);
         fragmentList.add(HomeFragment.newInstance(url));
         url = GsonRequest.getUrl(Constants.STATUSES_FRIENDS_TIMELINE,params);

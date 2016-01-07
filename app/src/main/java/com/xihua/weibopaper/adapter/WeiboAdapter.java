@@ -3,7 +3,6 @@ package com.xihua.weibopaper.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +12,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
-import com.sina.weibo.sdk.openapi.models.User;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.bean.PicUrls;
 import com.xihua.weibopaper.bean.StatusContent;
-import com.xihua.weibopaper.bean.WeiboContent;
+import com.xihua.weibopaper.bean.WeiBoUser;
+import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.common.MyApplication;
+import com.xihua.weibopaper.utils.AccessTokenKeeper;
 import com.xihua.weibopaper.utils.DateUtils;
+import com.xihua.weibopaper.utils.GsonRequest;
 import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.ScreenUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author cyq7on
@@ -34,15 +43,15 @@ import com.xihua.weibopaper.view.CircleImageView;
  */
 public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> {
     private Context context;
-    private WeiboContent content;
+    private List<StatusContent> list;
     private OnItemClickListener onItemClickListener;
     private View.OnClickListener onClickListener;
     private RequestQueue requestQueue;
     private RecyclerView recyclerView;
 
-    public WeiboAdapter(Context context, WeiboContent content, RequestQueue requestQueue) {
+    public WeiboAdapter(Context context, List<StatusContent> list, RequestQueue requestQueue) {
         this.context = context;
-        this.content = content;
+        this.list = list;
         this.requestQueue = requestQueue;
     }
 
@@ -85,8 +94,8 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                 }
             });
         }
-        StatusContent sc = content.getStatuses().get(position);
-        User user = sc.getUser();
+        StatusContent sc = list.get(position);
+        WeiBoUser user = sc.getUser();
 //        if (onClickListener == null) {
         onClickListener = new View.OnClickListener() {
             @Override
@@ -96,29 +105,29 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         };
         holder.ivMore.setOnClickListener(onClickListener);
 //        }
-        ImageUtils.getInstance().displayImage(requestQueue, user.avatar_large, null,
+        ImageUtils.getInstance().displayImage(requestQueue, user.getAvatar_large(), null,
                 holder.iv);
 
         // 黄V
-        if (user.verified_type == 0) {
+        if (user.getVerified_type() == 0) {
             holder.ivVerify.setImageResource(R.mipmap.avatar_vip);
         }
         // 200:初级达人 220:高级达人
-        else if (user.verified_type == 200 || user.verified_type == 220) {
+        else if (user.getVerified_type() == 200 || user.getVerified_type() == 220) {
             holder.ivVerify.setImageResource(R.mipmap.avatar_grassroot);
         }
         // 蓝V
-        else if (user.verified_type > 0) {
+        else if (user.getVerified_type() > 0) {
             holder.ivVerify.setImageResource(R.mipmap.avatar_enterprise_vip);
         }
-        if (user.verified_type >= 0) {
+        if (user.getVerified_type() >= 0) {
             holder.ivVerify.setVisibility(View.VISIBLE);
         } else {
             holder.ivVerify.setVisibility(View.GONE);
         }
-        String name = user.remark;
+        String name = user.getRemark();
         if (name.equals("")) {
-            name = user.screen_name;
+            name = user.getScreen_name();
         }
         holder.tvName.setText(name);
 
@@ -131,7 +140,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         holder.tvSource.setText(charSequence);
 //        holder.tvSource.setMovementMethod(LinkMovementMethod.getInstance());//点击的时候产生超链接
 
-        PicUrls[] picUrls;
+        List<PicUrls> picUrls;
         StatusContent reStatus = sc.getRetweeted_status();
         String count1 = "";
         String count2 = "";
@@ -181,7 +190,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         holder.ivComment.setTag(sc.getIdstr());
 
         //微博配图
-        int size = picUrls.length;
+        int size = picUrls.size();
         if (size == 0) {
             return;
         }
@@ -193,8 +202,10 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             image = new ImageView(context);
             image.setMaxHeight(1000);
             image.setMaxWidth(1000);
+            image.setMinimumHeight(300);
+            image.setMinimumWidth(300);
             image.setImageResource(R.mipmap.ic_launcher);
-            url = picUrls[0].getThumbnail_pic().replace("thumbnail", "bmiddle");
+            url = picUrls.get(0).getThumbnail_pic();
             image.setTag(url);
             ImageView view = (ImageView) recyclerView.findViewWithTag(url);
 //            Log.i("vvvvv00000", Boolean.toString(view == null));
@@ -213,7 +224,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             LinearLayout horizonLayout = new LinearLayout(context);
             LinearLayout.LayoutParams params;
             float density = ScreenUtils.getDensity(context);
-            float imageLayWidth = width - (10 + 10) * density;
+            float imageLayWidth = (width - (10 + 10) * density) * 2 / 3;
             for (int i = 0; i < size; i++) {
                 params = new LinearLayout.LayoutParams(
                         (int) (imageLayWidth / 2), (int) (imageLayWidth / 2));
@@ -223,7 +234,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                 image.setPadding(0, (int) (4 * density), (int) (4 * density),
                         (int) (4 * density));
                 image.setImageResource(R.mipmap.ic_launcher);
-                url = picUrls[i].getThumbnail_pic().replace("thumbnail", "bmiddle");
+                url = picUrls.get(i).getThumbnail_pic();
                 image.setTag(url);
                 horizonLayout.addView(image, params);
                 ImageUtils.getInstance().displayImage(requestQueue,url, null,image);
@@ -253,7 +264,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                         image.setPadding(0, (int) (2 * density),
                                 (int) (2 * density), (int) (2 * density));
                         image.setImageResource(R.mipmap.ic_launcher);
-                        url = picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle");
+                        url = picUrls.get(i * 3 + j).getThumbnail_pic();
                         image.setTag(url);
                         horizonLayout.addView(image, params);
                         ImageUtils.getInstance().displayImage(requestQueue,url,null,image);
@@ -276,7 +287,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                                     (int) (2 * density), (int) (2 * density));
                             image.setScaleType(ImageView.ScaleType.FIT_XY);
                             image.setImageResource(R.mipmap.ic_launcher);
-                            url = picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle");
+                            url = picUrls.get(i * 3 + j).getThumbnail_pic();
                             image.setTag(url);
                             horizonLayout.addView(image, params);
                             ImageUtils.getInstance().displayImage(requestQueue,url,null,image);
@@ -292,7 +303,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                                     + j));
                             image.setScaleType(ImageView.ScaleType.FIT_XY);
                             image.setImageResource(R.mipmap.ic_launcher);
-                            url = picUrls[i * 3 + j].getThumbnail_pic().replace("thumbnail", "bmiddle");
+                            url = picUrls.get(i * 3 + j).getThumbnail_pic();
                             image.setTag(url);
                             horizonLayout.addView(image, params);
                             ImageUtils.getInstance().displayImage(requestQueue, url, null,image);
@@ -307,7 +318,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return content.getStatuses().size();
+        return list.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -361,9 +372,29 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             }
             if (sendListener == null) {
                 sendListener = new View.OnClickListener() {
+                    RequestQueue requestQueue = Volley.newRequestQueue(MyApplication.getInstance());
+                    Map<String, String> params = new HashMap<>();
+                    Oauth2AccessToken accessToken = AccessTokenKeeper.
+                            readAccessToken(MyApplication.getInstance());
+                    GsonRequest<StatusContent> sendRequest = new GsonRequest<StatusContent>(params,
+                            Constants.STATUSES_REPOST, StatusContent.class,
+                            new Response.Listener<StatusContent>() {
+                                @Override
+                                public void onResponse(StatusContent response) {
+                                    ToastUtil.showShort(MyApplication.getInstance(), "转发成功");
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            ToastUtil.showShort(MyApplication.getInstance(), error.getMessage());
+                        }
+                    });
                     @Override
                     public void onClick(View v) {
-                        ToastUtil.showShort(MyApplication.getInstance(),(String)v.getTag());
+                        params.put("source", Constants.APP_KEY);
+                        params.put("access_token", accessToken.getToken());
+                        params.put("id", (String) v.getTag());
+                        requestQueue.add(sendRequest);
                     }
                 };
             }

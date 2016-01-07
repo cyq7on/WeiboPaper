@@ -1,7 +1,9 @@
 package com.xihua.weibopaper.common;
 
 import android.app.Activity;
-import android.app.Application;
+import android.content.Context;
+
+import org.litepal.LitePalApplication;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,17 +17,20 @@ import java.util.List;
  * @version V1.0
  */
 
-public class MyApplication extends Application {
-    private static MyApplication instance;
+public class MyApplication extends LitePalApplication {
     //运用list来保存们每一个activity是关键
     private static List<Activity> mList = new LinkedList<Activity>();
     // add Activity
     public static void addActivity(Activity activity) {
-        mList.add(activity);
+        if (!mList.contains(activity)) {
+            mList.add(activity);
+        }
     }
     //remove activity
     public static void removeActivity(Activity activity) {
-        mList.remove(activity);
+        if (mList.contains(activity)) {
+            mList.remove(activity);
+        }
     }
     //关闭每一个list内的activity
     public static void finishAll() {
@@ -39,11 +44,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
     }
 
-    public static MyApplication getInstance() {
-        return instance;
+    public static Context getInstance() {
+        return getContext();
     }
     //杀进程
     public void onLowMemory() {
