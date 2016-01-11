@@ -14,16 +14,7 @@ public class Geo extends BaseBean {
 	private String more;// 更多信息，不是所有情况都会返回该字段
 	private String type;
 	private String[] coordinates;
-	//用于litePal
-	private StatusContent statusContent;
 
-	public StatusContent getStatusContent() {
-		return statusContent;
-	}
-
-	public void setStatusContent(StatusContent statusContent) {
-		this.statusContent = statusContent;
-	}
 
 	public String getType() {
 		return type;

@@ -1,6 +1,7 @@
 package com.xihua.weibopaper.fragment;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,6 +23,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.melnykov.fab.FloatingActionButton;
 import com.mingle.widget.LoadingView;
+import com.snappydb.DB;
+import com.snappydb.DBFactory;
+import com.snappydb.SnappydbException;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.adapter.WeiboAdapter;
 import com.xihua.weibopaper.bean.StatusContent;
@@ -33,6 +37,11 @@ import com.xihua.weibopaper.view.DividerItemDecoration;
 import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,11 +72,10 @@ public class HomeFragment extends Fragment {
     private LinearLayoutManager manager;
     private DividerItemDecoration dividerItemDecoration;
     private XRecyclerView.LoadingListener loadingListener;
+    private DB snappydb;
 
-    public static Fragment newInstance(String url){
+    public static Fragment newInstance(Bundle bundle){
         Fragment fragment = new HomeFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("url", url);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -78,13 +86,12 @@ public class HomeFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser){
             if (request) {
-                //只有当该Fragment被用户可见的时候,才加载网络数据，并且只加载一次
+                //只有当该Fragment被用户可见时,才加载网络数据，并且只加载一次
                 requestQueue.add(requestContent);
             }
             else {
                 adapter.notifyDataSetChanged();
             }
-
         }
     }
 
@@ -92,9 +99,24 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getActivity();
+        try {
+            snappydb = DBFactory.open(context, "WeiboDB");
+        } catch (SnappydbException e) {
+            ToastUtil.showShort(context,"数据库打开失败");
+        }
         requestQueue = Volley.newRequestQueue(context);
         url = getArguments().getString("url");
         list = new ArrayList<>();
+        try {
+            String[] keys = snappydb.findKeys(getArguments().getString("which"));
+            int length = keys.length;
+            if (length > 0) {
+                WeiboContent content = snappydb.get(keys[length - 1],WeiboContent.class);
+                list.addAll(content.getStatuses());
+            }
+        } catch (SnappydbException e) {
+            e.printStackTrace();
+        }
         adapter = new WeiboAdapter(context,list,requestQueue);
         requestContent = new GsonRequest<>(url,
                 WeiboContent.class, new Response.Listener<WeiboContent>() {
@@ -108,10 +130,15 @@ public class HomeFragment extends Fragment {
                     loadingView.setVisibility(View.GONE);
                     request = false;
                 }
-                for (int i = 0;i < list.size();i++) {
-                    list.get(i).getUser().save();
+                StringBuilder key = new StringBuilder();
+                key.append(getArguments().getString("which")).
+                        append(list.get(list.size() - 1).getIdstr());
+                try {
+                    snappydb.put(key.toString(),response);
+                    Log.i("db", snappydb.get(key.toString(),WeiboContent.class).toString());
+                } catch (SnappydbException e) {
+                    ToastUtil.showShort(context, "缓存数据失败");
                 }
-                DataSupport.saveAll(list);
                 Log.i("content", response.toString());
             }
         }, new Response.ErrorListener() {
@@ -138,7 +165,7 @@ public class HomeFragment extends Fragment {
 
             }
         };
-        SQLiteDatabase database = Connector.getDatabase();
+//        SQLiteDatabase database = Connector.getDatabase();
     }
 
     @Nullable
@@ -171,4 +198,49 @@ public class HomeFragment extends Fragment {
         }
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        try {
+            snappydb.close();
+        } catch (SnappydbException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private byte[] saveObject(WeiboContent content) {
+        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(arrayOutputStream);
+            objectOutputStream.writeObject(content);
+            objectOutputStream.flush();
+            byte data[] = arrayOutputStream.toByteArray();
+            objectOutputStream.close();
+            arrayOutputStream.close();
+            return data;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+//    public WeiboContent getObject() {
+//        WeiboContent weiboContent = null;
+//                byte data[] = cursor.getBlob(cursor.getColumnIndex("classtabledata"));
+//                ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(data);
+//                try {
+//                    ObjectInputStream inputStream = new ObjectInputStream(arrayInputStream);
+//                    weiboContent = (WeiboContent) inputStream.readObject();
+//                    inputStream.close();
+//                    arrayInputStream.close();
+//                    return weiboContent;
+//                } catch (Exception e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                    return null;
+//                }
+//
+//    }
 }

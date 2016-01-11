@@ -1,7 +1,5 @@
 package com.xihua.weibopaper.bean;
 
-import org.litepal.crud.DataSupport;
-
 import java.io.Serializable;
 
 /**
@@ -11,5 +9,5 @@ import java.io.Serializable;
  * @Description:模型基类
  * @date 2016/1/622:04
  */
-public class BaseBean extends DataSupport implements Serializable {
+public class BaseBean implements Serializable {
 }

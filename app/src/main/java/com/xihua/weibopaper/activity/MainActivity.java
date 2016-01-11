@@ -19,7 +19,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,12 +31,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.melnykov.fab.FloatingActionButton;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.sina.weibo.sdk.openapi.models.User;
-import com.xihua.weibopaper.adapter.WeiboAdapter;
+import com.xihua.weibopaper.db.Category;
 import com.xihua.weibopaper.bean.WeiBoUser;
-import com.xihua.weibopaper.bean.WeiboContent;
 import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.common.MyApplication;
+import com.xihua.weibopaper.db.HomeStatus;
 import com.xihua.weibopaper.fragment.HomeFragment;
 import com.xihua.weibopaper.service.UnreadService;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
@@ -46,6 +44,8 @@ import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.PollingUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -172,9 +172,15 @@ public class MainActivity extends BaseActivity
         gruopList.add("全部微博");
         gruopList.add("我的关注");
         gruopList.add("我的微博");
-
         initTabLayout();
-
+        if (DataSupport.find(Category.class,1) == null) {
+            Category category;
+            for (int i = 0;i < gruopList.size();i++) {
+                category = new Category();
+                category.setName(gruopList.get(i));
+                category.save();
+            }
+        }
     }
 
 
@@ -185,13 +191,23 @@ public class MainActivity extends BaseActivity
         params.put("source", Constants.APP_KEY);
         params.put("access_token", accessToken.getToken());
 //        params.put("count", "30");
+        Bundle bundle;
         String url = GsonRequest.getUrl(Constants.STATUSES_PUBLIC_TIMELINE, params);
-        fragmentList.add(HomeFragment.newInstance(url));
+        bundle = new Bundle();
+        bundle.putString("url",url);
+        bundle.putString("which", "0");
+        fragmentList.add(HomeFragment.newInstance(bundle));
         url = GsonRequest.getUrl(Constants.STATUSES_FRIENDS_TIMELINE,params);
-        fragmentList.add(HomeFragment.newInstance(url));
+        bundle = new Bundle();
+        bundle.putString("url", url);
+        bundle.putString("which", "1");
+        fragmentList.add(HomeFragment.newInstance(bundle));
         params.put("uid", accessToken.getUid());
         url = GsonRequest.getUrl(Constants.STATUSES_USER_TIMELINE,params);
-        fragmentList.add(HomeFragment.newInstance(url));
+        bundle = new Bundle();
+        bundle.putString("url", url);
+        bundle.putString("which", "2");
+        fragmentList.add(HomeFragment.newInstance(bundle));
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp);
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
 

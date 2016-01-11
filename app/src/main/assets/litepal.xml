@@ -2,13 +2,10 @@
 <litepal>
     <dbname value="weibo" ></dbname>
 
-    <version value="6" ></version>
+    <version value="2" ></version>
 
     <list>
-        <mapping class="com.xihua.weibopaper.bean.PhotoBean"></mapping>
-        <mapping class="com.xihua.weibopaper.bean.PicUrls"></mapping>
-        <mapping class="com.xihua.weibopaper.bean.StatusContent"></mapping>
-        <mapping class="com.xihua.weibopaper.bean.WeiBoUser"></mapping>
-        <mapping class="com.xihua.weibopaper.bean.Geo"></mapping>
+        <mapping class="com.xihua.weibopaper.db.HomeStatus"></mapping>
+        <mapping class="com.xihua.weibopaper.db.Category"></mapping>
     </list>
 </litepal>
