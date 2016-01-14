@@ -1,9 +1,11 @@
 package com.xihua.weibopaper.common;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 
-import org.litepal.LitePalApplication;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +19,8 @@ import java.util.List;
  * @version V1.0
  */
 
-public class MyApplication extends LitePalApplication {
+public class MyApplication extends Application {
+    private static Context context;
     //运用list来保存们每一个activity是关键
     private static List<Activity> mList = new LinkedList<Activity>();
     // add Activity
@@ -44,10 +47,17 @@ public class MyApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        context = this;
+        //创建默认的ImageLoader配置参数
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration
+                .createDefault(this);
+
+        //Initialize ImageLoader with configuration.
+        ImageLoader.getInstance().init(configuration);
     }
 
     public static Context getInstance() {
-        return getContext();
+        return context;
     }
     //杀进程
     public void onLowMemory() {

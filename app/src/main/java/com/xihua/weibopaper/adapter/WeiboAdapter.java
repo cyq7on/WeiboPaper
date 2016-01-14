@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.bean.PicUrls;
@@ -26,9 +28,9 @@ import com.xihua.weibopaper.utils.AccessTokenKeeper;
 import com.xihua.weibopaper.utils.DateUtils;
 import com.xihua.weibopaper.utils.GsonRequest;
 import com.xihua.weibopaper.utils.ImageUtils;
-import com.xihua.weibopaper.utils.ScreenUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
+import com.xihua.weibopaper.view.FullyGridLayoutManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -68,6 +70,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         if (recyclerView == null) {
             recyclerView = (RecyclerView) parent;
         }
+//        viewHolder.setIsRecyclable(false);
         return viewHolder;
     }
 
@@ -142,9 +145,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
 
         List<PicUrls> picUrls;
         StatusContent reStatus = sc.getRetweeted_status();
-        String count1 = "";
-        String count2 = "";
-        String count3 = "";
+        String count1;
+        String count2;
+        String count3;
         if (reStatus == null) {
             holder.tvUserDo.setVisibility(View.GONE);
             holder.line.setVisibility(View.GONE);
@@ -194,131 +197,14 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         if (size == 0) {
             return;
         }
-        int width = ScreenUtils.getScreenWidth(context);// 屏幕宽度
-        ImageView image;
-        String url;
-        if (size == 1) {
-            holder.container.removeAllViews();
-            image = new ImageView(context);
-            image.setMaxHeight(1000);
-            image.setMaxWidth(1000);
-            image.setMinimumHeight(300);
-            image.setMinimumWidth(300);
-            image.setImageResource(R.mipmap.ic_launcher);
-            url = picUrls.get(0).getThumbnail_pic();
-            image.setTag(url);
-            ImageView view = (ImageView) recyclerView.findViewWithTag(url);
-//            Log.i("vvvvv00000", Boolean.toString(view == null));
-//            Log.i("vvvvv11111", (String) image.getTag());
-            image.setOnClickListener(new ImageOnClickListener(0));
-            image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-            holder.container.addView(image, params);
-//            holder.container.setTag(url);
-//            LinearLayout ll = (LinearLayout) recyclerView.findViewWithTag(url);
-//            Log.i("vvvvv111", Boolean.toString(ll == null));
-            ImageUtils.getInstance().displayImage(requestQueue,url,null,image);
-        } else if (size == 2) {
-            holder.container.removeAllViews();
-            LinearLayout horizonLayout = new LinearLayout(context);
-            LinearLayout.LayoutParams params;
-            float density = ScreenUtils.getDensity(context);
-            float imageLayWidth = (width - (10 + 10) * density) * 2 / 3;
-            for (int i = 0; i < size; i++) {
-                params = new LinearLayout.LayoutParams(
-                        (int) (imageLayWidth / 2), (int) (imageLayWidth / 2));
-                image = new ImageView(context);
-                image.setOnClickListener(new ImageOnClickListener(i));
-                image.setScaleType(ImageView.ScaleType.FIT_XY);
-                image.setPadding(0, (int) (4 * density), (int) (4 * density),
-                        (int) (4 * density));
-                image.setImageResource(R.mipmap.ic_launcher);
-                url = picUrls.get(i).getThumbnail_pic();
-                image.setTag(url);
-                horizonLayout.addView(image, params);
-                ImageUtils.getInstance().displayImage(requestQueue,url, null,image);
-            }
-            holder.container.addView(horizonLayout);
-        } else if (size > 2 && size <= 9) {
-            holder.container.removeAllViews();
-
-            LinearLayout.LayoutParams params;
-            float density = ScreenUtils.getDensity(context);
-            float imageLayWidth = width - (10 + 10) * density;
-
-            int count = size;
-            int yuShu = count % 3;
-            if (yuShu == 0) {
-                int hangNum = size / 3;
-                for (int i = 0; i < hangNum; i++) {
-                    LinearLayout horizonLayout = new LinearLayout(context);
-                    for (int j = 0; j < 3; j++) {
-                        params = new LinearLayout.LayoutParams(
-                                (int) (imageLayWidth / 3),
-                                (int) (imageLayWidth / 3));
-                        image = new ImageView(context);
-                        image.setOnClickListener(new ImageOnClickListener(i * 3
-                                + j));
-                        image.setScaleType(ImageView.ScaleType.FIT_XY);
-                        image.setPadding(0, (int) (2 * density),
-                                (int) (2 * density), (int) (2 * density));
-                        image.setImageResource(R.mipmap.ic_launcher);
-                        url = picUrls.get(i * 3 + j).getThumbnail_pic();
-                        image.setTag(url);
-                        horizonLayout.addView(image, params);
-                        ImageUtils.getInstance().displayImage(requestQueue,url,null,image);
-                    }
-                    holder.container.addView(horizonLayout);
-                }
-            } else {
-                int hangNum = size / 3 + 1;
-                for (int i = 0; i <= hangNum - 1; i++) {
-                    LinearLayout horizonLayout = new LinearLayout(context);
-                    if (i < hangNum - 1) {
-                        for (int j = 0; j < 3; j++) {
-                            params = new LinearLayout.LayoutParams(
-                                    (int) (imageLayWidth / 3),
-                                    (int) (imageLayWidth / 3));
-                            image = new ImageView(context);
-                            image.setOnClickListener(new ImageOnClickListener(i * 3
-                                    + j));
-                            image.setPadding(0, (int) (2 * density),
-                                    (int) (2 * density), (int) (2 * density));
-                            image.setScaleType(ImageView.ScaleType.FIT_XY);
-                            image.setImageResource(R.mipmap.ic_launcher);
-                            url = picUrls.get(i * 3 + j).getThumbnail_pic();
-                            image.setTag(url);
-                            horizonLayout.addView(image, params);
-                            ImageUtils.getInstance().displayImage(requestQueue,url,null,image);
-                        }
-                        holder.container.addView(horizonLayout);
-                    } else if (i == hangNum - 1) {
-                        for (int j = 0; j < yuShu; j++) {
-                            params = new LinearLayout.LayoutParams(
-                                    (int) (imageLayWidth / 3),
-                                    (int) (imageLayWidth / 3));
-                            image = new ImageView(context);
-                            image.setOnClickListener(new ImageOnClickListener(i * 3
-                                    + j));
-                            image.setScaleType(ImageView.ScaleType.FIT_XY);
-                            image.setImageResource(R.mipmap.ic_launcher);
-                            url = picUrls.get(i * 3 + j).getThumbnail_pic();
-                            image.setTag(url);
-                            horizonLayout.addView(image, params);
-                            ImageUtils.getInstance().displayImage(requestQueue, url, null,image);
-                        }
-                        holder.container.addView(horizonLayout);
-                    }
-                }
-            }
-        }
-
+        holder.container.setHasFixedSize(true);
+        holder.container.setLayoutManager(new FullyGridLayoutManager(context, 3));
+        holder.container.setAdapter(new ImageAdapter(picUrls, context, requestQueue));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list == null ? 0 : list.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -331,7 +217,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         TextView tvUserDo;
         View line;
         TextView tvContent;
-        LinearLayout container;
+        RecyclerView container;
         ImageView ivLike;
         ImageView ivSend;
         ImageView ivComment;
@@ -353,7 +239,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             tvUserDo = (TextView) itemView.findViewById(R.id.tv_user_do);
             line = itemView.findViewById(R.id.view);
             tvContent = (TextView) itemView.findViewById(R.id.tv_content);
-            container = (LinearLayout) itemView.findViewById(R.id.image_container);
+            container = (RecyclerView) itemView.findViewById(R.id.image_container);
             ivLike = (ImageView) itemView.findViewById(R.id.iv_like);
             ivSend = (ImageView) itemView.findViewById(R.id.iv_send);
             ivComment = (ImageView) itemView.findViewById(R.id.iv_comment);
@@ -427,4 +313,87 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         }
 
     }
+
 }
+
+class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
+    private List<PicUrls> urlList;
+    private Context context;
+    private OnItemClickListener onItemClickListener;
+    private RequestQueue requestQueue;
+    private DisplayImageOptions options;
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
+    }
+
+    public ImageAdapter(List<PicUrls> mData, Context mContext,RequestQueue requestQueue) {
+        this.urlList = mData;
+        this.context = mContext;
+        this.requestQueue = requestQueue;
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.mipmap.ic_launcher)
+                .showImageForEmptyUri(R.mipmap.ic_launcher)
+                .showImageOnFail(R.mipmap.ic_launcher)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .build();
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_weibo_image, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        if (onItemClickListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    onItemClickListener.onItemClick(holder.itemView, pos);
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    onItemClickListener.onItemLongClick(holder.itemView, pos);
+                    return true;
+                }
+            });
+        }
+//        ImageUtils.getInstance().displayImage(requestQueue,
+//                urlList.get(position).getThumbnail_pic(),holder.image);
+        ImageLoader.getInstance().displayImage(urlList.get(position).getThumbnail_pic(),
+                holder.image, options);
+
+    }
+
+    @Override
+    public int getItemCount() {
+
+        return urlList == null ? 0 : urlList.size();
+    }
+
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView image;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            image = (ImageView) itemView.findViewById(R.id.image);
+        }
+    }
+
+
+}
+

@@ -1,17 +1,12 @@
 package com.xihua.weibopaper.fragment;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-
-import com.jcodecraeer.xrecyclerview.ProgressStyle;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
-
-import android.text.style.RasterizerSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +16,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.melnykov.fab.FloatingActionButton;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.mingle.widget.LoadingView;
 import com.snappydb.DB;
 import com.snappydb.DBFactory;
@@ -34,20 +30,9 @@ import com.xihua.weibopaper.utils.GsonRequest;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.DividerItemDecoration;
 
-import org.litepal.crud.DataSupport;
-import org.litepal.tablemanager.Connector;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.sql.Blob;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * @Package com.xihua.weibopaper.fragment
@@ -65,7 +50,6 @@ public class HomeFragment extends Fragment {
     private GsonRequest<WeiboContent> requestContent;
     private String url;
     private XRecyclerView recyclerView;
-    private FloatingActionButton fab;
     private List<StatusContent> list;
     private boolean request = true;
     private LoadingView loadingView;
@@ -73,6 +57,12 @@ public class HomeFragment extends Fragment {
     private DividerItemDecoration dividerItemDecoration;
     private XRecyclerView.LoadingListener loadingListener;
     private DB snappydb;
+    private String lastKey;
+    private MyHandler handler;
+
+    private static final int LOAD_MORE_COMPLETE = 0;
+    private static final int LOADING_VIEW_GONE = 1;
+    private static final int LOADING_COUNT = 20;
 
     public static Fragment newInstance(Bundle bundle){
         Fragment fragment = new HomeFragment();
@@ -99,6 +89,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getActivity();
+        handler = new MyHandler(this);
         try {
             snappydb = DBFactory.open(context, "WeiboDB");
         } catch (SnappydbException e) {
@@ -107,12 +98,15 @@ public class HomeFragment extends Fragment {
         requestQueue = Volley.newRequestQueue(context);
         url = getArguments().getString("url");
         list = new ArrayList<>();
+        String which = getArguments().getString("which");
         try {
-            String[] keys = snappydb.findKeys(getArguments().getString("which"));
+            String[] keys = snappydb.findKeys(which);
             int length = keys.length;
+            int k = length < LOADING_COUNT ? 0 : length - LOADING_COUNT;
             if (length > 0) {
-                WeiboContent content = snappydb.get(keys[length - 1],WeiboContent.class);
-                list.addAll(content.getStatuses());
+                for (int i = length - 1;i >= k;i--) {
+                    list.add(snappydb.get(keys[i],StatusContent.class));
+                }
             }
         } catch (SnappydbException e) {
             e.printStackTrace();
@@ -127,17 +121,23 @@ public class HomeFragment extends Fragment {
                 adapter.notifyDataSetChanged();
                 recyclerView.refreshComplete();
                 if(request) {
-                    loadingView.setVisibility(View.GONE);
-                    request = false;
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            handler.sendEmptyMessage(LOADING_VIEW_GONE);
+                        }
+                    },1500);
                 }
-                StringBuilder key = new StringBuilder();
-                key.append(getArguments().getString("which")).
-                        append(list.get(list.size() - 1).getIdstr());
-                try {
-                    snappydb.put(key.toString(),response);
-                    Log.i("db", snappydb.get(key.toString(),WeiboContent.class).toString());
-                } catch (SnappydbException e) {
-                    ToastUtil.showShort(context, "缓存数据失败");
+                StringBuilder key;
+                for (int i = 0;i < list.size();i++) {
+                    key = new StringBuilder();
+                    StatusContent content = list.get(i);
+                    key.append(getArguments().getString("which")).append(content.getIdstr());
+                    try {
+                        snappydb.put(key.toString(),content);
+                    } catch (SnappydbException e) {
+                        ToastUtil.showShort(context, "缓存数据失败");
+                    }
                 }
                 Log.i("content", response.toString());
             }
@@ -162,10 +162,39 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onLoadMore() {
-
+                final int size = list.size();
+                String which = getArguments().getString("which");
+                try {
+                    String[] keys = snappydb.findKeys(which);
+                    int length = keys.length;
+                    if (length > 0) {
+                        String key;
+                        long lastId = list.get(size - 1).getId();
+                        for (int i = length - 1;i >= 0;i--) {
+                            key = keys[i].substring(1);
+                            if (Long.parseLong(key) == lastId) {
+                                int k = i > LOADING_COUNT ? i - LOADING_COUNT : 0;
+                                for (i--;i >= k;i--) {
+                                    list.add(snappydb.get(keys[i],StatusContent.class));
+                                }
+                                break;
+                            }
+                        }
+                    }
+                } catch (SnappydbException e) {
+                    e.printStackTrace();
+                }finally {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Message msg = handler.obtainMessage(LOAD_MORE_COMPLETE);
+                            msg.arg1 = size;
+                            handler.sendMessage(msg);
+                        }
+                    },3000);
+                }
             }
         };
-//        SQLiteDatabase database = Connector.getDatabase();
     }
 
     @Nullable
@@ -203,44 +232,57 @@ public class HomeFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         try {
+            String which = getArguments().getString("which");
+            String[] keys = snappydb.findKeys(which);
+            int length = keys.length;
+            if (length >= 300) {
+               for (int i = length - 1;i > length / 2;i--) {
+                   snappydb.del(keys[i]);
+               }
+            }
+        } catch (SnappydbException e) {
+            e.printStackTrace();
+        }
+        try {
             snappydb.close();
         } catch (SnappydbException e) {
             e.printStackTrace();
         }
     }
 
-    private byte[] saveObject(WeiboContent content) {
-        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(arrayOutputStream);
-            objectOutputStream.writeObject(content);
-            objectOutputStream.flush();
-            byte data[] = arrayOutputStream.toByteArray();
-            objectOutputStream.close();
-            arrayOutputStream.close();
-            return data;
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
+    public void refresh() {
+        if (getUserVisibleHint()) {
+            requestQueue.add(requestContent);
+            loadingView.setVisibility(View.VISIBLE);
+            request = true;
         }
     }
 
-//    public WeiboContent getObject() {
-//        WeiboContent weiboContent = null;
-//                byte data[] = cursor.getBlob(cursor.getColumnIndex("classtabledata"));
-//                ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(data);
-//                try {
-//                    ObjectInputStream inputStream = new ObjectInputStream(arrayInputStream);
-//                    weiboContent = (WeiboContent) inputStream.readObject();
-//                    inputStream.close();
-//                    arrayInputStream.close();
-//                    return weiboContent;
-//                } catch (Exception e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                    return null;
-//                }
-//
-//    }
+    private static class MyHandler extends Handler {
+        private WeakReference<HomeFragment> fragmentWeakReference;
+
+        MyHandler(HomeFragment fragment) {
+            fragmentWeakReference = new WeakReference<>(fragment);
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            final HomeFragment fragment = fragmentWeakReference.get();
+            switch (msg.what) {
+                case LOADING_VIEW_GONE:
+                    fragment.loadingView.setVisibility(View.GONE);
+                    fragment.request = false;
+                    break;
+                case LOAD_MORE_COMPLETE:
+                    fragment.adapter.notifyDataSetChanged();
+                    ((LinearLayoutManager)fragment.recyclerView.getLayoutManager()).
+                            scrollToPositionWithOffset(msg.arg1,0);
+                    fragment.recyclerView.loadMoreComplete();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
 }

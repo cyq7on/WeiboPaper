@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,7 +18,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,11 +29,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.melnykov.fab.FloatingActionButton;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.xihua.weibopaper.db.Category;
 import com.xihua.weibopaper.bean.WeiBoUser;
 import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.common.MyApplication;
-import com.xihua.weibopaper.db.HomeStatus;
 import com.xihua.weibopaper.fragment.HomeFragment;
 import com.xihua.weibopaper.service.UnreadService;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
@@ -44,8 +40,6 @@ import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.PollingUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
-
-import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,14 +119,6 @@ public class MainActivity extends BaseActivity
         setSupportActionBar(toolbar);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "刷新中...", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        fab.show();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -173,19 +159,11 @@ public class MainActivity extends BaseActivity
         gruopList.add("我的关注");
         gruopList.add("我的微博");
         initTabLayout();
-        if (DataSupport.find(Category.class,1) == null) {
-            Category category;
-            for (int i = 0;i < gruopList.size();i++) {
-                category = new Category();
-                category.setName(gruopList.get(i));
-                category.save();
-            }
-        }
     }
 
 
     private void initTabLayout() {
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         fragmentList = new ArrayList<>();
         Map<String, String> params = new HashMap<>();
         params.put("source", Constants.APP_KEY);
@@ -195,18 +173,18 @@ public class MainActivity extends BaseActivity
         String url = GsonRequest.getUrl(Constants.STATUSES_PUBLIC_TIMELINE, params);
         bundle = new Bundle();
         bundle.putString("url",url);
-        bundle.putString("which", "0");
+        bundle.putString("which", "a");
         fragmentList.add(HomeFragment.newInstance(bundle));
         url = GsonRequest.getUrl(Constants.STATUSES_FRIENDS_TIMELINE,params);
         bundle = new Bundle();
         bundle.putString("url", url);
-        bundle.putString("which", "1");
+        bundle.putString("which", "b");
         fragmentList.add(HomeFragment.newInstance(bundle));
         params.put("uid", accessToken.getUid());
         url = GsonRequest.getUrl(Constants.STATUSES_USER_TIMELINE,params);
         bundle = new Bundle();
         bundle.putString("url", url);
-        bundle.putString("which", "2");
+        bundle.putString("which", "c");
         fragmentList.add(HomeFragment.newInstance(bundle));
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp);
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -229,7 +207,16 @@ public class MainActivity extends BaseActivity
 
         });
         tabLayout.setupWithViewPager(viewPager);
-
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int select = tabLayout.getSelectedTabPosition();
+                if (select >= 0) {
+                    ((HomeFragment)fragmentList.get(select)).refresh();
+                }
+            }
+        });
+        fab.show();
     }
 
     @Override
