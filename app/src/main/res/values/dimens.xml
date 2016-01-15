@@ -49,4 +49,9 @@
     <dimen name="sp_18">18sp</dimen>
     <dimen name="sp_19">19sp</dimen>
     <dimen name="sp_20">20sp</dimen>
+
+    <dimen name="comm_h_margin">16dip</dimen>
+    <dimen name="comm_v_margin">16dip</dimen>
+    <dimen name="comm_h_gap">10dip</dimen>
+    <dimen name="comm_v_gap">10dip</dimen>
 </resources>

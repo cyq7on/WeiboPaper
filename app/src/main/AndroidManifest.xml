@@ -56,23 +56,29 @@
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- 注册选择国家页面 -->
         <activity
             android:name="com.sina.weibo.sdk.register.mobile.SelectCountryActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
 
         <service
             android:name="com.sina.weibo.sdk.net.DownloadService"
             android:exported="false" />
-        <!--未读消息-->
+        <!-- 未读消息 -->
         <service
             android:name="com.xihua.weibopaper.service.UnreadService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity
+            android:name=".PublishActivity"
+            android:label="@string/title_activity_publish"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
     </application>
 
 </manifest>

@@ -30,5 +30,6 @@ dependencies {
     compile 'com.github.zzz40500:android-shapeLoadingView:1.0.3.2'
     compile 'com.snappydb:snappydb-lib:0.5.2'
     compile 'com.esotericsoftware.kryo:kryo:2.24.0'
+    compile 'com.apkfuns.logutils:library:1.0.6'
     compile project(':WeiboSDK')
 }

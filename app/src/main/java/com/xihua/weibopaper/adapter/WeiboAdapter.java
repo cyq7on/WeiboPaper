@@ -1,6 +1,7 @@
 package com.xihua.weibopaper.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -8,16 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.xihua.weibopaper.activity.PublishActivity;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.bean.PicUrls;
 import com.xihua.weibopaper.bean.StatusContent;
@@ -44,12 +45,12 @@ import java.util.Map;
  * @date 2015/12/2517:12
  */
 public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> {
-    private Context context;
+    Context context;
     private List<StatusContent> list;
     private OnItemClickListener onItemClickListener;
     private View.OnClickListener onClickListener;
     private RequestQueue requestQueue;
-    private RecyclerView recyclerView;
+    private XRecyclerView recyclerView;
 
     public WeiboAdapter(Context context, List<StatusContent> list, RequestQueue requestQueue) {
         this.context = context;
@@ -66,9 +67,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_weibo_content, null);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view,context);
         if (recyclerView == null) {
-            recyclerView = (RecyclerView) parent;
+            recyclerView = (XRecyclerView) parent;
         }
 //        viewHolder.setIsRecyclable(false);
         return viewHolder;
@@ -111,6 +112,11 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         ImageUtils.getInstance().displayImage(requestQueue, user.getAvatar_large(), null,
                 holder.iv);
 
+//        String url = user.getAvatar_large();
+//        holder.iv.setTag(url);
+//        CircleImageView imageView = (CircleImageView) recyclerView.findViewWithTag(url);
+//        Log.i("test",Boolean.toString(imageView == null));
+
         // 黄V
         if (user.getVerified_type() == 0) {
             holder.ivVerify.setImageResource(R.mipmap.avatar_vip);
@@ -142,7 +148,6 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         CharSequence charSequence = Html.fromHtml(source);
         holder.tvSource.setText(charSequence);
 //        holder.tvSource.setMovementMethod(LinkMovementMethod.getInstance());//点击的时候产生超链接
-
         List<PicUrls> picUrls;
         StatusContent reStatus = sc.getRetweeted_status();
         String count1;
@@ -228,7 +233,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         private static View.OnClickListener sendListener;
         private static View.OnClickListener commentListener;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView,final Context context) {
             super(itemView);
             iv = (CircleImageView) itemView.findViewById(R.id.iv);
             tvName = (TextView) itemView.findViewById(R.id.tv_name);
@@ -258,29 +263,12 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             }
             if (sendListener == null) {
                 sendListener = new View.OnClickListener() {
-                    RequestQueue requestQueue = Volley.newRequestQueue(MyApplication.getInstance());
-                    Map<String, String> params = new HashMap<>();
-                    Oauth2AccessToken accessToken = AccessTokenKeeper.
-                            readAccessToken(MyApplication.getInstance());
-                    GsonRequest<StatusContent> sendRequest = new GsonRequest<StatusContent>(params,
-                            Constants.STATUSES_REPOST, StatusContent.class,
-                            new Response.Listener<StatusContent>() {
-                                @Override
-                                public void onResponse(StatusContent response) {
-                                    ToastUtil.showShort(MyApplication.getInstance(), "转发成功");
-                                }
-                            }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            ToastUtil.showShort(MyApplication.getInstance(), error.getMessage());
-                        }
-                    });
                     @Override
                     public void onClick(View v) {
-                        params.put("source", Constants.APP_KEY);
-                        params.put("access_token", accessToken.getToken());
-                        params.put("id", (String) v.getTag());
-                        requestQueue.add(sendRequest);
+                        Intent intent = new Intent(context, PublishActivity.class);
+                        intent.putExtra("info",0);
+                        intent.putExtra("id",(String)v.getTag());
+                        context.startActivity(intent);
                     }
                 };
             }
@@ -289,6 +277,10 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                     @Override
                     public void onClick(View v) {
                         ToastUtil.showShort(MyApplication.getInstance(),(String)v.getTag());
+                        Intent intent = new Intent(context, PublishActivity.class);
+                        intent.putExtra("info",1);
+                        intent.putExtra("id",(String)v.getTag());
+                        context.startActivity(intent);
                     }
                 };
             }
@@ -298,21 +290,6 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         }
     }
 
-    private class ImageOnClickListener implements View.OnClickListener {
-
-        private int index;
-
-        public ImageOnClickListener(int index) {
-            this.index = index;
-        }
-
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(context, "第" + index + "张", Toast.LENGTH_LONG)
-                    .show();
-        }
-
-    }
 
 }
 
