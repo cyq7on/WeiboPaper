@@ -276,7 +276,6 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                 commentListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ToastUtil.showShort(MyApplication.getInstance(),(String)v.getTag());
                         Intent intent = new Intent(context, PublishActivity.class);
                         intent.putExtra("info",1);
                         intent.putExtra("id",(String)v.getTag());

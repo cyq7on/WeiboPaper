@@ -23,6 +23,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import cn.hadcn.keyboard.ChatKeyboardLayout;
 
 /**
  * @author cyq7on
@@ -38,6 +41,7 @@ public class PublishActivity extends BaseActivity {
     private EditText etInput;
     private CheckBox cb;
     private String url;
+    private ChatKeyboardLayout keyboardLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,9 @@ public class PublishActivity extends BaseActivity {
         send = (LinearLayout) findViewById(R.id.btnSend);
         etInput = (EditText) findViewById(R.id.editContent);
         cb = (CheckBox) findViewById(R.id.checkbox);
+        keyboardLayout = (ChatKeyboardLayout)findViewById(R.id.kv_bar);
+        keyboardLayout.showEmoticons();
+
         final int info = getIntent().getIntExtra("info", -1);
         final String id = getIntent().getStringExtra("id");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -104,12 +111,14 @@ public class PublishActivity extends BaseActivity {
                     case 0:
                         url = Constants.STATUSES_REPOST;
                         params.put("status", input);
+                        //转发并评论
                         if (cb.isChecked()) {
                             params.put("is_comment", "3");
                         }
                         break;
                     //评论
                     case 1:
+                        //评论并转发
                         if (cb.isChecked()) {
                             url = Constants.STATUSES_REPOST;
                             params.put("status", input);

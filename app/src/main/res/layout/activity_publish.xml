@@ -19,6 +19,12 @@
 
 
     </android.support.design.widget.AppBarLayout>
+    <cn.hadcn.keyboard.ChatKeyboardLayout
+        android:id="@+id/kv_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:sendBtnBg="@drawable/send_button_bg">
+
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -68,4 +74,5 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
     </LinearLayout>
+    </cn.hadcn.keyboard.ChatKeyboardLayout>
 </android.support.design.widget.CoordinatorLayout>

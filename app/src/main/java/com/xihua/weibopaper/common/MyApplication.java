@@ -7,8 +7,13 @@ import android.content.Context;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import cn.hadcn.keyboard.ChatKeyboardLayout;
+import cn.hadcn.keyboard.EmoticonEntity;
+import cn.hadcn.keyboard.utils.EmoticonBase;
 
 /**
  * @Package com.xihua.weibopaper.common
@@ -51,9 +56,14 @@ public class MyApplication extends Application {
         //创建默认的ImageLoader配置参数
         ImageLoaderConfiguration configuration = ImageLoaderConfiguration
                 .createDefault(this);
-
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
+
+        if ( !ChatKeyboardLayout.isEmoticonInitSuccess(this) ) {
+            List<EmoticonEntity> entities = new ArrayList<>();
+            entities.add(new EmoticonEntity("emotions/sina", EmoticonBase.Scheme.ASSETS));
+            ChatKeyboardLayout.initEmoticonsDB(this, true, entities);
+        }
     }
 
     public static Context getInstance() {
