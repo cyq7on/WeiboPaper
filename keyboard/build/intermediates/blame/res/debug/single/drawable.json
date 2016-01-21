@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\indicator_point_select.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\indicator_point_select.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\recording_p.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\recording_p.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_input_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\btn_input_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\recording_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\recording_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\media_image_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\media_image_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\circle_button_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\circle_button_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\transparent_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\transparent_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\send_button_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\send_button_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\emoticon_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\emoticon_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\recording_text_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\recording_text_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\indicator_point_normal.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\indicator_point_normal.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\recording_n.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\recording_n.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_voice_press.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\btn_voice_press.xml"
+    }
+]

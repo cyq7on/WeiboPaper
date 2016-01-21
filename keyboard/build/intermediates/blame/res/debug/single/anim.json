@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\anim\\down_out.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\anim\\down_out.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\anim\\up_in.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\anim\\up_in.xml"
+    }
+]

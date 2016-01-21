@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
+    }
+]

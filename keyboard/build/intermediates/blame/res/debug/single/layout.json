@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\view_autoheight.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\view_autoheight.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\emoticons_item.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\emoticons_item.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\emoticonstoolbar_view.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\emoticonstoolbar_view.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\keyboard_bottom_media.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\keyboard_bottom_media.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\emoticonstoolbar_item.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\emoticonstoolbar_item.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\media_page.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\media_page.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\keyboard_bottom_emoticons.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\keyboard_bottom_emoticons.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\emoticons_page.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\emoticons_page.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\had_recording_view.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\had_recording_view.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\media_item.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\media_item.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\debug\\layout\\view_keyboardbar.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\layout\\view_keyboardbar.xml"
+    }
+]

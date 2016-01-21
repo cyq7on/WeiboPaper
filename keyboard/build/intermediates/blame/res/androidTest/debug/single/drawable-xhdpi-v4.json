@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\keyboard_icon.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\keyboard_icon.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\cross_icon.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\cross_icon.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\recording_icon.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\recording_icon.png"
+    }
+]

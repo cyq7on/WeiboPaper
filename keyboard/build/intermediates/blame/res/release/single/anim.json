@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\anim\\up_in.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\anim\\up_in.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\anim\\down_out.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\anim\\down_out.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\anim\\down_out.xml",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\anim\\down_out.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\anim\\up_in.xml",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\anim\\up_in.xml"
+    }
+]
