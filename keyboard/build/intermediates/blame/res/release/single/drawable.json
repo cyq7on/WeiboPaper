@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_edit_text_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_edit_text_material.xml"
+    },
+    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\btn_input_bg.xml",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\btn_input_bg.xml"
     },
@@ -12,14 +16,6 @@
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\btn_input_bg.xml"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_point_select.xml",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\indicator_point_select.xml"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\recording_p.xml",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\recording_p.xml"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\circle_button_bg.xml",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\circle_button_bg.xml"
     },
@@ -28,32 +24,100 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\btn_voice_press.xml"
     },
     {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_cab_background_top_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_default_mtrl_shape.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
+    },
+    {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\recording_p.xml",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\recording_p.xml"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\recording_n.xml",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\recording_n.xml"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_list_selector_holo_light.xml"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_point_select.xml",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\indicator_point_select.xml"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_radio_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_point_select.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\indicator_point_select.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\recording_p.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\recording_p.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_cab_background_internal_bg.xml"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\recording_bg.xml",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\recording_bg.xml"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\btn_voice_press.xml",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\btn_voice_press.xml"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_borderless_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_btn_borderless_material.xml"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\recording_text_bg.xml",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\recording_text_bg.xml"
     },
     {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_ratingbar_full_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_ratingbar_full_material.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_light.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\recording_n.xml",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\recording_n.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_point_select.xml",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\indicator_point_select.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_dialog_material_background_light.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_dialog_material_background_light.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_check_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\btn_voice_press.xml",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\btn_voice_press.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_colored_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_btn_colored_material.xml"
+    },
+    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\circle_button_bg.xml",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\circle_button_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_tab_indicator_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_tab_indicator_material.xml"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\send_button_bg.xml",
@@ -64,28 +128,36 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\recording_n.xml"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\send_button_bg.xml",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\send_button_bg.xml"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_dialog_material_background_dark.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_dialog_material_background_dark.xml"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\recording_bg.xml",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\recording_bg.xml"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_seekbar_track_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_item_background_holo_dark.xml"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\transparent_bg.xml",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\transparent_bg.xml"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_point_normal.xml",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\indicator_point_normal.xml"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\emoticon_bg.xml",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\emoticon_bg.xml"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\media_image_bg.xml",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\media_image_bg.xml"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_spinner_textfield_background_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_textfield_search_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_textfield_search_material.xml"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_point_normal.xml",
@@ -96,11 +168,35 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\transparent_bg.xml"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\media_image_bg.xml",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\media_image_bg.xml"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_text_cursor_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_text_cursor_material.xml"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\recording_text_bg.xml",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\recording_text_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\media_image_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\media_image_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\send_button_bg.xml",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\send_button_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\recording_bg.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable\\recording_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_point_normal.xml",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\indicator_point_normal.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\media_image_bg.xml",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable\\media_image_bg.xml"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\abc_switch_thumb_material.xml",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_switch_thumb_material.xml"
     }
 ]

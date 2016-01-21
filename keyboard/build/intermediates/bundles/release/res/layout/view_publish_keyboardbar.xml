@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layBtns"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <cn.hadcn.keyboard.view.HadEditText
+        android:id="@+id/et_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:focusable="true"
+        android:gravity="top"
+        android:hint="分享新鲜事..."
+        android:focusableInTouchMode="true"
+        android:textSize="16sp"
+        android:lineSpacingExtra="4dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="6dp">
+    </cn.hadcn.keyboard.view.HadEditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary">
+
+        <LinearLayout
+            android:id="@+id/btnCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:padding="8dip"
+                android:src="@drawable/ic_photo_light" />
+        </LinearLayout>
+        <!-- new_camera_gray -->
+
+        <LinearLayout
+            android:id="@+id/btnEmotion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:padding="8dip"
+                android:src="@drawable/ic_emoticon_light" />
+        </LinearLayout>
+        <!-- new_emotion_gray -->
+
+        <LinearLayout
+            android:id="@+id/btnMention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:alpha="0.95"
+                android:padding="4dip"
+                android:src="@drawable/ic_at_v2" />
+        </LinearLayout>
+        <!-- new_friend_gray -->
+
+        <LinearLayout
+            android:id="@+id/btnTrends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:alpha="0.95"
+                android:padding="4dip"
+                android:src="@drawable/ic_sharp_v2" />
+        </LinearLayout>
+        <!-- new_attend_gray -->
+
+        <View
+            android:layout_width="0dip"
+            android:layout_height="40dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/btnOverflow"
+            android:layout_width="50dip"
+            android:layout_height="40dip"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:padding="4dip"
+                android:src="@drawable/ic_overflow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:padding="8dip"
+                android:src="@drawable/ic_send_light" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_foot_func"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:visibility="gone">
+    </LinearLayout>
+
+
+</LinearLayout>

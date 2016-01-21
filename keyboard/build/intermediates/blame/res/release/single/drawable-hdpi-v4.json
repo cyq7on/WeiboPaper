@@ -4,8 +4,16 @@
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f33b.png"
     },
     {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_photo_light.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\ic_photo_light.png"
+    },
+    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2614.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x2614.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_btn_check_to_on_mtrl_000.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f602.png",
@@ -18,6 +26,10 @@
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f319.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f319.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_sharp_v2.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\ic_sharp_v2.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f609.png",
@@ -108,8 +120,20 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f37a.png"
     },
     {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f31f.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f31f.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_dark.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_list_selector_disabled_holo_dark.9.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_2.png",
@@ -228,20 +252,24 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f637.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f631.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f631.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f494.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f494.png"
     },
     {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
+    },
+    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_mic.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_mic.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f48e.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f48e.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_3.png",
@@ -252,24 +280,12 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f47f.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f436.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f436.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f621.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f621.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f559.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f559.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f637.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f637.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_launcher.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x270a.png",
@@ -278,10 +294,6 @@
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_5.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_5.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f447.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f447.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f633.png",
@@ -304,16 +316,8 @@
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x270a.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f47f.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f47f.png"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f620.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f620.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\input_bg_green.9.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\input_bg_green.9.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f60c.png",
@@ -328,8 +332,116 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f457.png"
     },
     {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f469.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f469.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x26bd.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x26bd.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\input_bar_flat.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\input_bar_flat.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_list_pressed_holo_dark.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f60c.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f60c.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_menu_share_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2600.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x2600.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f380.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f380.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f446.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f446.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f618.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f618.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f631.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f631.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f48e.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f48e.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f436.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f436.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f621.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f621.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_rating_star_on_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_btn_rating_star_on_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f559.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f559.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f447.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f447.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f47f.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f47f.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\input_bg_green.9.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\input_bg_green.9.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_list_pressed_holo_light.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_list_pressed_holo_light.9.png"
+    },
+    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f60f.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f60f.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f47b.png",
@@ -340,16 +452,12 @@
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f4a3.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x26bd.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x26bd.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_send_light.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\ic_send_light.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f469.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f469.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\input_bar_flat.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\input_bar_flat.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2615.png",
@@ -358,10 +466,6 @@
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f601.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f601.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f60c.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f60c.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\input_bg.9.png",
@@ -376,44 +480,28 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f61d.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2600.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x2600.png"
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f444.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f444.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\icon_emoji.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\icon_emoji.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f444.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f444.png"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f623.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f623.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f380.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f380.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_light.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f446.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f446.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f618.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f618.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_popup_background_mtrl_mult.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_popup_background_mtrl_mult.9.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f61c.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f61c.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f64f.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f64f.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2600.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x2600.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f622.png",
@@ -432,24 +520,12 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f61a.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f31f.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f31f.png"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f697.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f697.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_mic.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_mic.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_7.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_7.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f380.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f380.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\input_bg_green.9.png",
@@ -464,16 +540,92 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f341.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f449.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f449.png"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f4a3.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f4a3.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f630.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f630.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f44a.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f44a.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f44e.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f44e.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_clear_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_clear_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_overflow.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\ic_overflow.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f44c.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f44c.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f466.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f466.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f64f.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f64f.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_7.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_7.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f444.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f444.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f622.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f622.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2764.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x2764.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_list_focused_holo.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_list_focused_holo.9.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f64f.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f64f.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2600.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x2600.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_scrubber_primary_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_rating_star_off_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_btn_rating_star_off_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f31f.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f31f.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_7.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_7.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f380.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f380.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f449.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f449.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f62a.png",
@@ -484,12 +636,12 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f385.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f44a.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f44a.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f44e.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f44e.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_ab_back_mtrl_am_alpha.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f630.png",
@@ -510,6 +662,10 @@
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f604.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f604.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2764.png",
@@ -540,32 +696,40 @@
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f44d.png"
     },
     {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_list_longpressed_holo.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_list_longpressed_holo.9.png"
+    },
+    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f4f1.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f4f1.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f62d.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f62d.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f44c.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f44c.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f466.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f466.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_search_api_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f616.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f616.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_7.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_7.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f64f.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f64f.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_at_v2.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\ic_at_v2.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f468.png",
@@ -576,24 +740,16 @@
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f625.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f444.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f444.png"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f60a.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f60a.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2764.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x2764.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f61a.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f61a.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f622.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f622.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f61e.png",
@@ -608,14 +764,6 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f621.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_4.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_4.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_6.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_6.png"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f37a.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f37a.png"
     },
@@ -628,28 +776,16 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\icon_face_pop.png"
     },
     {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_scrubber_control_to_pressed_mtrl_000.png"
+    },
+    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\input_bar_flat.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\input_bar_flat.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f468.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f468.png"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f612.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f612.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_5.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_5.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\icon_del.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\icon_del.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f382.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f382.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_3.png",
@@ -668,20 +804,16 @@
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f44f.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f3e0.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f3e0.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f60a.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f60a.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f604.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f604.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f448.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f448.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f628.png",
@@ -690,18 +822,6 @@
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f343.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f343.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f467.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f467.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f559.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f559.png"
-    },
-    {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2614.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x2614.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f44e.png",
@@ -716,16 +836,16 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f319.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_1.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_1.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f616.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f616.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f447.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f447.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f612.png",
@@ -748,10 +868,6 @@
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f631.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f4aa.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f4aa.png"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f385.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f385.png"
     },
@@ -760,27 +876,107 @@
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f613.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f602.png",
-        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f602.png"
-    },
-    {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f44c.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f44c.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f625.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f625.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_emoticon_light.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\ic_emoticon_light.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_cancel.png",
         "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_cancel.png"
     },
     {
-        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f469.png",
-        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f469.png"
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_4.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_4.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_6.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_6.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f468.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f468.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_5.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_5.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\icon_del.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\icon_del.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f382.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f382.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f3e0.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f3e0.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f60a.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f60a.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f448.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f448.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f467.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f467.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f559.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f559.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x2614.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x2614.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\recording_level_1.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\recording_level_1.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_textfield_search_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f447.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f447.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_list_divider_mtrl_alpha.9.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_list_divider_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f4aa.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f4aa.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f602.png",
+        "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f602.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_go_search_api_mtrl_alpha.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_ic_go_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f625.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f625.png"
     },
     {
         "merged": "C:\\project\\androidStudio\\Weibo\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f618.png",
         "source": "C:\\project\\androidStudio\\Weibo\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f618.png"
+    },
+    {
+        "merged": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\emoji_0x1f469.png",
+        "source": "C:\\project\\androidStudio\\WeiboPaper\\keyboard\\src\\main\\res\\drawable-hdpi\\emoji_0x1f469.png"
     }
 ]
