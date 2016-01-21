@@ -18,6 +18,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.xihua.weibopaper.activity.CmtOrRelayActivity;
 import com.xihua.weibopaper.activity.PublishActivity;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.bean.PicUrls;
@@ -267,7 +268,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                 sendListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, PublishActivity.class);
+                        Intent intent = new Intent(context, CmtOrRelayActivity.class);
                         intent.putExtra("info",0);
                         intent.putExtra("StatusContent", (StatusContent) v.getTag());
                         context.startActivity(intent);
@@ -278,7 +279,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                 commentListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, PublishActivity.class);
+                        Intent intent = new Intent(context, CmtOrRelayActivity.class);
                         intent.putExtra("info",1);
                         intent.putExtra("StatusContent",(StatusContent)v.getTag());
                         context.startActivity(intent);

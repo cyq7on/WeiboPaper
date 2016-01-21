@@ -72,4 +72,6 @@ public class Constants {
     public static final String STATUSES_REPOST = "https://api.weibo.com/2/statuses/repost.json";
     //评论一条微博
     public static final String COMMENTS_CREATE = "https://api.weibo.com/2/comments/create.json";
+    //发布一条微博
+    public static final String STATUSES_UPDATE = "https://api.weibo.com/2/statuses/update.json";
 }

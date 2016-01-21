@@ -13,6 +13,7 @@
     <string name="msg_yesterday">昨天</string>
     <string name="msg_few_minutes_ago">分钟前</string>
     <string name="title_activity_publish">PublishActivity</string>
+    <string name="title_activity_cmtOrReplay">CmtOrRelayActivity</string>
 
     <!-- 发布 -->
     <string name="publish_please_login">请登录后再分享</string>

@@ -13,6 +13,7 @@ import java.util.List;
 
 import cn.hadcn.keyboard.ChatKeyboardLayout;
 import cn.hadcn.keyboard.EmoticonEntity;
+import cn.hadcn.keyboard.emoticon.util.EmoticonHandler;
 import cn.hadcn.keyboard.utils.EmoticonBase;
 
 /**
@@ -64,6 +65,8 @@ public class MyApplication extends Application {
             entities.add(new EmoticonEntity("emotions/sina", EmoticonBase.Scheme.ASSETS));
             ChatKeyboardLayout.initEmoticonsDB(this, true, entities);
 //        }
+
+        EmoticonHandler.getInstance(context).loadEmoticonsToMemory();
     }
 
     public static Context getInstance() {

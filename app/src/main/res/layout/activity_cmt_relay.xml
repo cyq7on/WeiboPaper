@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <cn.hadcn.keyboard.PublishKeyboardLayout
+    <cn.hadcn.keyboard.ChatKeyboardLayout
         android:id="@+id/kv_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,5 +29,31 @@
         app:sendBtnBg="@drawable/send_button_bg"
         tools:showIn="@layout/activity_publish">
 
-    </cn.hadcn.keyboard.PublishKeyboardLayout>
+
+        <LinearLayout
+            android:id="@+id/layRoot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <cn.hadcn.keyboard.ChatTextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="10dp"
+                tools:text="hahahah" />
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/publish_also_repost"
+                android:textColor="@drawable/hint"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </cn.hadcn.keyboard.ChatKeyboardLayout>
 </android.support.design.widget.CoordinatorLayout>

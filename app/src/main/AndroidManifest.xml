@@ -79,6 +79,12 @@
             android:label="@string/title_activity_publish"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
+
+        <activity
+            android:name=".CmtOrRelayActivity"
+            android:label="@string/title_activity_publish"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
     </application>
 
 </manifest>

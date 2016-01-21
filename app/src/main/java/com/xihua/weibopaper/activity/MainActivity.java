@@ -245,6 +245,7 @@ public class MainActivity extends BaseActivity
             case R.id.action_search:
                 break;
             case R.id.action_write:
+                startActivity(new Intent(this,PublishActivity.class));
                 break;
             case R.id.action_group:
                 break;
