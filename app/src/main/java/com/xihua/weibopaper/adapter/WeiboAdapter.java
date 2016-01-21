@@ -37,6 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.hadcn.keyboard.ChatTextView;
+
 /**
  * @author cyq7on
  * @version V1.0
@@ -194,8 +196,8 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         }
 
         holder.ivLike.setTag(position);
-        holder.ivSend.setTag(sc.getIdstr());
-        holder.ivComment.setTag(sc.getIdstr());
+        holder.ivSend.setTag(sc);
+        holder.ivComment.setTag(sc);
 
         //微博配图
         int size = picUrls.size();
@@ -219,9 +221,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         TextView tvCreateTime;
         TextView tvSource;
         ImageView ivMore;
-        TextView tvUserDo;
+        ChatTextView tvUserDo;
         View line;
-        TextView tvContent;
+        ChatTextView tvContent;
         RecyclerView container;
         ImageView ivLike;
         ImageView ivSend;
@@ -241,9 +243,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             tvCreateTime = (TextView) itemView.findViewById(R.id.tv_create_time);
             tvSource = (TextView) itemView.findViewById(R.id.tv_source);
             ivMore = (ImageView) itemView.findViewById(R.id.iv_more);
-            tvUserDo = (TextView) itemView.findViewById(R.id.tv_user_do);
+            tvUserDo = (ChatTextView) itemView.findViewById(R.id.tv_user_do);
             line = itemView.findViewById(R.id.view);
-            tvContent = (TextView) itemView.findViewById(R.id.tv_content);
+            tvContent = (ChatTextView) itemView.findViewById(R.id.tv_content);
             container = (RecyclerView) itemView.findViewById(R.id.image_container);
             ivLike = (ImageView) itemView.findViewById(R.id.iv_like);
             ivSend = (ImageView) itemView.findViewById(R.id.iv_send);
@@ -267,7 +269,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                     public void onClick(View v) {
                         Intent intent = new Intent(context, PublishActivity.class);
                         intent.putExtra("info",0);
-                        intent.putExtra("id",(String)v.getTag());
+                        intent.putExtra("StatusContent", (StatusContent) v.getTag());
                         context.startActivity(intent);
                     }
                 };
@@ -278,7 +280,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
                     public void onClick(View v) {
                         Intent intent = new Intent(context, PublishActivity.class);
                         intent.putExtra("info",1);
-                        intent.putExtra("id",(String)v.getTag());
+                        intent.putExtra("StatusContent",(StatusContent)v.getTag());
                         context.startActivity(intent);
                     }
                 };

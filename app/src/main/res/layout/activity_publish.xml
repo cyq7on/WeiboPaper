@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -19,38 +20,29 @@
 
 
     </android.support.design.widget.AppBarLayout>
+
     <cn.hadcn.keyboard.ChatKeyboardLayout
         android:id="@+id/kv_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:sendBtnBg="@drawable/send_button_bg">
-
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/layRoot"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:sendBtnBg="@drawable/send_button_bg"
         tools:showIn="@layout/activity_publish">
 
+
         <LinearLayout
-            android:id="@+id/layContainer"
+            android:id="@+id/layRoot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editContent"
+            <cn.hadcn.keyboard.ChatTextView
+                android:id="@+id/tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:hint="说点什么吧..."
-                android:background="@null"
-                android:gravity="top|left" />
+                android:padding="10dp"
+                tools:text="hahahah" />
 
             <CheckBox
                 android:id="@+id/checkbox"
@@ -62,17 +54,6 @@
                 android:textColor="@drawable/hint"
                 android:textSize="14sp" />
 
-            <include
-                layout="@layout/publish_btns"
-                android:layout_width="match_parent"
-                android:layout_height="50dip" />
         </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/layEmotion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-    </LinearLayout>
     </cn.hadcn.keyboard.ChatKeyboardLayout>
 </android.support.design.widget.CoordinatorLayout>

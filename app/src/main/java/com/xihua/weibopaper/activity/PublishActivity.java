@@ -11,6 +11,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.apkfuns.logutils.LogUtils;
+import com.apkfuns.logutils.Logger;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.common.Constants;
@@ -21,11 +23,15 @@ import com.xihua.weibopaper.utils.ToastUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.hadcn.keyboard.ChatKeyboardLayout;
+import cn.hadcn.keyboard.ChatTextView;
+import cn.hadcn.keyboard.media.MediaBean;
+import cn.hadcn.keyboard.view.HadEditText;
 
 /**
  * @author cyq7on
@@ -36,9 +42,10 @@ import cn.hadcn.keyboard.ChatKeyboardLayout;
  * @date 2016/1/15/15:52
  */
 
-public class PublishActivity extends BaseActivity {
-    private LinearLayout camera, emotion, topic, send;
-    private EditText etInput;
+public class PublishActivity extends BaseActivity implements MediaBean.MediaListener {
+    //    private LinearLayout camera, emotion, topic, send;
+    private ChatTextView tvContent;
+    private HadEditText etInput;
     private CheckBox cb;
     private String url;
     private ChatKeyboardLayout keyboardLayout;
@@ -47,16 +54,19 @@ public class PublishActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
-        emotion = (LinearLayout) findViewById(R.id.btnEmotion);
-        topic = (LinearLayout) findViewById(R.id.btnTrends);
-        send = (LinearLayout) findViewById(R.id.btnSend);
-        etInput = (EditText) findViewById(R.id.editContent);
+//        emotion = (LinearLayout) findViewById(R.id.btnEmotion);
+//        topic = (LinearLayout) findViewById(R.id.btnTrends);
+//        send = (LinearLayout) findViewById(R.id.btnSend);
+//        etInput = (HadEditText) findViewById(R.id.editContent);
+        tvContent = (ChatTextView) findViewById(R.id.tv_content);
         cb = (CheckBox) findViewById(R.id.checkbox);
-        keyboardLayout = (ChatKeyboardLayout)findViewById(R.id.kv_bar);
+        keyboardLayout = (ChatKeyboardLayout) findViewById(R.id.kv_bar);
         keyboardLayout.showEmoticons();
+        keyboardLayout.setToInput();
 
         final int info = getIntent().getIntExtra("info", -1);
-        final String id = getIntent().getStringExtra("id");
+        final StatusContent statusContent = (StatusContent) getIntent().getSerializableExtra("StatusContent");
+        tvContent.setText(statusContent.getText());
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setTitle(info);
         toolbar.setNavigationIcon(R.mipmap.back_white);
@@ -81,23 +91,22 @@ public class PublishActivity extends BaseActivity {
             //发微博
             default:
                 getSupportActionBar().setTitle("发微博");
-                camera = (LinearLayout) findViewById(R.id.btnCamera);
-                camera.setVisibility(View.VISIBLE);
+//                camera = (LinearLayout) findViewById(R.id.btnCamera);
+//                camera.setVisibility(View.VISIBLE);
                 cb.setVisibility(View.INVISIBLE);
                 break;
         }
 
-        send.setOnClickListener(new View.OnClickListener() {
+        keyboardLayout.getSendButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RequestQueue requestQueue = Volley.newRequestQueue(MyApplication.getInstance());
                 Oauth2AccessToken accessToken = AccessTokenKeeper.
                         readAccessToken(MyApplication.getInstance());
                 Map<String, String> params = new HashMap<>();
-                GsonRequest<StatusContent> AnotherRequest;//评论时同时转发
                 params.put("source", Constants.APP_KEY);
                 params.put("access_token", accessToken.getToken());
-                params.put("id", id);
+                params.put("id", statusContent.getIdstr());
                 String input;
 //                try {
 //                    input = URLEncoder.encode(etInput.getText().toString(), "utf-8");
@@ -105,7 +114,8 @@ public class PublishActivity extends BaseActivity {
 //                    e.printStackTrace();
 //                    input = "";
 //                }
-                input = etInput.getText().toString();
+//                input = etInput.getText().toString();
+                input = keyboardLayout.getInputArea().getText().toString();
                 switch (info) {
                     //转发
                     case 0:
@@ -123,7 +133,7 @@ public class PublishActivity extends BaseActivity {
                             url = Constants.STATUSES_REPOST;
                             params.put("status", input);
                             params.put("is_comment", "3");
-                        }else {
+                        } else {
                             url = Constants.COMMENTS_CREATE;
                             params.put("comment", input);
                         }
@@ -152,4 +162,8 @@ public class PublishActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public void onMediaClick(int id) {
+
+    }
 }

@@ -59,11 +59,11 @@ public class MyApplication extends Application {
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
 
-        if ( !ChatKeyboardLayout.isEmoticonInitSuccess(this) ) {
+//        if ( !ChatKeyboardLayout.isEmoticonInitSuccess(this) ) {
             List<EmoticonEntity> entities = new ArrayList<>();
             entities.add(new EmoticonEntity("emotions/sina", EmoticonBase.Scheme.ASSETS));
             ChatKeyboardLayout.initEmoticonsDB(this, true, entities);
-        }
+//        }
     }
 
     public static Context getInstance() {
