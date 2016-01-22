@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\project\androidStudio\Weibo\WeiboSDK\assets"/></dataSet><dataSet config="release"><source path="C:\project\androidStudio\Weibo\WeiboSDK\build-types\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\project\androidStudio\WeiboPaper\WeiboSDK\assets"/></dataSet><dataSet config="release"><source path="C:\project\androidStudio\WeiboPaper\WeiboSDK\build-types\release\assets"/></dataSet></merger>
