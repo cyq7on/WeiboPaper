@@ -7,7 +7,6 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.apkfuns.logutils.LogUtils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.mingle.widget.LoadingView;
@@ -28,19 +28,18 @@ import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiboContent;
 import com.xihua.weibopaper.utils.GsonRequest;
 import com.xihua.weibopaper.utils.ToastUtil;
-import com.xihua.weibopaper.view.DividerItemDecoration;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author cyq7on
+ * @version V1.0
  * @Package com.xihua.weibopaper.fragment
  * @ClassName: HomeFragment
  * @Description:主页的fragment
- * @author cyq7on
  * @date 2015/12/28 14:55
- * @version V1.0
  */
 
 public class HomeFragment extends Fragment {
@@ -54,7 +53,6 @@ public class HomeFragment extends Fragment {
     private boolean request = true;
     private LoadingView loadingView;
     private LinearLayoutManager manager;
-    private DividerItemDecoration dividerItemDecoration;
     private XRecyclerView.LoadingListener loadingListener;
     private DB snappydb;
     private String lastKey;
@@ -64,7 +62,7 @@ public class HomeFragment extends Fragment {
     private static final int LOADING_VIEW_GONE = 1;
     private static final int LOADING_COUNT = 20;
 
-    public static Fragment newInstance(Bundle bundle){
+    public static Fragment newInstance(Bundle bundle) {
         Fragment fragment = new HomeFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -74,12 +72,11 @@ public class HomeFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser){
+        if (isVisibleToUser) {
             if (request) {
                 //只有当该Fragment被用户可见时,才加载网络数据，并且只加载一次
                 requestQueue.add(requestContent);
-            }
-            else {
+            } else {
                 adapter.notifyDataSetChanged();
             }
         }
@@ -93,7 +90,7 @@ public class HomeFragment extends Fragment {
         try {
             snappydb = DBFactory.open(context, "WeiboDB");
         } catch (SnappydbException e) {
-            ToastUtil.showShort(context,"数据库打开失败");
+            ToastUtil.showShort(context, "数据库打开失败");
         }
         requestQueue = Volley.newRequestQueue(context);
         url = getArguments().getString("url");
@@ -104,14 +101,14 @@ public class HomeFragment extends Fragment {
             int length = keys.length;
             int k = length < LOADING_COUNT ? 0 : length - LOADING_COUNT;
             if (length > 0) {
-                for (int i = length - 1;i >= k;i--) {
-                    list.add(snappydb.get(keys[i],StatusContent.class));
+                for (int i = length - 1; i >= k; i--) {
+                    list.add(snappydb.get(keys[i], StatusContent.class));
                 }
             }
         } catch (SnappydbException e) {
             e.printStackTrace();
         }
-        adapter = new WeiboAdapter(context,list,requestQueue);
+        adapter = new WeiboAdapter(context, list, requestQueue);
         requestContent = new GsonRequest<>(url,
                 WeiboContent.class, new Response.Listener<WeiboContent>() {
             @Override
@@ -120,40 +117,38 @@ public class HomeFragment extends Fragment {
                 list.addAll(response.getStatuses());
                 adapter.notifyDataSetChanged();
                 recyclerView.refreshComplete();
-                if(request) {
+                if (request) {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             handler.sendEmptyMessage(LOADING_VIEW_GONE);
                         }
-                    },1500);
+                    }, 1500);
                 }
                 StringBuilder key;
-                for (int i = 0;i < list.size();i++) {
+                for (int i = 0; i < list.size(); i++) {
                     key = new StringBuilder();
                     StatusContent content = list.get(i);
                     key.append(getArguments().getString("which")).append(content.getIdstr());
                     try {
-                        snappydb.put(key.toString(),content);
+                        snappydb.put(key.toString(), content);
                     } catch (SnappydbException e) {
                         ToastUtil.showShort(context, "缓存数据失败");
                     }
                 }
-                Log.i("content", response.toString());
+                LogUtils.i(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 ToastUtil.showShort(context, error.getMessage());
-                if(request) {
+                if (request) {
                     loadingView.setVisibility(View.GONE);
                     request = false;
                 }
             }
         });
         manager = new LinearLayoutManager(context);
-        dividerItemDecoration = new DividerItemDecoration(context,
-                DividerItemDecoration.VERTICAL_LIST);
         loadingListener = new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -170,12 +165,12 @@ public class HomeFragment extends Fragment {
                     if (length > 0) {
                         String key;
                         long lastId = list.get(size - 1).getId();
-                        for (int i = length - 1;i >= 0;i--) {
+                        for (int i = length - 1; i >= 0; i--) {
                             key = keys[i].substring(1);
                             if (Long.parseLong(key) == lastId) {
                                 int k = i > LOADING_COUNT ? i - LOADING_COUNT : 0;
-                                for (i--;i >= k;i--) {
-                                    list.add(snappydb.get(keys[i],StatusContent.class));
+                                for (i--; i >= k; i--) {
+                                    list.add(snappydb.get(keys[i], StatusContent.class));
                                 }
                                 break;
                             }
@@ -183,7 +178,7 @@ public class HomeFragment extends Fragment {
                     }
                 } catch (SnappydbException e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -191,7 +186,7 @@ public class HomeFragment extends Fragment {
                             msg.arg1 = size;
                             handler.sendMessage(msg);
                         }
-                    },3000);
+                    }, 3000);
                 }
             }
         };
@@ -208,13 +203,11 @@ public class HomeFragment extends Fragment {
             recyclerView.setLayoutManager(manager);
             recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
             recyclerView.setLaodingMoreProgressStyle(ProgressStyle.BallRotate);
-        }
-        else {
+        } else {
             //这里不能重用manager，不解
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         }
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setLoadingListener(loadingListener);
         return view;
     }
@@ -236,9 +229,9 @@ public class HomeFragment extends Fragment {
             String[] keys = snappydb.findKeys(which);
             int length = keys.length;
             if (length >= 300) {
-               for (int i = length - 1;i > length / 2;i--) {
-                   snappydb.del(keys[i]);
-               }
+                for (int i = length - 1; i > length / 2; i--) {
+                    snappydb.del(keys[i]);
+                }
             }
         } catch (SnappydbException e) {
             e.printStackTrace();
@@ -264,6 +257,7 @@ public class HomeFragment extends Fragment {
         MyHandler(HomeFragment fragment) {
             fragmentWeakReference = new WeakReference<>(fragment);
         }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -275,8 +269,8 @@ public class HomeFragment extends Fragment {
                     break;
                 case LOAD_MORE_COMPLETE:
                     fragment.adapter.notifyDataSetChanged();
-                    ((LinearLayoutManager)fragment.recyclerView.getLayoutManager()).
-                            scrollToPositionWithOffset(msg.arg1,0);
+                    ((LinearLayoutManager) fragment.recyclerView.getLayoutManager()).
+                            scrollToPositionWithOffset(msg.arg1, 0);
                     fragment.recyclerView.loadMoreComplete();
                     break;
                 default:

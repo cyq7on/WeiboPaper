@@ -69,11 +69,11 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_weibo_content, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_weibo_content, parent,false);
         ViewHolder viewHolder = new ViewHolder(view,context);
-        if (recyclerView == null) {
-            recyclerView = (XRecyclerView) parent;
-        }
+//        if (recyclerView == null) {
+//            recyclerView = (XRecyclerView) parent;
+//        }
 //        viewHolder.setIsRecyclable(false);
         return viewHolder;
     }
@@ -295,84 +295,5 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
 
 }
 
-class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
-    private List<PicUrls> urlList;
-    private Context context;
-    private OnItemClickListener onItemClickListener;
-    private RequestQueue requestQueue;
-    private DisplayImageOptions options;
 
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-
-        void onItemLongClick(View view, int position);
-    }
-
-    public ImageAdapter(List<PicUrls> mData, Context mContext,RequestQueue requestQueue) {
-        this.urlList = mData;
-        this.context = mContext;
-        this.requestQueue = requestQueue;
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.mipmap.ic_launcher)
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
-                .showImageOnFail(R.mipmap.ic_launcher)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .build();
-    }
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_weibo_image, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-
-        return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        if (onItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    onItemClickListener.onItemClick(holder.itemView, pos);
-                }
-            });
-
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    onItemClickListener.onItemLongClick(holder.itemView, pos);
-                    return true;
-                }
-            });
-        }
-//        ImageUtils.getInstance().displayImage(requestQueue,
-//                urlList.get(position).getThumbnail_pic(),holder.image);
-        ImageLoader.getInstance().displayImage(urlList.get(position).getThumbnail_pic(),
-                holder.image, options);
-
-    }
-
-    @Override
-    public int getItemCount() {
-
-        return urlList == null ? 0 : urlList.size();
-    }
-
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView image;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.image);
-        }
-    }
-
-
-}
 

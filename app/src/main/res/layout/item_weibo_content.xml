@@ -1,161 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="10dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="20dp">
 
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp">
+        android:orientation="vertical">
 
-        <com.xihua.weibopaper.view.CircleImageView
-            android:id="@+id/iv"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/iv"
-            android:layout_marginLeft="3dp"
+            android:gravity="center_vertical"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
+
+            <com.xihua.weibopaper.view.CircleImageView
+                android:id="@+id/iv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@id/iv"
+                android:textColor="#000"
+                android:textSize="@dimen/com_sina_weibo_sdk_loginview_text_size"
+                tool:text="中国之声" />
+
+            <com.xihua.weibopaper.view.CircleImageView
+                android:id="@+id/iv_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@id/tv_name"
+                android:src="@mipmap/avatar_enterprise_vip" />
+
+            <ImageView
+                android:id="@+id/iv_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/ic_menu_moreoverflow_card_dark_normal" />
+
+            <TextView
+                android:id="@+id/tv_create_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@id/iv"
+                tool:text="1分钟前" />
+
+            <TextView
+                android:id="@+id/tv_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@id/tv_create_time"
+                tool:text="来自微博" />
+
+        </RelativeLayout>
+
+        <cn.hadcn.keyboard.ChatTextView
+            android:id="@+id/tv_user_do"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:textColor="#000"
-            android:textSize="@dimen/com_sina_weibo_sdk_loginview_text_size"
-            tool:text="中国之声" />
+            android:textSize="15sp"
+            tool:text="hahahahahahahha" />
 
-        <com.xihua.weibopaper.view.CircleImageView
-            android:id="@+id/iv_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_toRightOf="@id/tv_name"
-            android:src="@mipmap/avatar_enterprise_vip" />
-
-        <ImageView
-            android:id="@+id/iv_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_menu_moreoverflow_card_dark_normal" />
-
-        <TextView
-            android:id="@+id/tv_create_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name"
-            android:layout_toRightOf="@id/iv"
-            android:layout_marginLeft="3dp"
-            tool:text="1分钟前" />
-
-        <TextView
-            android:id="@+id/tv_source"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name"
-            android:layout_toRightOf="@id/tv_create_time"
-            android:layout_marginLeft="3dp"
-            tool:text="来自微博" />
-
-    </RelativeLayout>
-
-    <cn.hadcn.keyboard.ChatTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tool:text="hahahahahahahha"
-        android:id="@+id/tv_user_do"
-        android:textSize="15sp"
-        android:textColor="#000"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp"
-        />
-    <View
-        android:id="@+id/view"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#ABABAB"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:visibility="gone"/>
-    <cn.hadcn.keyboard.ChatTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="hahahahahahahha"
-        android:id="@+id/tv_content"
-        android:textSize="15sp"
-        android:textColor="#000"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/image_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
-        <ImageView
-            android:layout_width="26dp"
-            android:layout_height="20dp"
-            android:src="@mipmap/timeline_icon_unlike"
-            android:id="@+id/iv_like"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7"
-            android:textSize="16sp"
-            android:layout_marginLeft="5dp"
-            android:id="@+id/tv_like_num"
-            android:layout_toRightOf="@id/iv_like"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7"
-            android:textSize="16sp"
-            android:id="@+id/tv_comment_num"
-            android:layout_alignParentRight="true"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/iv_comment"
-            android:src="@mipmap/statusbar_ic_comment_small"
-            android:layout_toLeftOf="@id/tv_comment_num"
-            android:layout_marginRight="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="77"
-            android:textSize="16sp"
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/tv_send_num"
-            android:layout_toLeftOf="@id/iv_comment"
-            />
-        <ImageView
+            android:background="#ABABAB"
+            android:visibility="gone" />
+
+        <cn.hadcn.keyboard.ChatTextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="hahahahahahahha"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/image_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/iv_send"
-            android:src="@mipmap/statusbar_ic_sending"
-            android:layout_toLeftOf="@id/tv_send_num"
-            android:layout_marginRight="5dp"/>
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp" />
 
-    </RelativeLayout>
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="26dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/timeline_icon_unlike" />
+
+            <TextView
+                android:id="@+id/tv_like_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/iv_like"
+                android:text="7"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_comment_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="7"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/tv_comment_num"
+                android:src="@mipmap/statusbar_ic_comment_small" />
+
+            <TextView
+                android:id="@+id/tv_send_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/iv_comment"
+                android:text="77"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/tv_send_num"
+                android:src="@mipmap/statusbar_ic_sending" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>
