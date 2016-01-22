@@ -3,6 +3,7 @@ package cn.hadcn.keyboard;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -59,6 +60,7 @@ public class PublishKeyboardLayout extends SoftHandleLayout implements Emoticons
     private LinearLayout lyBottomLayout;
     private Context mContext;
     private LinearLayout camera, emoticon, mention,topic, send;
+    private RecyclerView recyclerView;
 
 
     public PublishKeyboardLayout(Context context) {
@@ -79,7 +81,6 @@ public class PublishKeyboardLayout extends SoftHandleLayout implements Emoticons
 //        EmoticonHandler.getInstance(context).loadEmoticonsToMemory();
         LayoutInflater.from(context).inflate(R.layout.view_publish_keyboardbar, this);
 
-//        rl_input = (RelativeLayout) findViewById(R.id.rl_input);
         lyBottomLayout = (LinearLayout) findViewById(R.id.ly_foot_func);
         camera = (LinearLayout) findViewById(R.id.btnCamera);
         emoticon = (LinearLayout) findViewById(R.id.btnEmotion);
@@ -89,7 +90,7 @@ public class PublishKeyboardLayout extends SoftHandleLayout implements Emoticons
         emoticon.setOnClickListener(new FaceClickListener());
         send.setOnClickListener(new SendClickListener());
         etInputArea = (HadEditText) findViewById(R.id.et_chat);
-
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         setAutoHeightLayoutView(lyBottomLayout);
 
         etInputArea.setOnTouchListener(new OnTouchListener() {
@@ -143,6 +144,9 @@ public class PublishKeyboardLayout extends SoftHandleLayout implements Emoticons
 
     public HadEditText getInputArea() {
         return etInputArea;
+    }
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
     }
 
     public void clearInputArea(){
