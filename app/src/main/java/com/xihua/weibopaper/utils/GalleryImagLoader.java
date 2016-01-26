@@ -24,25 +24,26 @@ public class GalleryImagLoader implements cn.finalteam.galleryfinal.ImageLoader 
     @Override
     public void displayImage(Activity activity, String path, final GFImageView imageView, Drawable defaultDrawable, int width, int height) {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(com.xihua.weibopaper.activity.R.mipmap.ic_launcher)
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
-                .showImageOnFail(R.mipmap.ic_launcher)
+//                .showImageOnLoading(com.xihua.weibopaper.activity.R.mipmap.ic_launcher)
+//                .showImageForEmptyUri(R.mipmap.ic_launcher)
+//                .showImageOnFail(R.mipmap.ic_launcher)
                 .cacheInMemory(false)
                 .cacheOnDisk(false)
                 .considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
-        ImageSize imageSize = new ImageSize(width, height);
-        com.nostra13.universalimageloader.core.ImageLoader.getInstance().
-                loadImage("file://" + path,imageSize,options,new SimpleImageLoadingListener() {
-                    @Override
-                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        super.onLoadingComplete(imageUri, view, loadedImage);
-                        imageView.setImageBitmap(loadedImage);
-                    }
-                });
+        //用这个会造成图片显示混乱
+//        ImageSize imageSize = new ImageSize(width, height);
 //        com.nostra13.universalimageloader.core.ImageLoader.getInstance().
-//                displayImage("file://" + path, imageView, options);
+//                loadImage("file://" + path,imageSize,options,new SimpleImageLoadingListener() {
+//                    @Override
+//                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//                        super.onLoadingComplete(imageUri, view, loadedImage);
+//                        imageView.setImageBitmap(loadedImage);
+//                    }
+//                });
+        com.nostra13.universalimageloader.core.ImageLoader.getInstance().
+                displayImage("file://" + path, imageView, options);
     }
 
     @Override

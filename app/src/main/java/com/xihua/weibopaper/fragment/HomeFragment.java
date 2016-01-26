@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,8 +56,8 @@ public class HomeFragment extends Fragment {
     private LinearLayoutManager manager;
     private XRecyclerView.LoadingListener loadingListener;
     private DB snappydb;
-    private String lastKey;
     private MyHandler handler;
+    private ContentLoadingProgressBar progressBar;
 
     private static final int LOAD_MORE_COMPLETE = 0;
     private static final int LOADING_VIEW_GONE = 1;
@@ -117,6 +118,7 @@ public class HomeFragment extends Fragment {
                 list.addAll(response.getStatuses());
                 adapter.notifyDataSetChanged();
                 recyclerView.refreshComplete();
+                progressBar.hide();
                 if (request) {
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -146,6 +148,7 @@ public class HomeFragment extends Fragment {
                     loadingView.setVisibility(View.GONE);
                     request = false;
                 }
+                progressBar.hide();
             }
         });
         manager = new LinearLayoutManager(context);
@@ -198,6 +201,8 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         loadingView = (LoadingView) view.findViewById(R.id.loadView);
         recyclerView = (XRecyclerView) view.findViewById(R.id.recyclerview);
+        progressBar = (ContentLoadingProgressBar) view.findViewById(R.id.progressBar);
+        progressBar.show();
         if (request) {
             loadingView.setVisibility(View.VISIBLE);
             recyclerView.setLayoutManager(manager);

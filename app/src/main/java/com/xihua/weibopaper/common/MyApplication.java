@@ -70,11 +70,11 @@ public class MyApplication extends Application {
         ImageLoader.getInstance().init(configuration);
 
         /*配置表情软键盘*/
-//        if ( !ChatKeyboardLayout.isEmoticonInitSuccess(this) ) {
-        List<EmoticonEntity> entities = new ArrayList<>();
-        entities.add(new EmoticonEntity("emotions/sina", EmoticonBase.Scheme.ASSETS));
-        ChatKeyboardLayout.initEmoticonsDB(this, true, entities);
-//        }
+        if (!ChatKeyboardLayout.isEmoticonInitSuccess(this)) {
+            List<EmoticonEntity> entities = new ArrayList<>();
+            entities.add(new EmoticonEntity("emotions/sina", EmoticonBase.Scheme.ASSETS));
+            ChatKeyboardLayout.initEmoticonsDB(this, true, entities);
+        }
 
         EmoticonHandler.getInstance(context).loadEmoticonsToMemory();
 
