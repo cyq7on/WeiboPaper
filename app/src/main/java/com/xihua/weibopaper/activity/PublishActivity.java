@@ -1,13 +1,14 @@
 package com.xihua.weibopaper.activity;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.android.volley.RequestQueue;
@@ -26,19 +27,19 @@ import com.xihua.weibopaper.common.MyApplication;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
 import com.xihua.weibopaper.utils.GalleryImagLoader;
 import com.xihua.weibopaper.utils.GsonRequest;
-import com.xihua.weibopaper.http.MultipartEntity;
-import com.xihua.weibopaper.http.MultipartRequest;
 import com.xihua.weibopaper.utils.ToastUtil;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.finalteam.galleryfinal.*;
+import cn.finalteam.galleryfinal.CoreConfig;
+import cn.finalteam.galleryfinal.FunctionConfig;
+import cn.finalteam.galleryfinal.GalleryFinal;
+import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 import cn.hadcn.keyboard.PublishKeyboardLayout;
 import cn.hadcn.keyboard.view.HadEditText;
@@ -61,7 +62,7 @@ public class PublishActivity extends BaseActivity{
     private List<PhotoInfo> photoInfoList;
     private ImageAdapter adapter;
     private FunctionConfig functionConfig;
-    private ContentLoadingProgressBar progressBar;
+
 
 
     @Override
@@ -82,7 +83,6 @@ public class PublishActivity extends BaseActivity{
         });
         etContent = keyboardLayout.getInputArea();
         recyclerView = keyboardLayout.getRecyclerView();
-        progressBar = new ContentLoadingProgressBar(this);
         photoInfoList = new ArrayList<>();
         adapter = new ImageAdapter(photoInfoList,this);
         recyclerView.setAdapter(adapter);
@@ -101,12 +101,13 @@ public class PublishActivity extends BaseActivity{
                 String content = etContent.getText().toString();
                 //没有内容和图片则返回
                 if (content.equals("")) {
-                    if (photoInfoList.size() == 0) {
-                        return;
-                    }else {
-                        ToastUtil.showShort(PublishActivity.this,"您还没有输入内容");
-                    }
+                    ToastUtil.showShort(PublishActivity.this,"您还没有输入内容");
+                    return;
                 }
+                final ProgressDialog dialog = new ProgressDialog(PublishActivity.this);
+                dialog.setMessage("发送中...");
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
                 RequestQueue requestQueue = Volley.newRequestQueue(PublishActivity.this);
                 Oauth2AccessToken accessToken = AccessTokenKeeper.
                         readAccessToken(MyApplication.getInstance());
@@ -159,6 +160,7 @@ public class PublishActivity extends BaseActivity{
                         @Override
                         public void onWeiboException(WeiboException e) {
                             ToastUtil.showShort(PublishActivity.this, e.getMessage());
+                            dialog.dismiss();
                         }
                     });
                 }else {
@@ -178,6 +180,7 @@ public class PublishActivity extends BaseActivity{
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             ToastUtil.showShort(PublishActivity.this, error.getMessage());
+                            dialog.dismiss();
                         }
                     });
                     requestQueue.add(request);

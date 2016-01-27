@@ -1,12 +1,13 @@
 package com.xihua.weibopaper.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,10 @@ import com.android.volley.toolbox.Volley;
 import com.apkfuns.logutils.LogUtils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.mingle.widget.LoadingView;
 import com.snappydb.DB;
 import com.snappydb.DBFactory;
 import com.snappydb.SnappydbException;
+import com.xihua.weibopaper.activity.PublishActivity;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.adapter.WeiboAdapter;
 import com.xihua.weibopaper.bean.StatusContent;
@@ -33,6 +34,8 @@ import com.xihua.weibopaper.utils.ToastUtil;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
  * @author cyq7on
@@ -52,13 +55,11 @@ public class HomeFragment extends Fragment {
     private XRecyclerView recyclerView;
     private List<StatusContent> list;
     private boolean request = true;
-    private LoadingView loadingView;
     private LinearLayoutManager manager;
     private XRecyclerView.LoadingListener loadingListener;
     private DB snappydb;
     private MyHandler handler;
-    private ContentLoadingProgressBar progressBar;
-
+    private MaterialProgressBar progressBar;
     private static final int LOAD_MORE_COMPLETE = 0;
     private static final int LOADING_VIEW_GONE = 1;
     private static final int LOADING_COUNT = 20;
@@ -118,14 +119,15 @@ public class HomeFragment extends Fragment {
                 list.addAll(response.getStatuses());
                 adapter.notifyDataSetChanged();
                 recyclerView.refreshComplete();
-                progressBar.hide();
                 if (request) {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            handler.sendEmptyMessage(LOADING_VIEW_GONE);
-                        }
-                    }, 1500);
+                    progressBar.setVisibility(View.GONE);
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            handler.sendEmptyMessage(LOADING_VIEW_GONE);
+//                            request = false;
+//                        }
+//                    }, 1500);
                 }
                 StringBuilder key;
                 for (int i = 0; i < list.size(); i++) {
@@ -145,10 +147,9 @@ public class HomeFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 ToastUtil.showShort(context, error.getMessage());
                 if (request) {
-                    loadingView.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
                     request = false;
                 }
-                progressBar.hide();
             }
         });
         manager = new LinearLayoutManager(context);
@@ -199,12 +200,10 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        loadingView = (LoadingView) view.findViewById(R.id.loadView);
         recyclerView = (XRecyclerView) view.findViewById(R.id.recyclerview);
-        progressBar = (ContentLoadingProgressBar) view.findViewById(R.id.progressBar);
-        progressBar.show();
+        progressBar = (MaterialProgressBar) view.findViewById(R.id.progressBar);
         if (request) {
-            loadingView.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
             recyclerView.setLayoutManager(manager);
             recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
             recyclerView.setLaodingMoreProgressStyle(ProgressStyle.BallRotate);
@@ -251,7 +250,6 @@ public class HomeFragment extends Fragment {
     public void refresh() {
         if (getUserVisibleHint()) {
             requestQueue.add(requestContent);
-            loadingView.setVisibility(View.VISIBLE);
             request = true;
         }
     }
@@ -269,8 +267,6 @@ public class HomeFragment extends Fragment {
             final HomeFragment fragment = fragmentWeakReference.get();
             switch (msg.what) {
                 case LOADING_VIEW_GONE:
-                    fragment.loadingView.setVisibility(View.GONE);
-                    fragment.request = false;
                     break;
                 case LOAD_MORE_COMPLETE:
                     fragment.adapter.notifyDataSetChanged();
