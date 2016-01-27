@@ -35,7 +35,7 @@ import com.xihua.weibopaper.common.MyApplication;
 import com.xihua.weibopaper.fragment.HomeFragment;
 import com.xihua.weibopaper.service.UnreadService;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
-import com.xihua.weibopaper.utils.GsonRequest;
+import com.xihua.weibopaper.http.GsonRequest;
 import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.PollingUtils;
 import com.xihua.weibopaper.utils.ToastUtil;

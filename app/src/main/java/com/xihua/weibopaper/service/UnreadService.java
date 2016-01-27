@@ -4,22 +4,16 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.xihua.weibopaper.activity.MainActivity;
 import com.xihua.weibopaper.bean.UnreadCount;
-import com.xihua.weibopaper.bean.WeiBoUser;
 import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
-import com.xihua.weibopaper.utils.GsonRequest;
-import com.xihua.weibopaper.utils.ImageUtils;
+import com.xihua.weibopaper.http.GsonRequest;
 import com.xihua.weibopaper.utils.ToastUtil;
 
 import java.util.HashMap;

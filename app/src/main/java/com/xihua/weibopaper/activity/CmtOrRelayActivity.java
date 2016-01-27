@@ -14,7 +14,7 @@ import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.common.MyApplication;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
-import com.xihua.weibopaper.utils.GsonRequest;
+import com.xihua.weibopaper.http.GsonRequest;
 import com.xihua.weibopaper.utils.ToastUtil;
 
 import java.util.HashMap;
@@ -22,7 +22,6 @@ import java.util.Map;
 
 import cn.hadcn.keyboard.ChatKeyboardLayout;
 import cn.hadcn.keyboard.ChatTextView;
-import cn.hadcn.keyboard.view.HadEditText;
 
 /**
  * @author cyq7on

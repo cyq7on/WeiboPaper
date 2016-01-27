@@ -123,29 +123,6 @@ public class MultipartEntity implements HttpEntity {
         writeToOutputStream(paramName, value.getBytes(), TYPE_TEXT_CHARSET, BIT_ENCODING, "");
     }
 
-    /**
-     * 将数据写入到输出流中
-     *
-     * @param key
-     * @param rawData
-     * @param type
-     * @param encodingBytes
-     * @param fileName
-     */
-    private void writeToOutputStream(String paramName, byte[] rawData, String type,
-                                     byte[] encodingBytes,
-                                     String fileName) {
-        try {
-            writeFirstBoundary();
-            mOutputStream.write((CONTENT_TYPE + type + NEW_LINE_STR).getBytes());
-            mOutputStream.write(getContentDispositionBytes(paramName, fileName));
-            mOutputStream.write(encodingBytes);
-            mOutputStream.write(rawData);
-            mOutputStream.write(NEW_LINE_STR.getBytes());
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * 添加二进制参数, 例如Bitmap的字节流参数
@@ -154,8 +131,9 @@ public class MultipartEntity implements HttpEntity {
      * @param rawData
      */
     public void addBinaryPart(String paramName, final byte[] rawData) {
-        writeToOutputStream(paramName, rawData, TYPE_OCTET_STREAM, BINARY_ENCODING, "no-file");
-//        writeToOutputStream(paramName, rawData, "image/png", BINARY_ENCODING, "no-file");
+        //博主留的坑？？？！！！
+//        writeToOutputStream(paramName, rawData, TYPE_OCTET_STREAM, BINARY_ENCODING, "no-file");
+        writeToOutputStream(paramName, rawData, TYPE_OCTET_STREAM, BINARY_ENCODING, "file");
     }
 
     /**
@@ -186,6 +164,31 @@ public class MultipartEntity implements HttpEntity {
             closeSilently(fin);
         }
     }
+
+    /**
+     * 将数据写入到输出流中
+     *
+     * @param key
+     * @param rawData
+     * @param type
+     * @param encodingBytes
+     * @param fileName
+     */
+    private void writeToOutputStream(String paramName, byte[] rawData, String type,
+                                     byte[] encodingBytes,
+                                     String fileName) {
+        try {
+            writeFirstBoundary();
+            mOutputStream.write((CONTENT_TYPE + type + NEW_LINE_STR).getBytes());
+            mOutputStream.write(getContentDispositionBytes(paramName, fileName));
+            mOutputStream.write(encodingBytes);
+            mOutputStream.write(rawData);
+            mOutputStream.write(NEW_LINE_STR.getBytes());
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void closeSilently(Closeable closeable) {
         try {

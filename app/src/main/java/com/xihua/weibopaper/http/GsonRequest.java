@@ -1,4 +1,4 @@
-package com.xihua.weibopaper.utils;
+package com.xihua.weibopaper.http;
 
 import android.util.Log;
 
@@ -17,9 +17,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @Package com.xihua.weibopaper.common
+ * @Package com.xihua.weibopaper.http
  * @ClassName: GsonRequest
- * @Description:封装了Gson的请求
+ * @Description: 封装了Gson的请求
  * @author cyq7on
  * @date 2015/12/9 20:31
  * @version V1.0

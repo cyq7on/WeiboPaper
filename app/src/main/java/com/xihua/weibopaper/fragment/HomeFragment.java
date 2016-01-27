@@ -1,8 +1,6 @@
 package com.xihua.weibopaper.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,12 +21,11 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.snappydb.DB;
 import com.snappydb.DBFactory;
 import com.snappydb.SnappydbException;
-import com.xihua.weibopaper.activity.PublishActivity;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.adapter.WeiboAdapter;
 import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiboContent;
-import com.xihua.weibopaper.utils.GsonRequest;
+import com.xihua.weibopaper.http.GsonRequest;
 import com.xihua.weibopaper.utils.ToastUtil;
 
 import java.lang.ref.WeakReference;
@@ -204,13 +201,14 @@ public class HomeFragment extends Fragment {
         progressBar = (MaterialProgressBar) view.findViewById(R.id.progressBar);
         if (request) {
             progressBar.setVisibility(View.VISIBLE);
-            recyclerView.setLayoutManager(manager);
+//            recyclerView.setLayoutManager(manager);
             recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
             recyclerView.setLaodingMoreProgressStyle(ProgressStyle.BallRotate);
         } else {
             //这里不能重用manager，不解
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            recyclerView.setLayoutManager(new LinearLayoutManager(context));
         }
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapter);
         recyclerView.setLoadingListener(loadingListener);
         return view;

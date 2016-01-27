@@ -11,32 +11,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.xihua.weibopaper.activity.CmtOrRelayActivity;
-import com.xihua.weibopaper.activity.PublishActivity;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.bean.PicUrls;
 import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiBoUser;
-import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.common.MyApplication;
-import com.xihua.weibopaper.utils.AccessTokenKeeper;
 import com.xihua.weibopaper.utils.DateUtils;
-import com.xihua.weibopaper.utils.GsonRequest;
 import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
 import com.xihua.weibopaper.view.FullyGridLayoutManager;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import cn.hadcn.keyboard.ChatTextView;
 

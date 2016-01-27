@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Message;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,19 +15,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.apkfuns.logutils.LogUtils;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.sina.weibo.sdk.exception.WeiboException;
-import com.sina.weibo.sdk.net.RequestListener;
-import com.sina.weibo.sdk.openapi.StatusesAPI;
 import com.xihua.weibopaper.adapter.ImageAdapter;
 import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.common.MyApplication;
+import com.xihua.weibopaper.http.MultipartEntity;
+import com.xihua.weibopaper.http.MultipartRequest;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
 import com.xihua.weibopaper.utils.GalleryImagLoader;
-import com.xihua.weibopaper.utils.GsonRequest;
+import com.xihua.weibopaper.http.GsonRequest;
 import com.xihua.weibopaper.utils.ToastUtil;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,8 +51,8 @@ import cn.hadcn.keyboard.view.HadEditText;
  * @date 2016/1/15/15:52
  */
 
-public class PublishActivity extends BaseActivity{
-    private View camera, emoticon, mention,topic, send;
+public class PublishActivity extends BaseActivity {
+    private View camera, emoticon, mention, topic, send;
     private PublishKeyboardLayout keyboardLayout;
     private HadEditText etContent;
     private final int REQUEST_CODE_GALLERY = 1001;
@@ -62,7 +60,6 @@ public class PublishActivity extends BaseActivity{
     private List<PhotoInfo> photoInfoList;
     private ImageAdapter adapter;
     private FunctionConfig functionConfig;
-
 
 
     @Override
@@ -84,7 +81,7 @@ public class PublishActivity extends BaseActivity{
         etContent = keyboardLayout.getInputArea();
         recyclerView = keyboardLayout.getRecyclerView();
         photoInfoList = new ArrayList<>();
-        adapter = new ImageAdapter(photoInfoList,this);
+        adapter = new ImageAdapter(photoInfoList, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         keyboardLayout.getCamera().setOnClickListener(new View.OnClickListener() {
@@ -101,7 +98,7 @@ public class PublishActivity extends BaseActivity{
                 String content = etContent.getText().toString();
                 //没有内容和图片则返回
                 if (content.equals("")) {
-                    ToastUtil.showShort(PublishActivity.this,"您还没有输入内容");
+                    ToastUtil.showShort(PublishActivity.this, "您还没有输入内容");
                     return;
                 }
                 final ProgressDialog dialog = new ProgressDialog(PublishActivity.this);
@@ -114,56 +111,37 @@ public class PublishActivity extends BaseActivity{
 
                 if (photoInfoList.size() > 0) {
                     String path = photoInfoList.get(0).getPhotoPath();
-                   int begin = path.lastIndexOf("/") + 1;
+                    int begin = path.lastIndexOf("/") + 1;
                     String fileName = path.substring(begin);
                     LogUtils.i(fileName);
                     Bitmap bitmap = BitmapFactory.decodeFile(path);
                     byte[] data = bitmap2Bytes(bitmap);
                     LogUtils.i(data);
-                    /* MultipartRequest multipartRequest = new MultipartRequest(
+                    MultipartRequest multipartRequest = new MultipartRequest(
                             Constants.STATUSES_UPLOAD, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Log.e("", "### response : " + response);
+                            ToastUtil.showShort(PublishActivity.this, "成功");
+                            finish();
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             ToastUtil.showShort(PublishActivity.this, error.getMessage());
-                        }
-                    });
-                    // 添加header
-//                    multipartRequest.addHeader("image", "png");
-//                    multipartRequest.addHeader("source", Constants.APP_KEY);
-//                    multipartRequest.addHeader("access_token", accessToken.getToken());
-//                    multipartRequest.addHeader("status", content);
-//                    multipartRequest.addHeader();
-                    // 通过MultipartEntity来设置参数
-                    MultipartEntity multi = multipartRequest.getMultiPartEntity();
-                    // 直接上传Bitmap
-                    multi.addBinaryPart("pic", data);
-                    // 上传文件
-//                    multi.addFilePart("pic", new File(path));
-                    multi.addStringPart("source", Constants.APP_KEY);
-                    multi.addStringPart("access_token",accessToken.getToken());
-                    multi.addStringPart("status",content);
-                    requestQueue.add(multipartRequest);*/
-                    StatusesAPI statusesAPI = new StatusesAPI(PublishActivity.this,
-                            Constants.APP_KEY,accessToken);
-                    statusesAPI.upload(content, bitmap, null, null, new RequestListener() {
-                        @Override
-                        public void onComplete(String s) {
-                            ToastUtil.showShort(PublishActivity.this, "成功");
-                            finish();
-                        }
-
-                        @Override
-                        public void onWeiboException(WeiboException e) {
-                            ToastUtil.showShort(PublishActivity.this, e.getMessage());
                             dialog.dismiss();
                         }
                     });
-                }else {
+                    // 通过MultipartEntity来设置参数
+                    MultipartEntity multi = multipartRequest.getMultiPartEntity();
+                    // 直接上传Bitmap
+//                    multi.addBinaryPart("pic", data);
+                    // 上传文件
+                    multi.addFilePart("pic", new File(path));
+                    multi.addStringPart("source", Constants.APP_KEY);
+                    multi.addStringPart("access_token", accessToken.getToken());
+                    multi.addStringPart("status", content);
+                    requestQueue.add(multipartRequest);
+                } else {
                     Map<String, String> params = new HashMap<>();
                     params.put("source", Constants.APP_KEY);
                     params.put("access_token", accessToken.getToken());
@@ -217,6 +195,7 @@ public class PublishActivity extends BaseActivity{
                 .build();
         GalleryFinal.init(coreConfig);
     }
+
     private GalleryFinal.OnHanlderResultCallback mOnHanlderResultCallback = new GalleryFinal.OnHanlderResultCallback() {
         @Override
         public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
@@ -230,11 +209,11 @@ public class PublishActivity extends BaseActivity{
 
         @Override
         public void onHanlderFailure(int requestCode, String errorMsg) {
-            ToastUtil.showShort(PublishActivity.this,errorMsg);
+            ToastUtil.showShort(PublishActivity.this, errorMsg);
         }
     };
 
-    private byte[] bitmap2Bytes(Bitmap bitmap){
+    private byte[] bitmap2Bytes(Bitmap bitmap) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
         try {
