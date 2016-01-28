@@ -52,25 +52,16 @@ public class CmtOrRelayActivity extends BaseActivity{
         final StatusContent statusContent = (StatusContent) getIntent().
                 getSerializableExtra("StatusContent");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        toolbar.setTitle(info);
-        toolbar.setNavigationIcon(R.mipmap.back_white);
-        setSupportActionBar(toolbar);//toolbar.setTitle在这句之前设置，Listener需要在这句之后
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         switch (info) {
             //转发
             case 0:
-                getSupportActionBar().setTitle("转发微博");
+                setToolbar("转发微博");
                 cb.setText("同时评论");
                 tvContent.setText(statusContent.getText());
                 break;
             //评论
             case 1:
-                getSupportActionBar().setTitle("评论微博");
+                setToolbar("评论微博");
                 cb.setText("同时转发");
                 tvContent.setText(statusContent.getText());
                 break;

@@ -73,4 +73,5 @@
     <string name="cmts_title">微博评论</string>
     <string name="cmts_repost_title">微博转发</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_image_detail">ImageDetailActivity</string>
 </resources>

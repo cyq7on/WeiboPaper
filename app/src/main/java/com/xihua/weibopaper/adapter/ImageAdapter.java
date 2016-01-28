@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.bean.PicUrls;
+import com.xihua.weibopaper.common.MyApplication;
 
 import java.util.List;
 
@@ -38,19 +39,18 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         void onItemLongClick(View view, int position);
     }
 
+    public void setOnItemClickLitener(OnItemClickListener mOnItemClickLitener)
+    {
+        this.onItemClickListener = mOnItemClickLitener;
+    }
+
     public ImageAdapter(List<PicUrls> mData, Context mContext, RequestQueue requestQueue) {
         this.urlList = mData;
         this.context = mContext;
         this.requestQueue = requestQueue;
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.mipmap.ic_launcher)
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
-                .showImageOnFail(R.mipmap.ic_launcher)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .build();
+        options = MyApplication.getOptions();
     }
+
 
     public ImageAdapter(List<PhotoInfo> mData, Context mContext) {
         this.photoInfoList = mData;

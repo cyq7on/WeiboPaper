@@ -79,13 +79,16 @@
             android:name=".PublishActivity"
             android:label="@string/title_activity_publish"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
-
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".CmtOrRelayActivity"
             android:label="@string/title_activity_publish"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".ImageDetailActivity"
+            android:label="@string/title_activity_image_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

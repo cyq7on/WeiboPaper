@@ -3,6 +3,7 @@ package com.xihua.weibopaper.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.xihua.weibopaper.common.MyApplication;
@@ -30,6 +31,18 @@ public class BaseActivity extends AppCompatActivity {
     public void initView(){
     }
     public void initData(){
+    }
+
+    public void setToolbar(String title) {
+        toolbar.setTitle(title);
+        toolbar.setNavigationIcon(R.mipmap.back_white);
+        setSupportActionBar(toolbar);//toolbar.setTitle在这句之前设置，Listener需要在这句之后
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

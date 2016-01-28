@@ -1,6 +1,7 @@
 package com.xihua.weibopaper.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,7 +23,9 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.snappydb.DB;
 import com.snappydb.DBFactory;
 import com.snappydb.SnappydbException;
+import com.xihua.weibopaper.activity.ImageDetailActivity;
 import com.xihua.weibopaper.activity.R;
+import com.xihua.weibopaper.adapter.ImageAdapter;
 import com.xihua.weibopaper.adapter.WeiboAdapter;
 import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiboContent;
@@ -60,6 +64,7 @@ public class HomeFragment extends Fragment {
     private static final int LOAD_MORE_COMPLETE = 0;
     private static final int LOADING_VIEW_GONE = 1;
     private static final int LOADING_COUNT = 20;
+    private WeiboAdapter.OnItemClickListener listener;
 
     public static Fragment newInstance(Bundle bundle) {
         Fragment fragment = new HomeFragment();
@@ -86,11 +91,23 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         context = getActivity();
         handler = new MyHandler(this);
+        listener = new WeiboAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ToastUtil.showShort(context,Integer.toString(position));
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        };
         try {
             snappydb = DBFactory.open(context, "WeiboDB");
         } catch (SnappydbException e) {
             ToastUtil.showShort(context, "数据库打开失败");
         }
+        LogUtils.i(this);
         requestQueue = Volley.newRequestQueue(context);
         url = getArguments().getString("url");
         list = new ArrayList<>();
@@ -118,6 +135,7 @@ public class HomeFragment extends Fragment {
                 recyclerView.refreshComplete();
                 if (request) {
                     progressBar.setVisibility(View.GONE);
+                    request = false;
 //                    handler.postDelayed(new Runnable() {
 //                        @Override
 //                        public void run() {
@@ -198,17 +216,17 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = (XRecyclerView) view.findViewById(R.id.recyclerview);
+        adapter.setOnItemClickLitener(listener);
         progressBar = (MaterialProgressBar) view.findViewById(R.id.progressBar);
         if (request) {
             progressBar.setVisibility(View.VISIBLE);
-//            recyclerView.setLayoutManager(manager);
+            recyclerView.setLayoutManager(manager);
             recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
             recyclerView.setLaodingMoreProgressStyle(ProgressStyle.BallRotate);
         } else {
             //这里不能重用manager，不解
-//            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
         }
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapter);
         recyclerView.setLoadingListener(loadingListener);
         return view;

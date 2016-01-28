@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
+import com.apkfuns.logutils.LogUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.xihua.weibopaper.activity.CmtOrRelayActivity;
+import com.xihua.weibopaper.activity.ImageDetailActivity;
 import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.bean.PicUrls;
 import com.xihua.weibopaper.bean.StatusContent;
@@ -24,6 +26,7 @@ import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
 import com.xihua.weibopaper.view.FullyGridLayoutManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.hadcn.keyboard.ChatTextView;
@@ -42,6 +45,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
     private View.OnClickListener onClickListener;
     private RequestQueue requestQueue;
     private XRecyclerView recyclerView;
+    private ImageAdapter.OnItemClickListener listener;
 
     public WeiboAdapter(Context context, List<StatusContent> list, RequestQueue requestQueue) {
         this.context = context;
@@ -55,6 +59,11 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         void onItemLongClick(View view, int position);
     }
 
+    public void setOnItemClickLitener(OnItemClickListener mOnItemClickLitener)
+    {
+        this.onItemClickListener = mOnItemClickLitener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_weibo_content, parent,false);
@@ -62,7 +71,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
 //        if (recyclerView == null) {
 //            recyclerView = (XRecyclerView) parent;
 //        }
-//        viewHolder.setIsRecyclable(false);
+        viewHolder.setIsRecyclable(false);
         return viewHolder;
     }
 
@@ -139,7 +148,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         CharSequence charSequence = Html.fromHtml(source);
         holder.tvSource.setText(charSequence);
 //        holder.tvSource.setMovementMethod(LinkMovementMethod.getInstance());//点击的时候产生超链接
-        List<PicUrls> picUrls;
+        final List<PicUrls> picUrls;
         StatusContent reStatus = sc.getRetweeted_status();
         String count1;
         String count2;
@@ -195,7 +204,34 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         }
         holder.container.setHasFixedSize(true);
         holder.container.setLayoutManager(new FullyGridLayoutManager(context, 3));
-        holder.container.setAdapter(new ImageAdapter(picUrls, context, requestQueue));
+        final ImageAdapter imageAdapter = new ImageAdapter(picUrls, context, requestQueue);
+//        if (listener == null) {
+            listener = new ImageAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int index) {
+                    ToastUtil.showShort(context,Integer.toString(index));
+                    Intent intent = new Intent(context, ImageDetailActivity.class);
+                    ArrayList<String> urlList = new ArrayList<>();
+                    StatusContent statusContent = list.get(position);
+                    StatusContent reStatus = statusContent.getRetweeted_status();
+                    List<PicUrls> picUrlsList = reStatus == null ? statusContent.getPic_urls() :
+                            reStatus.getPic_urls();
+                    for (int i = 0;i < picUrlsList.size();i++) {
+                        urlList.add(picUrlsList.get(i).getThumbnail_pic());
+                    }
+                    intent.putStringArrayListExtra("urlList",urlList);
+                    LogUtils.i(position);
+                    context.startActivity(intent);
+                }
+
+                @Override
+                public void onItemLongClick(View view, int position) {
+
+                }
+            };
+//        }
+        imageAdapter.setOnItemClickLitener(listener);
+        holder.container.setAdapter(imageAdapter);
     }
 
     @Override

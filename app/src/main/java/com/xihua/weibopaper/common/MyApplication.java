@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.xihua.weibopaper.activity.R;
 import com.xihua.weibopaper.utils.GalleryImagLoader;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class MyApplication extends Application {
     private static Context context;
     //运用list来保存们每一个activity是关键
     private static List<Activity> mList = new LinkedList<Activity>();
+    private static DisplayImageOptions options;
 
     // add Activity
     public static void addActivity(Activity activity) {
@@ -68,6 +71,14 @@ public class MyApplication extends Application {
                 .createDefault(this);
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.mipmap.ic_launcher)
+                .showImageForEmptyUri(R.mipmap.ic_launcher)
+                .showImageOnFail(R.mipmap.ic_launcher)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .build();
 
         /*配置表情软键盘*/
         if (!ChatKeyboardLayout.isEmoticonInitSuccess(this)) {
@@ -85,7 +96,9 @@ public class MyApplication extends Application {
         return context;
     }
 
-
+    public static DisplayImageOptions getOptions() {
+        return options;
+    }
     //杀进程
     public void onLowMemory() {
         super.onLowMemory();

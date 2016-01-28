@@ -41,16 +41,7 @@ public class LoginOrRegisterActivity extends BaseActivity {
         mSsoHandler = new SsoHandler(LoginOrRegisterActivity.this, mAuthInfo);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("微博");
-        toolbar.setNavigationIcon(R.mipmap.back_white);
-        setSupportActionBar(toolbar);
-        //在上一句之前设置无效
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        setToolbar("微博");
 
         if (b || time == 0) {
             return;

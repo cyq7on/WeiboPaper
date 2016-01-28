@@ -1,6 +1,7 @@
 package com.xihua.weibopaper.activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -69,15 +70,7 @@ public class PublishActivity extends BaseActivity {
         keyboardLayout = (PublishKeyboardLayout) findViewById(R.id.kv_bar);
         keyboardLayout.showEmoticons();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("发微博");
-        toolbar.setNavigationIcon(R.mipmap.back_white);
-        setSupportActionBar(toolbar);//toolbar.setTitle在这句之前设置，Listener需要在这句之后
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        setToolbar("发微博");
         etContent = keyboardLayout.getInputArea();
         recyclerView = keyboardLayout.getRecyclerView();
         photoInfoList = new ArrayList<>();
@@ -101,22 +94,22 @@ public class PublishActivity extends BaseActivity {
                     ToastUtil.showShort(PublishActivity.this, "您还没有输入内容");
                     return;
                 }
+                final RequestQueue requestQueue = Volley.newRequestQueue(PublishActivity.this);
                 final ProgressDialog dialog = new ProgressDialog(PublishActivity.this);
                 dialog.setMessage("发送中...");
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
-                RequestQueue requestQueue = Volley.newRequestQueue(PublishActivity.this);
+                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        requestQueue.cancelAll("cancle");
+                    }
+                });
                 Oauth2AccessToken accessToken = AccessTokenKeeper.
                         readAccessToken(MyApplication.getInstance());
 
                 if (photoInfoList.size() > 0) {
                     String path = photoInfoList.get(0).getPhotoPath();
-                    int begin = path.lastIndexOf("/") + 1;
-                    String fileName = path.substring(begin);
-                    LogUtils.i(fileName);
-                    Bitmap bitmap = BitmapFactory.decodeFile(path);
-                    byte[] data = bitmap2Bytes(bitmap);
-                    LogUtils.i(data);
                     MultipartRequest multipartRequest = new MultipartRequest(
                             Constants.STATUSES_UPLOAD, new Response.Listener<String>() {
                         @Override
@@ -133,13 +126,12 @@ public class PublishActivity extends BaseActivity {
                     });
                     // 通过MultipartEntity来设置参数
                     MultipartEntity multi = multipartRequest.getMultiPartEntity();
-                    // 直接上传Bitmap
-//                    multi.addBinaryPart("pic", data);
                     // 上传文件
                     multi.addFilePart("pic", new File(path));
                     multi.addStringPart("source", Constants.APP_KEY);
                     multi.addStringPart("access_token", accessToken.getToken());
                     multi.addStringPart("status", content);
+                    multipartRequest.setTag("cancle");
                     requestQueue.add(multipartRequest);
                 } else {
                     Map<String, String> params = new HashMap<>();
@@ -161,6 +153,7 @@ public class PublishActivity extends BaseActivity {
                             dialog.dismiss();
                         }
                     });
+                    request.setTag("cancle");
                     requestQueue.add(request);
                 }
 
