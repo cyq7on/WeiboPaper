@@ -72,9 +72,9 @@ public class MyApplication extends Application {
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
         options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.mipmap.ic_launcher)
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
-                .showImageOnFail(R.mipmap.ic_launcher)
+                .showImageOnLoading(R.mipmap.ic_default_photo)
+                .showImageForEmptyUri(R.mipmap.ic_default_photo)
+                .showImageOnFail(R.mipmap.ic_default_photo)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .considerExifParams(true)

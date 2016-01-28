@@ -204,23 +204,23 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         }
         holder.container.setHasFixedSize(true);
         holder.container.setLayoutManager(new FullyGridLayoutManager(context, 3));
-        final ImageAdapter imageAdapter = new ImageAdapter(picUrls, context, requestQueue);
+        ImageAdapter imageAdapter = new ImageAdapter(picUrls, context, requestQueue);
 //        if (listener == null) {
             listener = new ImageAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int index) {
-                    ToastUtil.showShort(context,Integer.toString(index));
                     Intent intent = new Intent(context, ImageDetailActivity.class);
                     ArrayList<String> urlList = new ArrayList<>();
-                    StatusContent statusContent = list.get(position);
-                    StatusContent reStatus = statusContent.getRetweeted_status();
-                    List<PicUrls> picUrlsList = reStatus == null ? statusContent.getPic_urls() :
-                            reStatus.getPic_urls();
-                    for (int i = 0;i < picUrlsList.size();i++) {
-                        urlList.add(picUrlsList.get(i).getThumbnail_pic());
+                    String url;
+                    for (int i = 0;i < picUrls.size();i++) {
+                        //换成中等质量图片的url
+                        url = picUrls.get(i).getThumbnail_pic().replace("thumbnail","bmiddle");
+                        urlList.add(url);
                     }
                     intent.putStringArrayListExtra("urlList",urlList);
+                    intent.putExtra("index",index);
                     LogUtils.i(position);
+                    LogUtils.i(urlList);
                     context.startActivity(intent);
                 }
 
