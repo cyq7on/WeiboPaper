@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.apkfuns.logutils.LogUtils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.snappydb.DB;
 import com.snappydb.DBFactory;
 import com.snappydb.SnappydbException;
@@ -29,12 +30,16 @@ import com.xihua.weibopaper.adapter.ImageAdapter;
 import com.xihua.weibopaper.adapter.WeiboAdapter;
 import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiboContent;
+import com.xihua.weibopaper.common.Constants;
 import com.xihua.weibopaper.http.GsonRequest;
+import com.xihua.weibopaper.utils.AccessTokenKeeper;
 import com.xihua.weibopaper.utils.ToastUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
@@ -43,7 +48,7 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
  * @version V1.0
  * @Package com.xihua.weibopaper.fragment
  * @ClassName: HomeFragment
- * @Description:主页的fragment
+ * @Description: 主页的fragment
  * @date 2015/12/28 14:55
  */
 
@@ -52,7 +57,6 @@ public class HomeFragment extends Fragment {
     private Context context;
     private RequestQueue requestQueue;
     private GsonRequest<WeiboContent> requestContent;
-    private String url;
     private XRecyclerView recyclerView;
     private List<StatusContent> list;
     private boolean request = true;
@@ -65,6 +69,8 @@ public class HomeFragment extends Fragment {
     private static final int LOADING_VIEW_GONE = 1;
     private static final int LOADING_COUNT = 20;
     private WeiboAdapter.OnItemClickListener listener;
+    private Map<String, String> params;
+    private String baseUrl;
 
     public static Fragment newInstance(Bundle bundle) {
         Fragment fragment = new HomeFragment();
@@ -109,9 +115,26 @@ public class HomeFragment extends Fragment {
         }
         LogUtils.i(this);
         requestQueue = Volley.newRequestQueue(context);
-        url = getArguments().getString("url");
+        params = new HashMap<>();
+        Oauth2AccessToken accessToken = AccessTokenKeeper.readAccessToken(context);
+        params.put("source", Constants.APP_KEY);
+        params.put("access_token", accessToken.getToken());
+        LogUtils.e(params);
         list = new ArrayList<>();
         String which = getArguments().getString("which");
+        switch (which) {
+            case "a":
+                baseUrl = Constants.STATUSES_PUBLIC_TIMELINE;
+                break;
+            case "b":
+                baseUrl = Constants.STATUSES_FRIENDS_TIMELINE;
+                break;
+            case "c":
+                baseUrl = Constants.STATUSES_USER_TIMELINE;
+                break;
+            default:
+                break;
+        }
         try {
             String[] keys = snappydb.findKeys(which);
             int length = keys.length;
@@ -125,7 +148,7 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
         adapter = new WeiboAdapter(context, list, requestQueue);
-        requestContent = new GsonRequest<>(url,
+        requestContent = new GsonRequest<>(GsonRequest.getUrl(baseUrl, params),
                 WeiboContent.class, new Response.Listener<WeiboContent>() {
             @Override
             public void onResponse(WeiboContent response) {
@@ -171,6 +194,8 @@ public class HomeFragment extends Fragment {
         loadingListener = new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                params.put("since_id",list.get(0).getIdstr());
+                refresh(GsonRequest.getUrl(baseUrl, params));
                 requestQueue.add(requestContent);
             }
 
@@ -268,6 +293,55 @@ public class HomeFragment extends Fragment {
             requestQueue.add(requestContent);
             request = true;
         }
+    }
+
+    private void refresh(String url) {
+        requestContent = new GsonRequest<>(url,
+                WeiboContent.class, new Response.Listener<WeiboContent>() {
+            @Override
+            public void onResponse(WeiboContent response) {
+                List<StatusContent> data = response.getStatuses();
+                recyclerView.refreshComplete();
+                if (data.size() == 0) {
+                    return;
+                }
+                list.clear();
+                list.addAll(response.getStatuses());
+                adapter.notifyDataSetChanged();
+                if (request) {
+                    progressBar.setVisibility(View.GONE);
+                    request = false;
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            handler.sendEmptyMessage(LOADING_VIEW_GONE);
+//                            request = false;
+//                        }
+//                    }, 1500);
+                }
+                StringBuilder key;
+                for (int i = 0; i < list.size(); i++) {
+                    key = new StringBuilder();
+                    StatusContent content = list.get(i);
+                    key.append(getArguments().getString("which")).append(content.getIdstr());
+                    try {
+                        snappydb.put(key.toString(), content);
+                    } catch (SnappydbException e) {
+                        ToastUtil.showShort(context, "缓存数据失败");
+                    }
+                }
+                LogUtils.i(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ToastUtil.showShort(context, error.getMessage());
+                if (request) {
+                    progressBar.setVisibility(View.GONE);
+                    request = false;
+                }
+            }
+        });
     }
 
     private static class MyHandler extends Handler {
