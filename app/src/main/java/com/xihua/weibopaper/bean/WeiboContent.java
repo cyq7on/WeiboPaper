@@ -14,10 +14,10 @@ public class WeiboContent implements Serializable{
 
 
     private boolean hasvisible;
-    private int previous_cursor;
+    private long previous_cursor;
     private String next_cursor;
-    private int total_number;
-    private int interval;
+    private long total_number;
+    private long interval;
     private List<StatusContent> statuses;
 
 
@@ -26,7 +26,7 @@ public class WeiboContent implements Serializable{
         this.hasvisible = hasvisible;
     }
 
-    public void setPrevious_cursor(int previous_cursor) {
+    public void setPrevious_cursor(long previous_cursor) {
         this.previous_cursor = previous_cursor;
     }
 
@@ -34,11 +34,11 @@ public class WeiboContent implements Serializable{
         this.next_cursor = next_cursor;
     }
 
-    public void setTotal_number(int total_number) {
+    public void setTotal_number(long total_number) {
         this.total_number = total_number;
     }
 
-    public void setInterval(int interval) {
+    public void setInterval(long interval) {
         this.interval = interval;
     }
 
@@ -46,7 +46,7 @@ public class WeiboContent implements Serializable{
         return hasvisible;
     }
 
-    public int getPrevious_cursor() {
+    public long getPrevious_cursor() {
         return previous_cursor;
     }
 
@@ -54,11 +54,11 @@ public class WeiboContent implements Serializable{
         return next_cursor;
     }
 
-    public int getTotal_number() {
+    public long getTotal_number() {
         return total_number;
     }
 
-    public int getInterval() {
+    public long getInterval() {
         return interval;
     }
 

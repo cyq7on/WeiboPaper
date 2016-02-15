@@ -89,6 +89,20 @@ public class HomeFragment extends Fragment {
             } else {
                 adapter.notifyDataSetChanged();
             }
+            String which = getArguments().getString("which");
+            switch (which) {
+                case "a":
+                    baseUrl = Constants.STATUSES_PUBLIC_TIMELINE;
+                    break;
+                case "b":
+                    baseUrl = Constants.STATUSES_FRIENDS_TIMELINE;
+                    break;
+                case "c":
+                    baseUrl = Constants.STATUSES_USER_TIMELINE;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -148,90 +162,20 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
         adapter = new WeiboAdapter(context, list, requestQueue);
-        requestContent = new GsonRequest<>(GsonRequest.getUrl(baseUrl, params),
-                WeiboContent.class, new Response.Listener<WeiboContent>() {
-            @Override
-            public void onResponse(WeiboContent response) {
-                list.clear();
-                list.addAll(response.getStatuses());
-                adapter.notifyDataSetChanged();
-                recyclerView.refreshComplete();
-                if (request) {
-                    progressBar.setVisibility(View.GONE);
-                    request = false;
-//                    handler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            handler.sendEmptyMessage(LOADING_VIEW_GONE);
-//                            request = false;
-//                        }
-//                    }, 1500);
-                }
-                StringBuilder key;
-                for (int i = 0; i < list.size(); i++) {
-                    key = new StringBuilder();
-                    StatusContent content = list.get(i);
-                    key.append(getArguments().getString("which")).append(content.getIdstr());
-                    try {
-                        snappydb.put(key.toString(), content);
-                    } catch (SnappydbException e) {
-                        ToastUtil.showShort(context, "缓存数据失败");
-                    }
-                }
-                LogUtils.i(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                ToastUtil.showShort(context, error.getMessage());
-                if (request) {
-                    progressBar.setVisibility(View.GONE);
-                    request = false;
-                }
-            }
-        });
+        refresh(GsonRequest.getUrl(baseUrl, params));
         manager = new LinearLayoutManager(context);
         loadingListener = new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
                 params.put("since_id",list.get(0).getIdstr());
+                params.put("max_id","0");
                 refresh(GsonRequest.getUrl(baseUrl, params));
                 requestQueue.add(requestContent);
             }
 
             @Override
             public void onLoadMore() {
-                final int size = list.size();
-                String which = getArguments().getString("which");
-                try {
-                    String[] keys = snappydb.findKeys(which);
-                    int length = keys.length;
-                    if (length > 0) {
-                        String key;
-                        long lastId = list.get(size - 1).getId();
-                        for (int i = length - 1; i >= 0; i--) {
-                            key = keys[i].substring(1);
-                            if (Long.parseLong(key) == lastId) {
-                                int k = i > LOADING_COUNT ? i - LOADING_COUNT : 0;
-                                for (i--; i >= k; i--) {
-                                    list.add(snappydb.get(keys[i], StatusContent.class));
-                                }
-                                break;
-                            }
-                        }
-                    }
-                } catch (SnappydbException e) {
-                    e.printStackTrace();
-                } finally {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Message msg = handler.obtainMessage(LOAD_MORE_COMPLETE);
-                            msg.arg1 = size;
-                            handler.sendMessage(msg);
-                        }
-                    }, 3000);
-                }
+                loadMore();
             }
         };
     }
@@ -305,8 +249,12 @@ public class HomeFragment extends Fragment {
                 if (data.size() == 0) {
                     return;
                 }
-                list.clear();
-                list.addAll(response.getStatuses());
+                if (data.size() > 10) {
+                    list.clear();
+                    list.addAll(response.getStatuses());
+                }else {
+                    list.addAll(0,response.getStatuses());
+                }
                 adapter.notifyDataSetChanged();
                 if (request) {
                     progressBar.setVisibility(View.GONE);
@@ -342,6 +290,71 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void loadMore() {
+        final int size = list.size();
+        LogUtils.i(size);
+        long lastId = list.get(size - 1).getId();
+        LogUtils.i(lastId);
+        String which = getArguments().getString("which");
+        try {
+            String[] keys = snappydb.findKeysBetween(which,which + (lastId - 1));
+//            LogUtils.i(keys);
+            int length = keys.length;
+            LogUtils.i(length);
+            if (length > 0) {
+                for (int i = length - 1; i >= 0; i--) {
+                    LogUtils.i(keys[i]);
+                    list.add(snappydb.get(keys[i], StatusContent.class));
+                }
+            }else {
+                params.put("since_id","0");
+                params.put("max_id",lastId - 1 + "");
+                requestContent = new GsonRequest<>(GsonRequest.getUrl(baseUrl, params),
+                        WeiboContent.class, new Response.Listener<WeiboContent>() {
+                    @Override
+                    public void onResponse(WeiboContent response) {
+                        List<StatusContent> data = response.getStatuses();
+                        recyclerView.refreshComplete();
+                        list.addAll(data);
+                        adapter.notifyDataSetChanged();
+                        if (request) {
+                            progressBar.setVisibility(View.GONE);
+                            request = false;
+                        }
+                        StringBuilder key;
+                        for (int i = 0; i < list.size(); i++) {
+                            key = new StringBuilder();
+                            StatusContent content = list.get(i);
+                            key.append(getArguments().getString("which")).append(content.getIdstr());
+                            try {
+                                snappydb.put(key.toString(), content);
+                            } catch (SnappydbException e) {
+                                ToastUtil.showShort(context, "缓存数据失败");
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        ToastUtil.showShort(context, error.getMessage());
+                    }
+                });
+                requestQueue.add(requestContent);
+            }
+        } catch (SnappydbException e) {
+            e.printStackTrace();
+        } finally {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Message msg = handler.obtainMessage(LOAD_MORE_COMPLETE);
+                    msg.arg1 = size;
+                    handler.sendMessage(msg);
+                }
+            }, 3000);
+        }
     }
 
     private static class MyHandler extends Handler {
