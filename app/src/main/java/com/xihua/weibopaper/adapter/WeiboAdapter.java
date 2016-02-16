@@ -39,7 +39,7 @@ import cn.hadcn.keyboard.ChatTextView;
  * @date 2015/12/2517:12
  */
 public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> {
-    Context context;
+    private Context context;
     private List<StatusContent> list;
     private OnItemClickListener onItemClickListener;
     private View.OnClickListener onClickListener;
@@ -68,9 +68,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_weibo_content, parent,false);
         ViewHolder viewHolder = new ViewHolder(view,context);
-//        if (recyclerView == null) {
-//            recyclerView = (XRecyclerView) parent;
-//        }
+        if (recyclerView == null) {
+            recyclerView = (XRecyclerView) parent;
+        }
         viewHolder.setIsRecyclable(false);
         return viewHolder;
     }

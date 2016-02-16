@@ -152,11 +152,12 @@ public class HomeFragment extends Fragment {
         try {
             String[] keys = snappydb.findKeys(which);
             int length = keys.length;
-            int k = length < LOADING_COUNT ? 0 : length - LOADING_COUNT;
             if (length > 0) {
+                int k = length < LOADING_COUNT ? 0 : length - LOADING_COUNT;
                 for (int i = length - 1; i >= k; i--) {
                     list.add(snappydb.get(keys[i], StatusContent.class));
                 }
+                params.put("since_id",list.get(0).getIdstr());
             }
         } catch (SnappydbException e) {
             e.printStackTrace();
@@ -235,6 +236,7 @@ public class HomeFragment extends Fragment {
     public void refresh() {
         if (getUserVisibleHint()) {
             requestQueue.add(requestContent);
+            progressBar.setVisibility(View.VISIBLE);
             request = true;
         }
     }
@@ -247,6 +249,10 @@ public class HomeFragment extends Fragment {
                 List<StatusContent> data = response.getStatuses();
                 recyclerView.refreshComplete();
                 if (data.size() == 0) {
+                    if (request) {
+                        progressBar.setVisibility(View.GONE);
+                        request = false;
+                    }
                     return;
                 }
                 if (data.size() > 10) {
@@ -300,25 +306,31 @@ public class HomeFragment extends Fragment {
         String which = getArguments().getString("which");
         try {
             String[] keys = snappydb.findKeysBetween(which,which + (lastId - 1));
-//            LogUtils.i(keys);
             int length = keys.length;
             LogUtils.i(length);
             if (length > 0) {
-                for (int i = length - 1; i >= 0; i--) {
-                    LogUtils.i(keys[i]);
+                LogUtils.i(keys);
+                int k = length < LOADING_COUNT ? 0 : length - LOADING_COUNT;
+                for (int i = length - 1; i >= k; i--) {
                     list.add(snappydb.get(keys[i], StatusContent.class));
                 }
             }else {
                 params.put("since_id","0");
-                params.put("max_id",lastId - 1 + "");
+                params.put("max_id",lastId + "");
                 requestContent = new GsonRequest<>(GsonRequest.getUrl(baseUrl, params),
                         WeiboContent.class, new Response.Listener<WeiboContent>() {
                     @Override
                     public void onResponse(WeiboContent response) {
                         List<StatusContent> data = response.getStatuses();
+                        LogUtils.i(response);
+                        LogUtils.i(baseUrl);
+                        LogUtils.i(data);
                         recyclerView.refreshComplete();
-                        list.addAll(data);
-                        adapter.notifyDataSetChanged();
+                        if (data.size() > 0) {
+                            data.remove(0);
+                            list.addAll(data);
+                            adapter.notifyDataSetChanged();
+                        }
                         if (request) {
                             progressBar.setVisibility(View.GONE);
                             request = false;
