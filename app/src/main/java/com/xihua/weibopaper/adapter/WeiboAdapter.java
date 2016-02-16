@@ -2,8 +2,12 @@ package com.xihua.weibopaper.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +25,16 @@ import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiBoUser;
 import com.xihua.weibopaper.common.MyApplication;
 import com.xihua.weibopaper.utils.DateUtils;
+import com.xihua.weibopaper.utils.HighLightUtils;
 import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
 import com.xihua.weibopaper.view.FullyGridLayoutManager;
+import com.xihua.weibopaper.view.NoUnderLineClickspan;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import cn.hadcn.keyboard.ChatTextView;
 
@@ -142,11 +149,13 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
 
         holder.tvCreateTime.setText(DateUtils.formatDate(sc.getCreated_at()));
         String source = sc.getSource();
-//        SpannableString msp = new SpannableString(source);
-//        msp.setSpan(new ForegroundColorSpan(Color.BLUE),
-//                0, source.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); //设置前景色
         CharSequence charSequence = Html.fromHtml(source);
-        holder.tvSource.setText(charSequence);
+        SpannableString ss = new SpannableString(charSequence);
+//        ss.setSpan(new ForegroundColorSpan(Color.GRAY),
+//                0, charSequence.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); //设置前景色
+        ss.setSpan(new NoUnderLineClickspan(source),
+                0, charSequence.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); //去掉下划线
+        holder.tvSource.setText(ss);
 //        holder.tvSource.setMovementMethod(LinkMovementMethod.getInstance());//点击的时候产生超链接
         final List<PicUrls> picUrls;
         StatusContent reStatus = sc.getRetweeted_status();
@@ -156,7 +165,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         if (reStatus == null) {
             holder.tvUserDo.setVisibility(View.GONE);
             holder.line.setVisibility(View.GONE);
-            holder.tvContent.setText(sc.getText());
+            holder.tvContent.setText(HighLightUtils.getHighLight(sc.getText()));
             picUrls = sc.getPic_urls();
             count1 = sc.getAttitudes_count();
             count2 = sc.getReposts_count();
@@ -164,8 +173,8 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         } else {
             holder.line.setVisibility(View.VISIBLE);
             holder.tvUserDo.setVisibility(View.VISIBLE);
-            holder.tvUserDo.setText(sc.getText());
-            holder.tvContent.setText(reStatus.getText());
+            holder.tvUserDo.setText(HighLightUtils.getHighLight(sc.getText()));
+            holder.tvContent.setText(HighLightUtils.getHighLight(reStatus.getText()));
             picUrls = reStatus.getPic_urls();
             count1 = reStatus.getAttitudes_count();
             count2 = reStatus.getReposts_count();
