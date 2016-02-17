@@ -115,6 +115,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 ToastUtil.showShort(context,Integer.toString(position));
+                LogUtils.i(position);
             }
 
             @Override

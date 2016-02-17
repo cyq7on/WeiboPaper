@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,17 +25,18 @@ import com.xihua.weibopaper.bean.PicUrls;
 import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiBoUser;
 import com.xihua.weibopaper.common.MyApplication;
+import com.xihua.weibopaper.textspan.MentionLinkOnTouchListener;
+import com.xihua.weibopaper.textspan.MyClickableSpan;
 import com.xihua.weibopaper.utils.DateUtils;
 import com.xihua.weibopaper.utils.HighLightUtils;
 import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
 import com.xihua.weibopaper.view.FullyGridLayoutManager;
-import com.xihua.weibopaper.view.NoUnderLineClickspan;
+import com.xihua.weibopaper.textspan.NoUnderLineClickableSpan;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import cn.hadcn.keyboard.ChatTextView;
 
@@ -153,7 +155,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         SpannableString ss = new SpannableString(charSequence);
 //        ss.setSpan(new ForegroundColorSpan(Color.GRAY),
 //                0, charSequence.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); //设置前景色
-        ss.setSpan(new NoUnderLineClickspan(source),
+        ss.setSpan(new NoUnderLineClickableSpan(source),
                 0, charSequence.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); //去掉下划线
         holder.tvSource.setText(ss);
 //        holder.tvSource.setMovementMethod(LinkMovementMethod.getInstance());//点击的时候产生超链接
@@ -166,7 +168,10 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             holder.tvUserDo.setVisibility(View.GONE);
             holder.line.setVisibility(View.GONE);
             holder.tvContent.setText(HighLightUtils.highLight(sc.getText(),
-                    HighLightUtils.TOPIC,HighLightUtils.USER_NAME,HighLightUtils.URL));
+                    HighLightUtils.TOPIC, HighLightUtils.USER_NAME, HighLightUtils.URL));
+            holder.tvContent.setOnTouchListener(new MentionLinkOnTouchListener());
+            //这句很重要，缺少会导致MyClickableSpan中的点击失效
+            holder.tvContent.setMovementMethod(LinkMovementMethod.getInstance());
             picUrls = sc.getPic_urls();
             count1 = sc.getAttitudes_count();
             count2 = sc.getReposts_count();

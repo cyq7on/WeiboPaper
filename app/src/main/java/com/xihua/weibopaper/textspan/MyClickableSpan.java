@@ -1,4 +1,4 @@
-package com.xihua.weibopaper.view;
+package com.xihua.weibopaper.textspan;
 
 import android.graphics.Color;
 import android.text.TextPaint;
@@ -15,10 +15,10 @@ import com.xihua.weibopaper.utils.ToastUtil;
  * @Description: 特定文字点击响应
  * @date 2016/2/1619:41
  */
-public class MyClickspan extends ClickableSpan {
+public class MyClickableSpan extends ClickableSpan {
     String text;
 
-    public MyClickspan(String text) {
+    public MyClickableSpan(String text) {
         super();
         this.text = text;
     }

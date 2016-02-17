@@ -1,4 +1,4 @@
-package com.xihua.weibopaper.view;
+package com.xihua.weibopaper.textspan;
 
 import android.graphics.Color;
 import android.text.TextPaint;
@@ -12,10 +12,10 @@ import android.view.View;
  * @Description:
  * @date 2016/2/1619:41
  */
-public class NoUnderLineClickspan extends ClickableSpan {
+public class NoUnderLineClickableSpan extends ClickableSpan {
     String text;
 
-    public NoUnderLineClickspan(String text) {
+    public NoUnderLineClickableSpan(String text) {
         super();
         this.text = text;
     }

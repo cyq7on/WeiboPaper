@@ -1,11 +1,9 @@
 package com.xihua.weibopaper.utils;
 
-import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 
-import com.xihua.weibopaper.view.MyClickspan;
+import com.xihua.weibopaper.textspan.MyClickableSpan;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,9 +29,12 @@ public class HighLightUtils {
         Matcher matcher = p.matcher(content);
         SpannableString ss = new SpannableString(content);
         while (matcher.find()) {
+            int start = matcher.start();
+            int end = matcher.end();
+            String text = content.substring(start,end);
 //            ss.setSpan(new ForegroundColorSpan(Color.parseColor("#6666ff")),
-            ss.setSpan(new MyClickspan(content),
-                    matcher.start(), matcher.end(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new MyClickableSpan(text),
+                    start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return ss;
     }
