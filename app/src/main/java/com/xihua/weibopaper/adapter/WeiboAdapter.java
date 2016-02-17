@@ -165,7 +165,8 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         if (reStatus == null) {
             holder.tvUserDo.setVisibility(View.GONE);
             holder.line.setVisibility(View.GONE);
-            holder.tvContent.setText(HighLightUtils.getHighLight(sc.getText()));
+            holder.tvContent.setText(HighLightUtils.highLight(sc.getText(),
+                    HighLightUtils.TOPIC,HighLightUtils.USER_NAME,HighLightUtils.URL));
             picUrls = sc.getPic_urls();
             count1 = sc.getAttitudes_count();
             count2 = sc.getReposts_count();
@@ -173,8 +174,10 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         } else {
             holder.line.setVisibility(View.VISIBLE);
             holder.tvUserDo.setVisibility(View.VISIBLE);
-            holder.tvUserDo.setText(HighLightUtils.getHighLight(sc.getText()));
-            holder.tvContent.setText(HighLightUtils.getHighLight(reStatus.getText()));
+            holder.tvUserDo.setText(HighLightUtils.highLight(sc.getText(),
+                    HighLightUtils.TOPIC, HighLightUtils.USER_NAME, HighLightUtils.URL));
+            holder.tvContent.setText(HighLightUtils.highLight(reStatus.getText(),
+                    HighLightUtils.TOPIC,HighLightUtils.USER_NAME,HighLightUtils.URL));
             picUrls = reStatus.getPic_urls();
             count1 = reStatus.getAttitudes_count();
             count2 = reStatus.getReposts_count();
