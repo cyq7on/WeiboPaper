@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@mipmap/ic_refresh_light" />
+        android:src="@mipmap/ic_refresh_light"
+        app:layout_behavior="com.xihua.weibopaper.utils.ScrollingFabBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

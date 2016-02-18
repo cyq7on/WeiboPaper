@@ -2,12 +2,15 @@ package com.xihua.weibopaper.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
+
+import com.xihua.weibopaper.activity.R;
 
 /**
  * 获得屏幕相关的辅助类
@@ -182,5 +185,13 @@ public class ScreenUtils
 		return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
 	}
 
+	public static int getToolbarHeight(Context context) {
+		final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(
+				new int[]{R.attr.actionBarSize});
+		int toolbarHeight = (int) styledAttributes.getDimension(0, 0);
+		styledAttributes.recycle();
+
+		return toolbarHeight;
+	}
 
 }

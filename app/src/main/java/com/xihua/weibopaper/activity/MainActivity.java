@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -21,6 +22,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -38,6 +41,7 @@ import com.xihua.weibopaper.utils.AccessTokenKeeper;
 import com.xihua.weibopaper.http.GsonRequest;
 import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.PollingUtils;
+import com.xihua.weibopaper.utils.SystemBarTintManager;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
 

@@ -6,6 +6,8 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 
 import com.apkfuns.logutils.LogUtils;
+import com.xihua.weibopaper.activity.R;
+import com.xihua.weibopaper.common.MyApplication;
 import com.xihua.weibopaper.utils.ToastUtil;
 
 /**
@@ -25,7 +27,7 @@ public class MyClickableSpan extends ClickableSpan {
 
     @Override
     public void updateDrawState(TextPaint ds) {
-        ds.setColor(Color.parseColor("#6666ff"));
+        ds.setColor(MyApplication.getInstance().getResources().getColor(R.color.colorPrimary));
         ds.setUnderlineText(false);
     }
 

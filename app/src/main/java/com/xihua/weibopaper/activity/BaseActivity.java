@@ -1,12 +1,16 @@
 package com.xihua.weibopaper.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.xihua.weibopaper.common.MyApplication;
+import com.xihua.weibopaper.utils.SystemBarTintManager;
 
 /**
  * @Package com.xihua.weibopaper.activity
@@ -26,6 +30,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MyApplication.addActivity(this);
+        setStateBarColor(R.color.colorPrimaryDark);
     }
 
     public void initView(){
@@ -33,6 +38,22 @@ public class BaseActivity extends AppCompatActivity {
     public void initData(){
     }
 
+    private void setStateBarColor(int resId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window win = getWindow();
+            WindowManager.LayoutParams winParams = win.getAttributes();
+            final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+            winParams.flags |= bits;
+            win.setAttributes(winParams);
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarDarkMode(true, this);
+            if (resId < 0) {
+                return;
+            }
+            tintManager.setStatusBarTintResource(resId);
+        }
+    }
     public void setToolbar(String title) {
         toolbar.setTitle(title);
         toolbar.setNavigationIcon(R.mipmap.back_white);
