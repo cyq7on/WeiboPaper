@@ -16,6 +16,7 @@ import com.xihua.weibopaper.common.MyApplication;
 import com.xihua.weibopaper.utils.AccessTokenKeeper;
 import com.xihua.weibopaper.http.GsonRequest;
 import com.xihua.weibopaper.utils.ToastUtil;
+import com.xihua.weibopaper.view.XTextView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,7 @@ import cn.hadcn.keyboard.ChatTextView;
  */
 
 public class CmtOrRelayActivity extends BaseActivity{
-    private ChatTextView tvContent;
+    private XTextView tvContent;
     private CheckBox cb;
     private String url;
     private ChatKeyboardLayout keyboardLayout;
@@ -42,7 +43,7 @@ public class CmtOrRelayActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cmt_relay);
-        tvContent = (ChatTextView) findViewById(R.id.tv_content);
+        tvContent = (XTextView) findViewById(R.id.tv_content);
         cb = (CheckBox) findViewById(R.id.checkbox);
         keyboardLayout = (ChatKeyboardLayout) findViewById(R.id.kv_bar);
         keyboardLayout.showEmoticons();

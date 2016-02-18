@@ -2,13 +2,11 @@ package com.xihua.weibopaper.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +24,14 @@ import com.xihua.weibopaper.bean.StatusContent;
 import com.xihua.weibopaper.bean.WeiBoUser;
 import com.xihua.weibopaper.common.MyApplication;
 import com.xihua.weibopaper.textspan.MentionLinkOnTouchListener;
-import com.xihua.weibopaper.textspan.MyClickableSpan;
+import com.xihua.weibopaper.textspan.NoUnderLineClickableSpan;
 import com.xihua.weibopaper.utils.DateUtils;
 import com.xihua.weibopaper.utils.HighLightUtils;
 import com.xihua.weibopaper.utils.ImageUtils;
 import com.xihua.weibopaper.utils.ToastUtil;
 import com.xihua.weibopaper.view.CircleImageView;
 import com.xihua.weibopaper.view.FullyGridLayoutManager;
-import com.xihua.weibopaper.textspan.NoUnderLineClickableSpan;
+import com.xihua.weibopaper.view.XTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -164,14 +162,11 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         String count1;
         String count2;
         String count3;
+
         if (reStatus == null) {
             holder.tvUserDo.setVisibility(View.GONE);
             holder.line.setVisibility(View.GONE);
-            holder.tvContent.setText(HighLightUtils.highLight(sc.getText(),
-                    HighLightUtils.TOPIC, HighLightUtils.USER_NAME, HighLightUtils.URL));
-            holder.tvContent.setOnTouchListener(new MentionLinkOnTouchListener());
-            //这句很重要，缺少会导致MyClickableSpan中的点击失效
-            holder.tvContent.setMovementMethod(LinkMovementMethod.getInstance());
+            holder.tvContent.setText(sc.getText());
             picUrls = sc.getPic_urls();
             count1 = sc.getAttitudes_count();
             count2 = sc.getReposts_count();
@@ -179,10 +174,8 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         } else {
             holder.line.setVisibility(View.VISIBLE);
             holder.tvUserDo.setVisibility(View.VISIBLE);
-            holder.tvUserDo.setText(HighLightUtils.highLight(sc.getText(),
-                    HighLightUtils.TOPIC, HighLightUtils.USER_NAME, HighLightUtils.URL));
-            holder.tvContent.setText(HighLightUtils.highLight(reStatus.getText(),
-                    HighLightUtils.TOPIC,HighLightUtils.USER_NAME,HighLightUtils.URL));
+            holder.tvUserDo.setText(sc.getText());
+            holder.tvContent.setText(reStatus.getText());
             picUrls = reStatus.getPic_urls();
             count1 = reStatus.getAttitudes_count();
             count2 = reStatus.getReposts_count();
@@ -256,6 +249,13 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         return list == null ? 0 : list.size();
     }
 
+    /*存在的bug：
+    * XTextView内部setOnTouchListener(new MentionLinkOnTouchListener())没有作用，
+    * 在外部手动调用也不行
+    * 解法方法：
+    * 将HighLightUtils.highLight方法的第一个参数由String改为CharSequence，原因未知
+    * 反思：从最终的解决方法来看，不是setOnTouchListener(new MentionLinkOnTouchListener())没有作用
+    * */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView iv;
         TextView tvName;
@@ -263,9 +263,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
         TextView tvCreateTime;
         TextView tvSource;
         ImageView ivMore;
-        ChatTextView tvUserDo;
+        XTextView tvUserDo;
         View line;
-        ChatTextView tvContent;
+        XTextView tvContent;
         RecyclerView container;
         ImageView ivLike;
         ImageView ivSend;
@@ -285,9 +285,9 @@ public class WeiboAdapter extends RecyclerView.Adapter<WeiboAdapter.ViewHolder> 
             tvCreateTime = (TextView) itemView.findViewById(R.id.tv_create_time);
             tvSource = (TextView) itemView.findViewById(R.id.tv_source);
             ivMore = (ImageView) itemView.findViewById(R.id.iv_more);
-            tvUserDo = (ChatTextView) itemView.findViewById(R.id.tv_user_do);
+            tvUserDo = (XTextView) itemView.findViewById(R.id.tv_user_do);
             line = itemView.findViewById(R.id.view);
-            tvContent = (ChatTextView) itemView.findViewById(R.id.tv_content);
+            tvContent = (XTextView) itemView.findViewById(R.id.tv_content);
             container = (RecyclerView) itemView.findViewById(R.id.image_container);
             ivLike = (ImageView) itemView.findViewById(R.id.iv_like);
             ivSend = (ImageView) itemView.findViewById(R.id.iv_send);

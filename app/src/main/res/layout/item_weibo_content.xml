@@ -77,7 +77,7 @@
 
         </RelativeLayout>
 
-        <cn.hadcn.keyboard.ChatTextView
+        <com.xihua.weibopaper.view.XTextView
             android:id="@+id/tv_user_do"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
             android:background="#ABABAB"
             android:visibility="gone" />
 
-        <cn.hadcn.keyboard.ChatTextView
+        <com.xihua.weibopaper.view.XTextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

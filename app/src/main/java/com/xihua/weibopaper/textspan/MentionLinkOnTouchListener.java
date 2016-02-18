@@ -9,6 +9,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.apkfuns.logutils.LogUtils;
+
 /**
  * @author cyq7on
  * @version V1.0
@@ -34,7 +36,6 @@ public class MentionLinkOnTouchListener implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         TextView tv = (TextView) v;
         Layout layout = tv.getLayout();
-
         if (layout == null)
             return false;
 
@@ -68,6 +69,7 @@ public class MentionLinkOnTouchListener implements View.OnTouchListener {
 
                 if (find) {
 //                    LongClickableLinkMovementMethod.getInstance().onTouchEvent(tv, value, event);
+                    LogUtils.i(v);
                     BackgroundColorSpan backgroundColorSpan = new BackgroundColorSpan(color);
                     value.setSpan(backgroundColorSpan, findStart, findEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
                     // Android has a bug, sometime TextView wont change its value
