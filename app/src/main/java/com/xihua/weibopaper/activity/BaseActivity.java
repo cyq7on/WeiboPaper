@@ -48,9 +48,6 @@ public class BaseActivity extends AppCompatActivity {
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarDarkMode(true, this);
-            if (resId < 0) {
-                return;
-            }
             tintManager.setStatusBarTintResource(resId);
         }
     }
